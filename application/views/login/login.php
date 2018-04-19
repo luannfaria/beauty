@@ -107,7 +107,7 @@
                     {
                       if(data.result == true){
 
-                          window.location.href = "<?php echo base_url();?>dashboard/painel";
+                          window.location.href = "<?php echo base_url();?>Dashboard/painel";
                       }
                       else{
 

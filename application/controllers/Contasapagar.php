@@ -12,6 +12,8 @@ class Contasapagar extends CI_Controller{
         if( (!session_id()) || (!$this->session->userdata('logado'))){
             redirect('dashboard/index');
 }
+
+
         $this->load->model('Contasapagar_model');
     }
 

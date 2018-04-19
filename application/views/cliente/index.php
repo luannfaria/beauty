@@ -8,22 +8,38 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                  <h3 class="page-header"><i class="fa fa-user"></i>CLIENTES</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-laptop"></i>Clientes</li>
+              </ol>
+<?php if ($this->session->flashdata('success')) { ?>
+                  <div class="alert alert-success fade in">
+
+                    <button data-dismiss="alert" class="close close-sm" type="button">
+                                      <i class="icon-remove"></i>
+                                  </button>
+                           <?PHP echo $this->session->flashdata('success') ?>
+                  </div>
+                  <?php } ?>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('cliente/add'); ?>" class="btn btn-primary">NOVO CLIENTE</a>
+                <?php if($this->permission->checkPermission($this->session->userdata('permissao'),'aCliente')){ ?>
+                    <a href="<?php echo site_url('cliente/add'); ?>" class="btn btn-success">NOVO CLIENTE</a>
+                  <?php } ?>
                 </div>
+
                 <br>
             </div>
             <div class="box-body">
+              <section class="panel">
                 <table class="table table-striped">
                     <tr>
 
 
-						<th>Nome</th>
-						<th>Sobrenome</th>
-						<th>Data cadastro</th>
-						<th>Telefone fixo</th>
-						<th>Telefone celular</th>
+						<th><i class="fa fa-user"></i> Nome</th>
+
+						<th><i class="fa fa-calendar"></i> Data cadastro</th>
+						<th><i class="fa fa-phone"></i> Telefone fixo</th>
+						<th><i class="fa fa-mobile"></i> Celular</th>
 
 						<th>Obs</th>
             <th>Status</th>
@@ -33,18 +49,18 @@
                     <tr>
 
 
-						<td><?php echo $c['nome']; ?></td>
-						<td><?php echo $c['sobrenome']; ?></td>
+						<td><?php echo $c['nome']; ?> <?php echo $c['sobrenome']; ?></td>
+
 						<td><?php echo $c['datacadastro']; ?></td>
 						<td><?php echo $c['telefonefixo']; ?></td>
 						<td><?php echo $c['telefonecelular']; ?></td>
 
 						<td><?php echo $c['obs']; ?></td>
             <?php if( $c['status']=='1'){ ?>
-          <td>ATIVO</td>
+          <td><span class="label label-success">ATIVO</span></td>
           <?php } ?>
           <?php if( $c['status']=='2'){ ?>
-          <td>INATIVO</td>
+          <td><span class="label label-danger">INATIVO</span></td>
           <?php } ?>
 						<td>
                             <a href="<?php echo site_url('cliente/edit/'.$c['idcliente']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
@@ -53,8 +69,11 @@
                     </tr>
                     <?php } ?>
                 </table>
-
+              </section>
+  <?php echo $this->pagination->create_links();?>
             </div>
         </div>
+
+
     </div>
 </div>

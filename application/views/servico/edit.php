@@ -39,13 +39,14 @@
     </script>
 
 <div class="row">
-    <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
 
+      <div class="col-lg-12">
+                  <section class="panel">
+                    <header class="panel-heading">
+                      Editar serviço
+                    </header>
+                    <div class="panel-body">
 
-              	<h3 class="box-title">Editar Serviço</h3>
-            </div>
 			<?php echo form_open('servico/edit/'.$servico['idservico']); ?>
 			<div class="box-body">
 				<div class="row clearfix">
@@ -124,8 +125,10 @@
 	        </div>
 			<?php echo form_close(); ?>
 		</div>
+  </section>
+  </div>
     </div>
-</div>
+
 <script src="<?php echo base_url()?>assets/js/jquery.validate.js"></script>
 <script src="<?php echo base_url();?>assets/js/maskmoney.js"></script>
 <script type="text/javascript">

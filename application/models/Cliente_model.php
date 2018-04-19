@@ -28,13 +28,22 @@ class Cliente_model extends CI_Model
         return $this->db->get('cliente')->result_array();
     }
 
+    public function count($table) {
+        return $this->db->count_all($table);
+    }
+
     /*
      * function to add new cliente
      */
     function add_cliente($params)
     {
         $this->db->insert('cliente',$params);
-        return $this->db->insert_id();
+        if ($this->db->affected_rows() == '1')
+{
+  return TRUE;
+}
+
+return TRUE;   
     }
 
 

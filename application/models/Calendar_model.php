@@ -1,7 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Calendar_model extends CI_Model {
+
+	function __construct()
+	{
+			parent::__construct();
+	}
 
 
 /*Read the data from DB */
@@ -28,6 +32,50 @@ public function itensagenda($itens){
 	return $this->db->insert_id();
 }
 
+public function itens($idagenda){
+
+	$this->db->select('*');
+$this->db->from('itensagenda');
+$this->db->where('idagenda', $idagenda);
+
+  return $this->db->get()->result();
+
+}
+
+public function getidcliente($idagenda){
+
+
+
+					$this->db->select('idcliente');
+		    $this->db->from('agenda');
+		    $this->db->where('idagenda', $idagenda);
+		    $this->db->limit(1);
+
+		    $query = $this->db->get();
+
+		    if ($query->num_rows() == 1)
+		    {
+		    //Use row() to get a single result
+		    $row = $query->row();
+
+		    //$row will now have if you printed the contents:
+		    //print_r( $row );
+		    //stdClass Object ( [email] => example@gmail.com )
+
+		    //Pass $query->email directly to reset_password
+
+		    return $row->idcliente;
+		    }
+
+}
+
+
+function update_serv($idag,$itemstatus){
+				$this->db->set('status',$itemstatus);
+				$this->db->where('idagenda',$idag);
+				return $this->db->update('itensagenda');
+
+}
 
 function update_status($idag,$statusfechado){
 	$this->db->set('status',$statusfechado);
@@ -35,6 +83,8 @@ function update_status($idag,$statusfechado){
 	return $this->db->update('agenda');
 
 }
+
+
 
 public function autoCompleteServico($q){
 
@@ -85,6 +135,14 @@ public function getagenda($id){
 
 	return $this->db-get('itensagenda','idagenda',$id);
 }
+
+public function getagendamento($idagenda){
+
+		  return $this->db->get_where('agenda',array('idagenda'=>$idagenda))->row_array();
+}
+
+
+
 
 	function remove($id)
 	{

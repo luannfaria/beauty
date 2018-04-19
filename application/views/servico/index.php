@@ -43,49 +43,58 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="page-header"><i class="icon_tools"></i>SERVIÇOS</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-wrench"></i>Serviços</li>
+              </ol>
 
             	<div class="box-tools">
-                    <a href="<?php echo site_url('servico/add'); ?>" class="btn btn-primary">CADASTRAR SERVIÇO</a>
+                    <a href="<?php echo site_url('servico/add'); ?>" class="btn btn-success">NOVO SERVIÇO</a>
 
-                    <a href="#pacote" data-toggle="modal" class="btn btn-primary">CADASTRAR PACOTE</a>
+                    <a href="#pacote" data-toggle="modal" class="btn btn-success">NOVO PACOTE</a>
                 </div>
                 <br>
             </div>
             <div class="box-body">
+              <section class="panel">
                 <table class="table table-striped">
                     <tr>
 
 
-						<th>Nome Serviço</th>
-						<th>Valor de venda</th>
+						<th><i class="fa fa-circle"></i> Nome Serviço</th>
+						<th><i class="fa fa-dollar"></i> Valor de venda</th>
 
-						<th>Comissão</th>
-<th>Tipo serviço</th>
-<th>Status</th>
-						<th>Ações</th>
+						<th><i class="fa fa-dollar"></i> Comissão</th>
+<th><i class="fa fa-wrench"></i> Tipo serviço</th>
+<th><i class="fa fa-check"></i> Status</th>
+						<th><i class="fa fa-cogs"></i> Ações</th>
                     </tr>
                     <?php foreach($servicos as $s){ ?>
                     <tr>
 
 
 						<td><?php echo $s['nomeservico']; ?></td>
-						<td><?php echo $s['valorserv']; ?></td>
+						<td>R$ <?php echo $s['valorserv']; ?></td>
+            <?php if($s['tiposervico']=='2') { ?>
+              <td> # </td>
+          <?php   }else { ?>
+            <td>R$ <?php echo $s['comissao']; ?></td>
+    <?php      } ?>
 
-						<td><?php echo $s['comissao']; ?></td>
+
 
 
             <td><?php if($s['tiposervico']== '1'){ ?>INDIVIDUAL <?php }elseif($s['tiposervico']== '2') { ?> PACOTE <?php } ?></td>
-            <td><?php if($s['status']== '1'){ ?>ATIVO <?php }elseif($s['status']== '2') { ?> INATIVO <?php } ?></td>
+            <td><?php if($s['status']== '1'){ ?> <span class="label label-success"> ATIVO </span> <?php }elseif($s['status']== '2') { ?> <span class="label label-danger"> INATIVO </span> <?php } ?></td>
 
 						<td>
                             <a href="<?php echo site_url('servico/edit/'.$s['idservico']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
-                           <a href="<?php echo site_url('servico/remove/'.$s['idservico']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> APAGAR</a>
+
                         </td>
                     </tr>
                     <?php } ?>
                 </table>
-
+</section>
             </div>
         </div>
     </div>
@@ -124,23 +133,24 @@
 
     <div class="col-md-6">
       <label>Nome do item</label>
-      <input type="text" class="form-control" name="item" id="item"/>
-        <!--  <div class="form-group">
-            <label>Adicione um serviço</label>
+
+         <div class="form-group">
+          <!--  <label>Adicione um serviço</label>-->
             <input type="hidden" name="idservico" id="idservico" />
 
 
 
             <input type="hidden" name="valorserv" id="valorserv" value="" />
             <input type="hidden" name="comissao" id="comissao" value=""/>
+              <input type="hidden" name="nomeservico" id="nomeservico" value=""/>
         <input type="text" class="form-control" name="servico" id="inputproduto" placeholder="Digite o nome do produto" />
-      </div>-->
+      </div>
 
     </div>
 
     <div class="col-md-3">
       <label>Comissão</label>
-      <input type="text" class="form-control" onkeyup="formatarComissao();" name="comissao" id="comissao"/>
+      <input type="text" class="form-control"  name="comi" id="comi"/>
     </div>
 
     <div class="col-md-3">
@@ -204,9 +214,10 @@
     $('#form_prepare').submit(function(){
       var $this = $( this );
 
-        var item= $this.find("input[name='item']").val();
-        var comissao = $this.find("input[name='comissao']").val();
+        var nomeservico= $this.find("input[name='nomeservico']").val();
+        var comissao = $this.find("input[name='comi']").val();
         var nomepacote = $this.find("input[name='nomepacote']").val();
+        var idservico = $this.find("input[name='idservico']").val();
         var status = $this.find("input[name='status']").val();
         var vlr = $this.find("input[name='vlr']").val();
         var tip = $this.find("input[name='tiposervico']").val();
@@ -218,7 +229,7 @@
 
 
       var tr = '<tr>'+
-        '<td>'+item+'</td>'+
+        '<td>'+nomeservico+'</td>'+
         '<td>'+comissao+'</td>'+
 
 
@@ -227,10 +238,11 @@
       $('#table').find('tbody').append( tr );
 
 
-      var hiddens = '<input type="hidden" name="item[]" value="'+item+'" />'+
+      var hiddens = '<input type="hidden" name="item[]" value="'+nomeservico+'" />'+
       '<input type="hidden" name="pacotenome" value="'+nomepacote+'" />'+
       '<input type="hidden" name="valorpacote" value="'+vlr+'" />'+
       '<input type="hidden" name="statuspacote" value="'+status+'" />'+
+      '<input type="hidden" name="idservico[]" value="'+idservico+'" />'+
       '<input type="hidden" name="tiposerv" value="'+tip+'" />'+
       '<input type="hidden" name="comissao[]" value="'+comissao+'" />';
 ;
@@ -243,27 +255,28 @@
 
 $("#inputproduto").autocomplete({
 
-    source: "<?php echo base_url(); ?>calendar/autoCompleteProduto",
+  source: "<?php echo base_url(); ?>calendar/autoCompleteServico",
 
-    minLength: 2,
+  minLength: 2,
 
-    select: function(event, ui) {
-
-
-
-        $("#idservico").val(ui.item.idservico);
+  select: function(event, ui) {
 
 
 
-        $("#valorserv").val(ui.item.valorserv);
+      $("#idservico").val(ui.item.idservico);
 
-        $("#quantidade").focus();
+      $("#valorserv").val(ui.item.valorserv);
+        $("#com").val(ui.item.comissao);
 
+          $("#nomeservico").val(ui.item.nomeservico);
 
 
 
 
-    }
+
+
+
+  }
 
 });
 });

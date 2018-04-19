@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+
 
 class Calendar extends CI_Controller {
 
@@ -10,7 +10,7 @@ class Calendar extends CI_Controller {
 				if( (!session_id()) || (!$this->session->userdata('logado'))){
 						redirect('dashboard/index');
 }
-        $this->load->model('Calendar_model','',TRUE);
+        $this->load->model('Calendar_model');
 
     }
 
@@ -30,6 +30,25 @@ $this->load->model('Atendente_model');
 		$this->load->view('include/header');
 		$this->load->view('agenda/agenda',$data);
 		$this->load->view('include/footer');
+	}
+
+	function agendavenda($idagenda){
+
+		$data['agenda'] =$this->Calendar_model->getagendamento($idagenda);
+
+		$idcliente = $this->Calendar_model->getidcliente($idagenda);
+
+			$this->load->model('Cliente_model');
+	$data['cliente'] = $this->Cliente_model->get_cliente($idcliente);
+
+		$data['servicos'] = $this->Calendar_model->itens($idagenda);
+
+
+		$this->load->view('include/header');
+		$this->load->view('agenda/agendavenda',$data);
+		$this->load->view('include/footer');
+
+
 	}
 
 	/*Get all Events */
@@ -67,6 +86,7 @@ public function faturar(){
 
 
 
+
 		$count = count($this->input->post('valorserv'));
 
 		$subtotal = 0;
@@ -80,9 +100,12 @@ public function faturar(){
 		}
 
 		$params = array(
-'idatendente' => $this->input->post('atendente')[0],
+'idatendente' => $this->input->post('resource')[0],
 'idcliente' => $this->input->post('idcliente')[0],
-'nomecliente' => $this->input->post('nomecli')[0],
+'nomecliente' => $this->input->post('nome')[0],
+'data' => $this->input->post('databr')[0],
+'hora' => $this->input->post('hora')[0],
+'nomeatend' => $this->input->post('nomeatendente')[0],
 'status' => $this->input->post('status')[0],
 'subtotal' => $subtotal
 
@@ -115,11 +138,11 @@ for($i=0; $i< $count;$i++){
 
 			'nomeservico' => $this->input->post('nomeservico')[$i],
 			'comissao' => $this->input->post('comissao')[$i],
-			'nomecliente' => $this->input->post('nomecli')[0],
+			'nomecliente' => $this->input->post('nome')[0],
 			'idservico' =>  $this->input->post('idservico')[$i],
-			'idatendente' => $this->input->post('atendente')[$i],
+			'idatendente' => $this->input->post('resource')[$i],
 			'start' =>  $this->input->post('dataInicial')[$i],
-		
+			'nomeatendente' =>  $this->input->post('nomeatendente')[$i],
 			'hora' =>  $this->input->post('hora')[$i],
 			'end' =>  $this->input->post('end')[$i],
 			'status' => $this->input->post('status')[$i],
@@ -141,6 +164,8 @@ for($i=0; $i< $count;$i++){
 
 
 public function listaagenda(){
+
+
 
 	    $this->load->model('Agenda_model');
 

@@ -8,8 +8,10 @@
         <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js?v=0.3.3"></script>
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-table"></i> Fluxo de caixa</h3>
-
+        <ol class="breadcrumb">
+          <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+          <li><i class="fa fa-dollar"></i>Fluxo de caixa</li>
+        </ol>
 <form class="form-inline" method="post" action="<?php echo base_url();?>fluxo/buscafluxo" >
   <div class="form-group">
 
@@ -31,7 +33,9 @@
     </div>
 <br>
 <?php
-if(!$result){?>
+if (!$result) {
+    ?>
+    <section class="panel">
 <table class="table table-striped">
   <thead>
     <tr>
@@ -52,9 +56,13 @@ if(!$result){?>
 </tbody>
 
 </table>
-<?php } else{?>
 
+</section>
+<?php
+} else {
+        ?>
 
+  <section class="panel">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -66,56 +74,56 @@ if(!$result){?>
 
 
   <th>Valor</th>
-  <th>Forma</th>
+  <th>Forma pgto/rec</th>
 
   </tr>
   </thead>
 
   <tbody >
 <?php $totalentrada=0;
-$totalsaida=0;
-$saldofinal=0;
- ?>
+        $totalsaida=0;
+        $saldofinal=0; ?>
     <?php foreach ($result as $r) {
-      echo '<tr>';
+            echo '<tr>';
             echo '<td>'.$r['data'].'</td>';
-          if($r['tipomov']==1){
-              echo '<td> ENTRADA</td>';
-$totalentrada += $r['valor'];
+            if ($r['tipomov']==1) {
+                echo '<td> ENTRADA</td>';
+                $totalentrada += $r['valor'];
             }
-              if($r['tipomov']==2){
+            if ($r['tipomov']==2) {
                 $totalsaida += $r['valor'];
-                  echo '<td> SAIDA</td>';}
+                echo '<td> SAIDA</td>';
+            }
             echo '<td>'.$r['descricao'].'</td>';
             echo '<td>R$ '.$r['valor'].'</td>';
             echo '<td>'.$r['forma'].'</td>';
 
 
             echo '</tr>';
-
-
-  }
-$saldofinal = ($totalentrada-$totalsaida);
-  ?>
+        }
+        $saldofinal = ($totalentrada-$totalsaida); ?>
 
   <tr>
                                             <td colspan="4" style="text-align: right"><font color="green"><strong>Total Entrada:</font></strong></td>
-                                             <td><font color="green"><strong>R$ <?php echo number_format($totalentrada,2,',','.');?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada,2); ?>"></font></strong></td>
+                                             <td><font color="green"><strong>R$ <?php echo number_format($totalentrada, 2, ',', '.'); ?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada, 2); ?>"></font></strong></td>
                                          </tr>
 
                                          <tr>
                                                                                    <td colspan="4" style="text-align: right"><font color="red"><strong>Total Saida:</strong></font></td>
-                                                                                    <td><font color="red"><strong>R$ <?php echo number_format($totalsaida,2,',','.');?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada,2); ?>"></strong></font></td>
+                                                                                    <td><font color="red"><strong>R$ <?php echo number_format($totalsaida, 2, ',', '.'); ?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada, 2); ?>"></strong></font></td>
                                                                                 </tr>
 
                                                                                 <tr>
                                                                                                                           <td colspan="4" style="text-align: right"><strong>Saldo Final:</strong></td>
-                                                                                                                           <td><strong>R$ <?php echo number_format($saldofinal,2,',','.');?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada,2); ?>"></strong></td>
+                                                                                                                           <td><strong>R$ <?php echo number_format($saldofinal, 2, ',', '.'); ?><input type="hidden" id="total-venda" value="<?php echo number_format($totalentrada, 2); ?>"></strong></td>
                                                                                                                        </tr>
-<?php }?>
+<?php
+    }?>
   </tbody>
 
   </table>
+
+</section>
 </section>
 
 </section>

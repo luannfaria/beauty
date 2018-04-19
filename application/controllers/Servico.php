@@ -88,7 +88,7 @@ class Servico extends CI_Controller{
 
         			'idpacote' => $pacote,
         			'nomeserv' =>  $this->input->post('item')[$i],
-
+              'idserv' =>$this->input->post('idservico')[$i],
               'comissao' => $this->input->post('comissao')[$i]
 
 

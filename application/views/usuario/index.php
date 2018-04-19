@@ -5,7 +5,10 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                  <h3 class="page-header"><i class="fa fa-user"></i>USUARIOS</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-laptop"></i>Usuarios</li>
+              </ol>
             	<div class="box-tools">
                     <a href="<?php echo site_url('usuario/add'); ?>" class="btn btn-success">ADICIONAR USUARIO</a>
                 </div>

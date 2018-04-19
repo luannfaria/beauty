@@ -6,27 +6,31 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Categorias Produtos/Serviços</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-laptop"></i>Categorias</li>
+              </ol>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('categoria_prod_serv/add'); ?>" class="btn btn-primary">NOVA CATEGORIA</a>
+                    <a href="<?php echo site_url('categoria_prod_serv/add'); ?>" class="btn btn-success">NOVA CATEGORIA</a>
                 </div>
                 <br>
             </div>
             <div class="box-body">
+              <section class="panel">
                 <table class="table table-striped">
                     <tr>
 
 
-						<th>Nome</th>
-            <th>Status</th>
-						<th>Ações</th>
+						<th><i class="fa fa-cicle"></i> Nome</th>
+            <th><i class="fa fa-check"></i> Status</th>
+						<th><i class="icon_cogs"></i> Ações</th>
                     </tr>
                     <?php foreach($categoria_prod_servs as $c){ ?>
                     <tr>
 
 
 						<td><?php echo $c['nome']; ?></td>
-            <td><?php if($c['status']== '1'){ ?>ATIVO <?php }elseif($c['status']== '2') { ?> INATIVO <?php } ?></td>
+            <td><?php if($c['status']== '1'){ ?><span class="label label-success"> ATIVO </span><?php }elseif($c['status']== '2') { ?> <span class="label label-danger"> INATIVO </span> <?php } ?></td>
 						<td>
                             <a href="<?php echo site_url('categoria_prod_serv/edit/'.$c['idcategoria_prod_serv']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
                     <!--        <a href="<?php echo site_url('categoria_prod_serv/remove/'.$c['idcategoria_prod_serv']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a> -->
@@ -34,7 +38,7 @@
                     </tr>
                     <?php } ?>
                 </table>
-
+</section>
             </div>
         </div>
     </div>

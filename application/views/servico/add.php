@@ -71,7 +71,7 @@
           <div class="col-md-3">
             <label for="idcategoria" class="control-label"><span class="text-danger">*</span>Categorias</label>
             <div class="form-group">
-              <select name="idcategoria" class="form-control">
+              <select name="idcategoria" class="form-control m-bot15">
                 <option value="">Selecione uma categoria</option>
                 <?php
                 foreach($all_categoria_prod_servs as $categoria_prod_serv)

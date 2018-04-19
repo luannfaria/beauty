@@ -39,12 +39,7 @@
   <link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" />
   <link href="<?php echo base_url()?>assets/css/xcharts.min.css" rel=" stylesheet">
   <link href="<?php echo base_url()?>assets/css/jquery-ui-1.10.4.min.css" rel="stylesheet">
-  <!-- =======================================================
-    Theme Name: NiceAdmin
-    Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    Author: BootstrapMade
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
+
 </head>
 
 <body>
@@ -66,7 +61,7 @@
         <ul class="nav top-menu">
           <li>
             <form class="navbar-form">
-              <input class="form-control" placeholder="Search" type="text">
+              <input class="form-control" placeholder="Pesquisar" type="text">
             </form>
           </li>
         </ul>
@@ -119,8 +114,10 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
-          <li class="active">
-            <a class="" href="<?php echo base_url(); ?>dashboard/painel">
+          <li class="<?php if (isset($menuPainel)) {
+    echo 'active';
+};?>">
+            <a  href="<?php echo base_url(); ?>dashboard/painel">
                           <i class="icon_house_alt"></i>
                           <span>Painel inicial</span>
                       </a>
@@ -136,6 +133,8 @@
               <li><a class="" href="<?php echo base_url();?>calendar/listaagenda">Agendamentos</a></li>
             </ul>
           </li>
+            <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vProduto') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vServico') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vCategoria')) {
+    ?>
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_tools"></i>
@@ -143,30 +142,75 @@
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
+                <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vServico')) {
+        ?>
               <li><a class="" href="<?php echo base_url(); ?>servico">Serviços/Pacotes</a></li>
+
+            <?php
+    } ?>
+                <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vProduto')) {
+        ?>
               <li><a class="" href="#">Produtos</a></li>
+
+            <?php
+    } ?>
+
+            <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCategoria')) {
+        ?>
               <li><a class="" href="<?php echo base_url(); ?>categoria_prod_serv">Categorias</a></li>
+
+            <?php
+    } ?>
             </ul>
           </li>
-          <li>
-            <a class="" href="<?php echo base_url() ?>cliente">
-                          <i class="icon_profile"></i>
-                          <span>Clientes</span>
-                      </a>
-          </li>
 
-          <li class="sub-menu">
+        <?php
+} ?>
+          <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCliente')) {
+        ?>
+          <li class="<?php if (isset($menuCliente)) {
+            echo 'active';
+        }; ?>">
+            <a href="<?php echo base_url() ?>cliente">
+
+                          <i class="icon_profile"></i>
+                          <span>Clientes</span></a>
+
+          </li>
+          <?php
+    } ?>
+
+
+  <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vPagar')  || $this->permission->checkPermission($this->session->userdata('permissao'), 'vReceber')) {
+        ?>
+
+          <li class="sub-menu  <?php if (isset($menuFinanceiro)) {
+            echo 'active open';
+        }; ?>">
             <a href="javascript:;" class="">
                           <i class="fa fa-money"></i>
                           <span>Financeiro</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
+              <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vPagar')) {
+            ?>
               <li><a class="" href="<?php echo base_url(); ?>contasapagar">Contas a pagar</a></li>
+
+            <?php
+        } ?>
+            <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vReceber')) {
+            ?>
               <li><a class="" href="<?php echo base_url(); ?>contasareceber">Contas a receber</a></li>
+
+            <?php
+        } ?>
               <li><a class="" href="<?php echo base_url(); ?>fluxo/fluxo">Fluxo de caixa</a></li>
             </ul>
           </li>
+
+<?php
+    } ?>
 
 
 
@@ -184,7 +228,11 @@
             </ul>
           </li>
 
-          <li class="sub-menu">
+<?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vFunc')  || $this->permission->checkPermission($this->session->userdata('permissao'), 'vPermissao') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vUser')) {
+        ?>
+          <li class="sub-menu <?php if (isset($menuConfiguracoes)) {
+            echo 'active open';
+        }; ?>">
             <a href="javascript:;" class="">
                           <i class="fa fa-cogs"></i>
                           <span>Configurações</span>
@@ -192,12 +240,28 @@
                       </a>
             <ul class="sub">
               <li><a class="" href="#">Dados da Empresa</a></li>
+                <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vFunc')) {
+            ?>
               <li><a class="" href="<?php echo base_url() ?>atendente"><span>Atendentes</span></a></li>
+<?php
+        } ?>
+  <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vUser')) {
+            ?>
               <li><a class="" href="<?php echo base_url() ?>usuario">Usuarios do sistema</a></li>
+<?php
+        } ?>
+        <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vPermissao')) { ?>
+
+              <li><a class="" href="<?php echo base_url() ?>permissoes">Permissões do usuario</a></li>
+
+              <?php } ?>
+
 
             </ul>
           </li>
 
+<?php
+    } ?>
         </ul>
         <!-- sidebar menu end-->
       </div>

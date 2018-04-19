@@ -3,7 +3,7 @@
     <!--overview start-->
     <div class="row">
       <div class="col-lg-12">
-        <h3 class="page-header"><i class="fa fa-laptop"></i> Painel Inicial</h3>
+        
         <ol class="breadcrumb">
           <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
           <li><i class="fa fa-laptop"></i>Painel Inicial</li>
@@ -14,9 +14,9 @@
     <div class="row">
       <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <div class="info-box blue-bg">
-          <i class="fa fa-cloud-download"></i>
-          <div class="count">674</div>
-          <div class="title">Download Aplicativo</div>
+          <i class="fa fa-user"></i>
+          <div class="count"><?php echo $ncliente ?></div>
+          <div class="title">CLIENTES CADASTRADOS</div>
         </div>
         <!--/.info-box-->
       </div>

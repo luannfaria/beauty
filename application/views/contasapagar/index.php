@@ -5,13 +5,17 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                  <h3 class="page-header"><i class="fa fa-money"></i>CONTAS A PAGAR</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-laptop"></i>Contas a pagar</li>
+              </ol>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('contasapagar/add'); ?>" class="btn btn-primary">ADICIONAR PAGAMENTO</a>
+                    <a href="<?php echo site_url('contasapagar/add'); ?>" class="btn btn-success">NOVO PAGAMENTO</a>
                 </div>
                 <br>
             </div>
             <div class="box-body">
+              <section class="panel">
                 <table class="table table-striped">
                     <tr>
 
@@ -51,7 +55,7 @@
                     </tr>
                     <?php } ?>
                 </table>
-
+</section>
             </div>
         </div>
     </div>

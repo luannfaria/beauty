@@ -5,23 +5,27 @@
     <div class="col-md-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="page-header"><i class="fa fa-money"></i>CONTAS A RECEBER</h3>
+              <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+                <li><i class="fa fa-dollar"></i>Contas a receber</li>
+              </ol>
             	<div class="box-tools">
-                    <a href="<?php echo site_url('contasareceber/add'); ?>" class="btn btn-primary">ADICIONAR NOVO</a>
+                    <a href="<?php echo site_url('contasareceber/add'); ?>" class="btn btn-success" >NOVO PAGAMENTO</a>
                 </div>
                 <br>
             </div>
             <div class="box-body">
+              <section class="panel">
                 <table class="table table-striped">
                     <tr>
-						<th>Numero</th>
-						<th>Descricao</th>
+						<th><i class="fa fa-sort-numeric-desc"> </i> Numero</th>
+						<th><i class="fa fa-bookmark"> </i> Descricao</th>
 
-						<th>Valor</th>
-						<th>Data Vencimento</th>
-						<th>Data Pagamento</th>
-						<th>Observação</th>
-						<th>Ações</th>
+						<th><i class="fa fa-dollar"> </i> Valor</th>
+						<th><i class="fa fa-calendar"> </i> Data Vencimento</th>
+						<th><i class="fa fa-calendar"> </i> Data Pagamento</th>
+						<th><i class="fa fa-comment-o"> </i> Observação</th>
+						<th><i class="fa fa-cogs"> </i> Ações</th>
                     </tr>
                     <?php foreach($contasarecebers as $c){ ?>
                     <tr>
@@ -45,7 +49,7 @@
                     </tr>
                     <?php } ?>
                 </table>
-
+              </section>
             </div>
         </div>
     </div>

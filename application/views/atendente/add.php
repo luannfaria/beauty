@@ -27,10 +27,11 @@
 
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
-              	<h3 class="box-title">Adicionar Atendente</h3>
-            </div>
+      <section class="panel">
+        <header class="panel-heading">
+          Adicionar atendente
+        </header>
+        <div class="panel-body">
             <?php echo form_open('atendente/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix">
@@ -125,6 +126,7 @@
           	</div>
             <?php echo form_close(); ?>
       	</div>
+      </form>
     </div>
 </div>
 

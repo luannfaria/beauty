@@ -110,17 +110,20 @@ var Script = function () {
           );
         },
 
-        select: function(start) {
+        select: function(start, end, jsEvent, view, resource) {
 
 
 
               $('#cadastrar #dataInicial').val(moment(start).format('YYYY-MM-DD'));
                 $('#cadastrar #start').val(moment(start).format('DD/MM/YYYY'));
 
-               $('#cadastrar #hora').val(moment(start).format('HH:mm'));
+                 $('#cadastrar #hora').val(moment(start).format('HH:mm'));
+
+          //     $('#cadastrar #hora').val(moment(start).format('HH:mm'));
 
                $('#cadastrar #end').val(moment(start).add(40, 'minutes').format('HH:mm'));
-            //  $('#cadastrar #idatend').html(resource.id);
+                $('#cadastrar #resource').val(resource.id);
+                $('#cadastrar #nomeatendente').val(resource.title);
 
 //var resourceTitle = $("#calendar").fullCalendar("getResourceById",event.resourceId);
 

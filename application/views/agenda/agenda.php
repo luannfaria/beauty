@@ -55,7 +55,7 @@
   <div class="col-lg-4">
               <div class="form-group">
                 <label for="exampleInputEmail1">Data</label>
-                <input type="text" class="form-control" value="" name="start" id="start" >
+                <input type="text" class="form-control" value="" name="start" id="start" disabled>
                 <input type="hidden" class="form-control" value="" name="dataInicial" id="dataInicial" >
               </div>
               </div>
@@ -63,8 +63,9 @@
 <div class="col-lg-3">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Hora</label>
-                    <input type="text" class="form-control" value="" name="hora" id="hora" >
-                    <input type="hidden" class="form-control" value="" name="hora" id="hora" >
+<input type="text" class="form-control" value="" name="hora" id="hora"  disabled>
+                    <input type="hidden" class="form-control" value="" name="resource" id="resource">
+                    <input type="hidden" class="form-control" value="" name="nomeatendente" id="nomeatendente" >
                     <input type="hidden" class="form-control" value="1" name="status" id="status" >
                     <input type="hidden" class="form-control" value="" name="end" id="end" >
                     <input type="hidden" class="form-control" value="#809fff" name="cor" id="cor" >
@@ -72,23 +73,14 @@
                   </div>
 </div>
 
-<div class="col-md-5">
-  <label for="atendente" class="control-label"><span class="text-danger">*</span>Atendente</label>
-  <div class="form-group">
-    <select name="atendente" class="form-control">
-      <option value="">Selecione um atendente</option>
-      <?php
-      foreach($all_atendentes as $atendente)
-      {
-        $selected = ($atendente['idatendente'] == $this->input->post('idatendente')) ? ' selected="selected"' : "";
-
-        echo '<option value="'.$atendente['idatendente'].'" '.$selected.'>'.$atendente['nome'].'</option>';
-      }
-      ?>
-    </select>
-    <span class="text-danger"><?php echo form_error('idatendente');?></span>
-  </div>
+<div class="col-lg-3">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Atendente</label>
+<input type="text" class="form-control" value="" name="nomeatendente" id="nomeatendente"  disabled>
 </div>
+</div>
+
+
 
 
 
@@ -99,8 +91,8 @@
 
     <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Digite o nome do cliente" />
 
-    <input type="hidden" name="idcliente" id="idcliente" />
-    <input type="hidden" name="nomecli" id="nomecli" />
+    <input type="hidden" class="form-control" name="idcliente" id="idcliente" />
+    <input type="hidden" class="form-control" name="nome" id="nome" />
 
 
       <span class="text-danger"><?php echo form_error('idcliente');?></span>
@@ -135,7 +127,8 @@
                               </div>
 
 <div class="col-lg-4">
-<label><input type="submit" class="btn btn-success" name="ok" value="ADICIONAR SERVIÇO" /></label>
+  <label for="">&nbsp</label>
+<input type="submit" class="btn btn-success" name="ok" value="ADICIONAR SERVIÇO" />
 </div>
   </form>
                           </div>
@@ -548,6 +541,7 @@
       $('#form_prepare').submit(function(){
         var $this = $( this );
 
+        var databr = $this.find("input[name='start']").val();
           var hora= $this.find("input[name='hora']").val();
           var start = $this.find("input[name='dataInicial']").val();
           var nomeservico = $this.find("input[name='nomeservico']").val();
@@ -557,7 +551,8 @@
             var idcliente = $this.find("input[name='idcliente']").val();
               var idservico = $this.find("input[name='idservico']").val();
             var end = $this.find("input[name='end']").val();
-            var atendente = $this.find("select[name='atendente']").val();
+            var atendente = $this.find("input[name='resource']").val();
+            var nomeatendente = $this.find("input[name='nomeatendente']").val();
             var status = $this.find("input[name='status']").val();
             var cor = $this.find("input[name='cor']").val();
 
@@ -577,13 +572,15 @@
 
 
         var hiddens = '<input type="hidden" name="nomeservico[]" value="'+nomeservico+'" />'+
+        '<input type="hidden" name="databr[]" value="'+databr+'" />'+
         '<input type="hidden" name="valorserv[]" value="'+valorserv+'" />'+
         '<input type="hidden" name="comissao[]" value="'+comissao+'" />'+
         '<input type="hidden" name="idservico[]" value="'+idservico+'" />'+
         '<input type="hidden" name="idcliente[]" value="'+idcliente+'" />'+
         '<input type="hidden" name="nome[]" value="'+nome+'" />'+
 			'<input type="hidden" name="hora[]" value="'+hora+'" />'+
-      '<input type="hidden" name="atendente[]" value="'+atendente+'" />'+
+      '<input type="hidden" name="resource[]" value="'+atendente+'" />'+
+      '<input type="hidden" name="nomeatendente[]" value="'+nomeatendente+'" />'+
       '<input type="hidden" name="end[]" value="'+end+'" />'+
       '<input type="hidden" name="status[]" value="'+status+'" />'+
       '<input type="hidden" name="cor[]" value="'+cor+'" />'+

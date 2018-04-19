@@ -21,29 +21,32 @@ function mtel(v){
 
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
-              	<h3 class="box-title">Editar atendente</h3>
-            </div>
-			<?php echo form_open('atendente/edit/'.$atendente['idatendente']); ?>
+      <section class="panel">
+        <header class="panel-heading">
+          Adicionar atendente
+        </header>
+
+      <div class="painel-body">
+        	<?php echo form_open('atendente/edit/'.$atendente['idatendente']); ?>
 			<div class="box-body">
-				<div class="row clearfix">
-					<div class="col-md-6">
+
+<div class="col-md-12">
+					<div class="col-md-3">
 						<label for="nome" class="control-label"><span class="text-danger">*</span>Nome</label>
 						<div class="form-group">
 							<input type="text" name="nome" value="<?php echo ($this->input->post('nome') ? $this->input->post('nome') : $atendente['nome']); ?>" class="form-control" id="nome" />
 							<span class="text-danger"><?php echo form_error('nome');?></span>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-3">
 						<label for="sobrenome" class="control-label"><span class="text-danger">*</span>Sobrenome</label>
 						<div class="form-group">
 							<input type="text" name="sobrenome" value="<?php echo ($this->input->post('sobrenome') ? $this->input->post('sobrenome') : $atendente['sobrenome']); ?>" class="form-control" id="sobrenome" />
 							<span class="text-danger"><?php echo form_error('sobrenome');?></span>
 						</div>
 					</div>
-          <div class="col-md-6">
-            <label for="cpf" class="control-label">Cpf</label>
+          <div class="col-md-2">
+            <label for="cpf" class="control-label">CPF</label>
             <div class="form-group">
               <input type="text" name="cpf" value="<?php echo ($this->input->post('cpf') ? $this->input->post('cpf') : $atendente['cpf']); ?>" class="form-control" id="cpf" />
             </div>
@@ -131,13 +134,13 @@ function mtel(v){
 					</div>
 
 				</div>
-			</div>
+
 			<div class="box-footer">
             	<button type="submit" class="btn btn-success">
 					<i class="fa fa-check"></i> SALVAR
 				</button>
 	        </div>
 			<?php echo form_close(); ?>
-		</div>
     </div>
 </div>
+		</div>
