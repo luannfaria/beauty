@@ -7,9 +7,9 @@
       <div class="col-lg-12">
 
         <ol class="breadcrumb">
-          <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-          <li><i class="fa fa-desktop"></i>UI Fitures</li>
-          <li><i class="fa fa-list-alt"></i>Components</li>
+          <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
+
+          <li><i class="fa fa-list-alt"></i>Editar permissões</li>
         </ol>
       </div>
     </div>

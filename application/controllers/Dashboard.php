@@ -58,7 +58,7 @@ class Dashboard extends CI_Controller
               $password_stored =  $user->senha;
 
               if($senha == $password_stored){
-                  $session_data = array('login' => $user->login, 'id' => $user->idusuario,'permissao' => $user->permissoes_id ,'logado' => TRUE);
+                  $session_data = array('login' => $user->login, 'id' => $user->idusuario,'permissao' => $user->idPermissao ,'logado' => TRUE);
                   $this->session->set_userdata($session_data);
                   $json = array('result' => true);
   echo json_encode($json);
@@ -85,7 +85,7 @@ class Dashboard extends CI_Controller
 
       $this->load->model('Cliente_model');
         $data['ncliente'] = $this->Cliente_model->count('cliente');
-
+        
     $this->load->view('include/header');
     $this->load->view('dashboard/painel',$data);
     $this->load->view('include/footer');

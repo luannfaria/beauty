@@ -39,6 +39,117 @@ class Permissoes extends CI_Controller
         $this->load->view('include/footer');
     }
 
+    public function add(){
+
+
+      $this->load->library('form_validation');
+
+  $this->form_validation->set_rules('nome','Nome','required');
+
+
+  if($this->form_validation->run())
+      {
+
+
+
+      $nomePermissao = $this->input->post('nome');
+      $situacao = $this->input->post('situacao');
+      $permissoes = array(
+
+              'aCliente' => $this->input->post('aCliente'),
+              'eCliente' => $this->input->post('eCliente'),
+              'dCliente' => $this->input->post('dCliente'),
+              'vCliente' => $this->input->post('vCliente'),
+
+              'aProduto' => $this->input->post('aProduto'),
+              'eProduto' => $this->input->post('eProduto'),
+              'dProduto' => $this->input->post('dProduto'),
+              'vProduto' => $this->input->post('vProduto'),
+
+              'aServico' => $this->input->post('aServico'),
+              'eServico' => $this->input->post('eServico'),
+              'dServico' => $this->input->post('dServico'),
+              'vServico' => $this->input->post('vServico'),
+
+              'aFunc' => $this->input->post('aFunc'),
+              'eFunc' => $this->input->post('eFunc'),
+              'dFunc' => $this->input->post('dFunc'),
+              'vFunc' => $this->input->post('vFunc'),
+
+              'vRel' => $this->input->post('vRel'),
+              'relv' => $this->input->post('relv'),
+              'relcli' => $this->input->post('relcli'),
+              'relc' => $this->input->post('relc'),
+              'relf' => $this->input->post('relf'),
+
+              'aVenda' => $this->input->post('aVenda'),
+              'eVenda' => $this->input->post('eVenda'),
+              'dVenda' => $this->input->post('dVenda'),
+              'vVenda' => $this->input->post('vVenda'),
+
+              'aAgenda' => $this->input->post('aAgenda'),
+              'eAgenda' => $this->input->post('eAgenda'),
+              'dAgenda' => $this->input->post('dAgenda'),
+              'vAgenda' => $this->input->post('vAgenda'),
+
+              'aCategoria' => $this->input->post('aCategoria'),
+              'eCategoria' => $this->input->post('eCategoria'),
+              'dCategoria' => $this->input->post('dCategoria'),
+              'vCategoria' => $this->input->post('vCategoria'),
+
+              'aPermissao'=> $this->input->post('aPermissao'),
+              'vPermissao' => $this->input->post('vPermissao'),
+              'ePermissao'=> $this->input->post('ePermissao'),
+              'dPermissao'=> $this->input->post('dPermissao'),
+
+              'aPagar' => $this->input->post('aPagar'),
+              'ePagar' => $this->input->post('ePagar'),
+              'dPagar' => $this->input->post('dPagar'),
+              'vPagar' => $this->input->post('vPagar'),
+
+              'aReceber' => $this->input->post('aReceber'),
+              'eReceber' => $this->input->post('eReceber'),
+              'dReceber' => $this->input->post('dReceber'),
+              'vReceber' => $this->input->post('vReceber'),
+
+              'vUser' => $this->input->post('vUser'),
+              'aUser' => $this->input->post('aUser'),
+              'eUser' => $this->input->post('eUser'),
+              'dUser' => $this->input->post('dUser'),
+
+              'vConfig' => $this->input->post('vConfig'),
+
+              'cPermissao' => $this->input->post('cPermissao'),
+              'cBackup' => $this->input->post('cBackup'),
+
+
+
+        );
+      $permissoes = serialize($permissoes);
+
+      $data = array(
+            'nome' => $nomePermissao,
+            'permissoes' => $permissoes,
+            'situacao' => $situacao
+        );
+
+
+        if ($this->Permissoes_model->add($data) == true) {
+            $this->session->set_flashdata('success', 'Permissão editada com sucesso!');
+            redirect('permissoes/index');
+        } else {
+            $this->data['custom_error'] = '<div class="form_error"><p>Ocorreu um errro.</p></div>';
+        }
+
+}
+
+
+        $this->load->view('include/header');
+        $this->load->view('permissoes/add');
+        $this->load->view('include/footer');
+
+    }
+
 
     public function edit($id)
     {

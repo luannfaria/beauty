@@ -1,8 +1,8 @@
-<?php 
+<?php
 $config['pagination']['page_query_string'] = TRUE;
 $config['pagination']['uri_segment'] = 3;
-                
-$config['pagination']['per_page'] = RECORDS_PER_PAGE;
+
+$config['pagination']['per_page'] = 10;
 
 $config['pagination']['prev_link'] = '‹';
 $config['pagination']['next_link'] = '›';
@@ -22,4 +22,6 @@ $config['pagination']['first_tag_close'] = '</li>';
 $config['pagination']['last_link'] = '››';
 $config['pagination']['last_tag_open'] = '<li>';
 $config['pagination']['last_tag_close'] = '</li>';
+
+
 ?>

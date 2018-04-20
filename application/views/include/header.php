@@ -87,7 +87,7 @@
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
-                            <span class="username">LOGADO</span>
+                          Bem vindo,  <span class="username"><?php echo $this->session->userdata('login') ?></span>
                             <b class="caret"></b>
                         </a>
             <ul class="dropdown-menu extended logout">

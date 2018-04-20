@@ -9,7 +9,7 @@
                     <li><i class="fa fa-laptop"></i>Permissões</li>
                   </ol>
                 	<div class="box-tools">
-
+                      <a href="<?php echo site_url('permissoes/add'); ?>" class="btn btn-success">NOVO</a>
                     </div>
                     <br>
                 </div>

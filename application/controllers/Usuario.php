@@ -31,11 +31,14 @@ class Usuario extends CI_Controller{
      */
     function add()
     {
+
+
         $this->load->library('form_validation');
 
 		$this->form_validation->set_rules('login','Login','required');
 		$this->form_validation->set_rules('senha','Senha','required');
-
+    $this->form_validation->set_rules('senhaconf', 'Confirmar senha', 'required|matches[senha]');
+    $this->form_validation->set_rules('permissao','Permissão','required');
 		if($this->form_validation->run())
         {
             $params = array(
@@ -43,6 +46,7 @@ class Usuario extends CI_Controller{
 				'senha' => $this->input->post('senha'),
 				'login' => $this->input->post('login'),
 				'datacadastro' => $this->input->post('datacadastro'),
+        'idPermissao' => $this->input->post('permissao'),
             );
 
             $usuario_id = $this->Usuario_model->add_usuario($params);
@@ -53,8 +57,12 @@ class Usuario extends CI_Controller{
         //    $data['_view'] = 'usuario/add';
         //    $this->load->view('layouts/main',$data);
 
+        $this->load->model('Permissoes_model');
+
+          $data['permissao'] = $this->Permissoes_model->get_all_permissoes();
+
         $this->load->view('include/header');
-        $this->load->view('usuario/add');
+        $this->load->view('usuario/add',$data);
         $this->load->view('include/footer');
         }
     }

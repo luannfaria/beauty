@@ -70,8 +70,10 @@
                     <?php } ?>
                 </table>
               </section>
-  <?php echo $this->pagination->create_links();?>
+
             </div>
+
+            <?php echo $this->pagination->create_links();?>
         </div>
 
 

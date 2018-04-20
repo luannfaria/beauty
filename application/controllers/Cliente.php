@@ -44,29 +44,33 @@ class Cliente extends CI_Controller{
 
         $config['base_url'] = base_url().'cliente/gerenciar/';
         $config['total_rows'] = $this->Cliente_model->count('cliente');
+        $config['page_query_string'] = TRUE;
+        $config['uri_segment'] = 3;
         $config['per_page'] = 10;
-       $config['uri_segment'] = 3;
-        $config['next_link'] = '>>';
-        $config['prev_link'] = '<<';
-        $config['full_tag_open'] = '<div class="panel-body""><ul class="pagination pagination-lg">';
-        $config['full_tag_close'] = '</ul></div>';
-        $config['num_tag_open'] = '<li>';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
-        $config['cur_tag_close'] = '</b></a></li>';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
+
+        $config['prev_link'] = '‹';
+        $config['next_link'] = '›';
+        $config['full_tag_open'] = '<ul class="pagination">';
         $config['next_tag_open'] = '<li>';
         $config['next_tag_close'] = '</li>';
-        $config['first_link'] = '>>';
-        $config['last_link'] = '<<';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="active"><a href="">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['full_tag_close'] = '</ul>';
+        $config['first_link'] = '‹‹';
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
+        $config['last_link'] = '››';
         $config['last_tag_open'] = '<li>';
         $config['last_tag_close'] = '</li>';
 
+
         $this->pagination->initialize($config);
-        $data['custom_error'] = '';
+
+
 
 
         $data['clientes'] = $this->Cliente_model->get_all_clientes();

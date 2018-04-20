@@ -34,6 +34,18 @@ class Permissoes_model extends CI_Model
         return $this->db->get('permissoes')->row();
     }
 
+    function add($data){
+
+      $this->db->insert('permissoes',$data);
+      if ($this->db->affected_rows() >= 0)
+  {
+    return TRUE;
+  }
+
+  return FALSE;
+  
+    }
+
 
     function update($table,$data,$fieldID,$ID){
       $this->db->where($fieldID,$ID);

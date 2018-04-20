@@ -17,21 +17,27 @@
             <div class="box-body">
                 <table class="table table-striped">
                     <tr>
-						<th>Numero usuario</th>
-            <th>Login</th>
-						<th>Status</th>
+						<th> ID</th>
+            <th> Login</th>
+						<th> Status</th>
 
-						<th>Ações</th>
+						<th> Ações</th>
                     </tr>
                     <?php foreach($usuarios as $u){ ?>
                     <tr>
 						<td><?php echo $u['idusuario']; ?></td>
             <td><?php echo $u['login']; ?></td>
-						<td><?php echo $u['status']; ?></td>
+				<?php if($u['status']==1) { ?>
+            <td>ATIVO </td>
+        <?php } ?>
+
+        <?php if($u['status']==2) { ?>
+            <td>ATIVO </td>
+        <?php } ?>
 
 						<td>
                             <a href="<?php echo site_url('usuario/edit/'.$u['idusuario']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
-                            <a href="<?php echo site_url('usuario/remove/'.$u['idusuario']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> DELETAR</a>
+                          
                         </td>
                     </tr>
                     <?php } ?>
