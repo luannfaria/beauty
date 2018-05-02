@@ -291,9 +291,11 @@
                                     </div>
 <div class="row">
     <label for="">&nbsp</label>
+    <?php date_default_timezone_set('America/Sao_Paulo'); ?>
         <input type="hidden" name="status" value="FECHADO">
-        	<input type="hidden" name="datavencimento" value="<?php echo $agenda['data'] ;?>" class="has-datepicker form-control" id="datepicker1" />
-          <input type="hidden" name="datapagamento" value="<?php echo $agenda['data'] ;?>" class="has-datepicker form-control" id="datepicker" />
+        	<input type="hidden" name="datavencimento" value="<?php
+ echo date('d/m/Y') ;?>" class="has-datepicker form-control" id="datepicker1" />
+          <input type="hidden" name="datapagamento" value="<?php echo date('d/m/Y') ;?>" class="has-datepicker form-control" id="datepicker" />
 
           <input type="hidden" name="idagendamento" id="idagendamento" value="<?php echo $agenda['idagenda'] ;?>" />
 

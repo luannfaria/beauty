@@ -8,7 +8,7 @@
 
         <ol class="breadcrumb">
           <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
-          <li><i class="fa fa-table"></i> Faturar Agendamentos</li>
+          <li><i class="fa fa-calendar"></i> Faturar Agendamentos</li>
 
         </ol>
 
@@ -24,9 +24,9 @@
 <th><i class="fa fa-sort-numeric-desc"> </i> Numero </th>
 <th><i class="fa fa-user"> </i> Cliente</th>
 <th><i class="icon_calendar"> </i> Data</th>
-<th><i class="icon_calendar"> </i> Hora</th>
+<th><i class="fa fa-clock-o"> </i> Hora</th>
 <th><i class="fa fa-dollar"> </i> Valor</th>
-<th><i class="fa fa-dollar"> </i> Atendente</th>
+<th><i class="fa fa-user"> </i> Atendente</th>
 
 <th><i class="fa fa-check"> </i> Status</th>
 <th><i class="fa fa-cogs"> </i> Ações</th>

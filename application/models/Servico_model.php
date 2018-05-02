@@ -19,6 +19,23 @@ class Servico_model extends CI_Model
         return $this->db->get_where('servico',array('idservico'=>$idservico))->row_array();
     }
 
+    function get_idpacote($idservico)
+    {
+        return $this->db->get_where('servico',array('idservico'=>$idservico))->row_array();
+    }
+
+      function get_item($iditem)
+      {
+
+        return $this->db->get_where('item_serv',array('iditem_serv'=>$iditem))->row_array();
+      }
+
+
+    function get_itens($idservico)
+    {
+      return $this->db->get_where('item_serv',array('idpacote'=>$idservico))->result_array();
+    }
+
     /*
      * Get all servicos
      */
@@ -47,6 +64,22 @@ class Servico_model extends CI_Model
     	$this->db->insert('item_serv',$itens);
     	return $this->db->insert_id();
     }
+
+    function item($itens){
+
+      $this->db->insert('item_serv',$itens);
+
+      if ($this->db->affected_rows() == '1')
+      {
+        return TRUE;
+      }
+else{
+      return FALSE;
+
+    }
+
+
+    }
     /*
      * function to update servico
      */
@@ -61,6 +94,28 @@ class Servico_model extends CI_Model
      */
     function delete_servico($idservico)
     {
-        return $this->db->delete('servico',array('idservico'=>$idservico));
+        $this->db->delete('servico',array('idservico'=>$idservico));
+
+      if ($this->db->affected_rows() == '1')
+{
+return TRUE;
+}
+
+return FALSE;
+
+    }
+
+
+    function delete_item($iditem){
+
+      $this->db->delete('item_serv',array('iditem_serv'=>$iditem));
+
+      if ($this->db->affected_rows() == '1')
+  		{
+  			return TRUE;
+  		}
+
+  		return FALSE;
+
     }
 }

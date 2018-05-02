@@ -69,6 +69,25 @@ class Servico extends CI_Controller{
         }
     }
 
+    function editpacote($idservico){
+
+        $data['servico'] = $this->Servico_model->get_servico($idservico);
+        $data['itenspacote'] =$this->Servico_model->get_itens($idservico);
+        $data['pacote']=$this->Servico_model->get_idpacote($idservico);
+        $this->load->model('Categoria_prod_serv_model');
+				$data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
+
+
+        $this->load->view('include/header');
+        $this->load->view('servico/editpacote',$data);
+        $this->load->view('include/footer');
+
+
+
+
+
+    }
+
     function addpacote(){
 
       $params = array(
@@ -102,6 +121,26 @@ class Servico extends CI_Controller{
 
 
          redirect(base_url('servico'));
+
+
+    }
+    function additempacote(){
+
+      $itens = array(
+            'idpacote' => $this->input->post('idpacote'),
+            'nomeserv' => $this->input->post('nomeitem'),
+            'idserv' =>$this->input->post('idservico'),
+            'comissao'=>$this->input->post('comi'),
+          );
+
+          if($this->Servico_model->item($itens)== true){
+
+            echo json_encode(array('result'=> true));
+
+          }
+          else{
+                echo json_encode(array('result'=> false));
+            }
 
 
     }
@@ -168,6 +207,30 @@ class Servico extends CI_Controller{
         }
         else
             show_error('The servico you are trying to delete does not exist.');
+    }
+
+    function removeitem(){
+
+        $iditem_serv = $this->input->post('iditem');
+
+
+
+
+
+          if($this->Servico_model->delete_item($iditem_serv)== true){
+
+            echo json_encode(array('result'=> true));
+
+          }
+          else{
+                echo json_encode(array('result'=> false));
+            }
+
+
+
+
+
+
     }
 
 }

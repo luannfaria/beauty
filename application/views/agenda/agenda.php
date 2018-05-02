@@ -54,7 +54,7 @@
           <form action="" method="post" id="form_prepare">
   <div class="col-lg-4">
               <div class="form-group">
-                <label for="exampleInputEmail1">Data</label>
+                <label for="exampleInputEmail1"><i class="fa fa-calendar"> </i> Data</label>
                 <input type="text" class="form-control" value="" name="start" id="start" disabled>
                 <input type="hidden" class="form-control" value="" name="dataInicial" id="dataInicial" >
               </div>
@@ -62,7 +62,7 @@
 
 <div class="col-lg-3">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Hora</label>
+                    <label for="exampleInputEmail1"><i class="fa fa-clock-o"> </i> Hora</label>
 <input type="text" class="form-control" value="" name="hora" id="hora"  disabled>
                     <input type="hidden" class="form-control" value="" name="resource" id="resource">
                     <input type="hidden" class="form-control" value="" name="nomeatendente" id="nomeatendente" >
@@ -75,7 +75,7 @@
 
 <div class="col-lg-3">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Atendente</label>
+                    <label for="exampleInputEmail1"><i class="fa fa-users"> </i>Atendente</label>
 <input type="text" class="form-control" value="" name="nomeatendente" id="nomeatendente"  disabled>
 </div>
 </div>
@@ -86,7 +86,7 @@
 
 <div class="col-lg-8">
     <div class="form-group">
-    <label for="idcliente" class="control-label"><span class="text-danger">*</span>Cliente</label>
+    <label for="idcliente" class="control-label"><span class="text-danger">*</span><i class="fa fa-user"> </i> Cliente</label>
 
 
     <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Digite o nome do cliente" />
@@ -109,7 +109,7 @@
 
 <div class="col-lg-8">
                                 <div class="form-group">
-                      						<label for="idservico" class="control-label">Serviços</label>
+                      						<label for="idservico" class="control-label"><i class="fa fa-spinner"> </i> Serviços</label>
 
                                   <input type="text" class="form-control" name="servico" id="servico" placeholder="Digite o nome do serviço" />
 

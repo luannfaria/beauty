@@ -86,11 +86,17 @@
 
             <td><?php if($s['tiposervico']== '1'){ ?>INDIVIDUAL <?php }elseif($s['tiposervico']== '2') { ?> PACOTE <?php } ?></td>
             <td><?php if($s['status']== '1'){ ?> <span class="label label-success"> ATIVO </span> <?php }elseif($s['status']== '2') { ?> <span class="label label-danger"> INATIVO </span> <?php } ?></td>
-
+<?php if($s['tiposervico']=='1') { ?>
 						<td>
                             <a href="<?php echo site_url('servico/edit/'.$s['idservico']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
 
                         </td>
+                        <?php   }else { ?>
+
+                          <td>
+                          <a href="<?php echo site_url('servico/editpacote/'.$s['idservico']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
+</td>
+                              <?php      } ?>
                     </tr>
                     <?php } ?>
                 </table>

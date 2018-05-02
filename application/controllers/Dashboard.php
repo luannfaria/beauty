@@ -85,7 +85,9 @@ class Dashboard extends CI_Controller
 
       $this->load->model('Cliente_model');
         $data['ncliente'] = $this->Cliente_model->count('cliente');
-        
+          $this->load->model('Dashboard_model');
+        $data['nagenda'] = $this->Dashboard_model->count('agenda');
+
     $this->load->view('include/header');
     $this->load->view('dashboard/painel',$data);
     $this->load->view('include/footer');

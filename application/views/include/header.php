@@ -122,6 +122,9 @@
                           <span>Painel inicial</span>
                       </a>
           </li>
+
+          <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vAgenda')) {
+  ?>
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_calendar"></i>
@@ -133,6 +136,8 @@
               <li><a class="" href="<?php echo base_url();?>calendar/listaagenda">Agendamentos</a></li>
             </ul>
           </li>
+
+        <?php } ?>
             <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vProduto') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vServico') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vCategoria')) {
     ?>
           <li class="sub-menu">

@@ -17,4 +17,8 @@ public function check_credentials($login) {
     return $this->db->get('usuario')->row();
 }
 
+public function count($table) {
+    return $this->db->count_all($table);
+}
+
 }
