@@ -29,7 +29,7 @@
     <div class="col-md-12">
       <section class="panel">
         <header class="panel-heading">
-          Adicionar atendente
+          <i class="fa fa-user"></i>Adicionar atendente
         </header>
         <div class="panel-body">
             <?php echo form_open('atendente/add'); ?>

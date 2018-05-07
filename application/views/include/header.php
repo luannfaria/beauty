@@ -16,7 +16,6 @@
   <!-- bootstrap theme -->
   <link href="<?php echo base_url()?>assets/css/bootstrap-theme.css" rel="stylesheet">
 
-  <link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
   <!--external css-->
   <!-- font icon -->
   <link href="<?php echo base_url()?>assets/css/elegant-icons-style.css" rel="stylesheet" />
@@ -221,13 +220,14 @@
 
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
+                          <i class="fa fa-list"></i>
                           <span>Relatorios</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
               <li><a class="" href="#">Clientes</a></li>
               <li><a class="" href="<?php echo base_url() ?>relatorio/comissao">Comissões</a></li>
+                <li><a class="" href="#">Financeiro</a></li>
               <li><a class="" href="#">Serviços/Produtos</a></li>
               <li><a class="" href="#">Vendas</a></li>
             </ul>

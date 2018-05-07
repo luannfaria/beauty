@@ -10,7 +10,7 @@
             <div class="box-header">
               <ol class="breadcrumb">
                 <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
-                <li><i class="fa fa-laptop"></i>Clientes</li>
+                <li><i class="fa fa-user"></i>Clientes</li>
               </ol>
 <?php if ($this->session->flashdata('success')) { ?>
                   <div class="alert alert-success fade in">

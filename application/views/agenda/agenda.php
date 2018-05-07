@@ -49,7 +49,7 @@
               </div>
               <div class="modal-body">
 
-          <!--    <?php echo form_open('calendar/add'); ?> -->
+          
 
           <form action="" method="post" id="form_prepare">
   <div class="col-lg-4">
@@ -89,7 +89,7 @@
     <label for="idcliente" class="control-label"><span class="text-danger">*</span><i class="fa fa-user"> </i> Cliente</label>
 
 
-    <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Digite o nome do cliente" />
+    <input type="text" class="form-control required" name="cliente" id="cliente" placeholder="Digite o nome do cliente"  onfocus="this.value=''" required/>
 
     <input type="hidden" class="form-control" name="idcliente" id="idcliente" />
     <input type="hidden" class="form-control" name="nome" id="nome" />
@@ -103,7 +103,7 @@
   <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Novo Cliente</a>
 
   </div>
-<!--<?php echo form_close(); ?>-->
+
 
 <div class="row">
 
@@ -111,7 +111,7 @@
                                 <div class="form-group">
                       						<label for="idservico" class="control-label"><i class="fa fa-spinner"> </i> Serviços</label>
 
-                                  <input type="text" class="form-control" name="servico" id="servico" placeholder="Digite o nome do serviço" />
+                                  <input type="text" class="form-control required" name="servico" id="servico" placeholder="Digite o nome do serviço" onfocus="this.value=''" required/>
 
                                   <input type="hidden" name="idservico" id="idservico" value=""/>
 

@@ -2,37 +2,14 @@
   <section class="wrapper">
 
 
-  <link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
-         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-           <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js?v=0.3.3"></script>
-
-    <script type="text/javascript">
-    function formatarMoeda() {
-    var elemento = document.getElementById('valor');
-    var valor = elemento.value;
-
-    valor = valor + '';
-    valor = parseInt(valor.replace(/[\D]+/g,''));
-    valor = valor + '';
-    valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-    if (valor.length > 6) {
-    valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-    }
-
-    elemento.value = valor;
-    }
-
-    </script>
-
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
-              	<h3 class="box-title">ADICIONAR NOVO</h3>
-            </div>
+      	<section class="panel">
+        <header class="panel-heading">
+          <i class="fa fa-dollar"></i>Adicionar nova conta
+        </header>
+            
+            <div class="panel-body">
             <?php echo form_open('contasapagar/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix">
@@ -45,7 +22,7 @@
 						</div>
 					</div>
 					<div class="col-md-2">
-						<label for="numero" class="control-label">Numero</label>
+						<label for="numero" class="control-label">Nº Documento</label>
 						<div class="form-group">
 							<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
 						</div>
@@ -53,7 +30,7 @@
 					<div class="col-md-2">
 						<label for="valor" class="control-label"><span class="text-danger">*</span>Valor</label>
 						<div class="form-group">
-							<input type="text" name="valor" value="<?php echo $this->input->post('valor'); ?>" onkeyup="formatarMoeda();" class="form-control" id="valor" />
+							<input type="text" name="valor" value="<?php echo $this->input->post('valor'); ?>"  class="form-control" id="valor" />
 							<span class="text-danger"><?php echo form_error('valor');?></span>
 						</div>
 					</div>
@@ -71,12 +48,7 @@
 							<input type="text" name="obs" value="<?php echo $this->input->post('obs'); ?>" class="form-control" id="obs" />
 						</div>
 					</div>
-					<div class="col-md-2">
-						<label for="datapagamento" class="control-label">Data pagamento</label>
-						<div class="form-group">
-							<input type="text" name="datapagamento" value="<?php echo $this->input->post('datapagamento'); ?>" class="form-control" id="datapagamento" />
-						</div>
-					</div>
+
 
 
             <div class="col-md-2">
@@ -103,14 +75,33 @@
           	</div>
             <?php echo form_close(); ?>
       	</div>
+        </section>
     </div>
 </div>
 
-<script>
-$( function() {
-  $( "#datavencimento" ).datepicker({ dateFormat: 'dd/mm/yy' });
+<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+<script src="<?php echo base_url()?>assets/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="<?php echo base_url()?>assets/js/jquery.scrollTo.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
-    $( "#datapagamento" ).datepicker({ dateFormat: 'dd/mm/yy' });
+<!-- jquery ui -->
+<script src="<?php echo base_url()?>assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="<?php echo base_url()?>assets/js/validate.js"></script>
 
-});
-</script>
+
+    <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+
+    <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+    <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+    <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg-custom.js"></script>
+    <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+    <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+    <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+    <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+
+    $('#valor').maskMoney();
+    $( "#datavencimento" ).datepicker({ dateFormat: 'DD/MM/YY' });
+    </script>

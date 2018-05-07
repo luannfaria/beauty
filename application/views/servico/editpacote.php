@@ -13,7 +13,7 @@
                         </header>
                         <div class="panel-body">
 
-    			<?php echo form_open('servico/edit/'.$servico['idservico']); ?>
+    			<?php echo form_open('servico/editpacote/'.$servico['idservico']); ?>
     			<div class="box-body">
     				<div class="row clearfix">
 
@@ -27,30 +27,14 @@
     					<div class="col-md-2">
     						<label for="valorserv" class="control-label"><span class="text-danger">*</span>Valor pacote</label>
     						<div class="form-group">
-    							<input type="text" name="valorserv" value="<?php echo ($this->input->post('valorserv') ? $this->input->post('valorserv') : $servico['valorserv']); ?>" class="form-control money" onkeyup="formatarMoeda();" id="valorserv" />
+    							<input type="text" name="valorserv" value="<?php echo ($this->input->post('valorserv') ? $this->input->post('valorserv') : $servico['valorserv']); ?>" class="form-control" id="valorserv" />
     							<span class="text-danger"><?php echo form_error('valorserv');?></span>
     						</div>
     					</div>
 
 
 
-              <div class="col-md-2">
-                <label for="idcategoria" class="control-label"><span class="text-danger">*</span>Categoria</label>
-                <div class="form-group">
-                  <select name="idcategoria" class="form-control">
-                    <option value="">Selecione uma categoria</option>
-                    <?php
-                    foreach($all_categoria_prod_servs as $categoria_prod_serv)
-                    {
-                      $selected = ($categoria_prod_serv['idcategoria_prod_serv'] == $servico['idcategoria']) ? ' selected="selected"' : "";
 
-                      echo '<option value="'.$categoria_prod_serv['idcategoria_prod_serv'].'" '.$selected.'>'.$categoria_prod_serv['nome'].'</option>';
-                    }
-                    ?>
-                  </select>
-                  <span class="text-danger"><?php echo form_error('idcategoria');?></span>
-                </div>
-              </div>
 
               <div class="col-md-2">
                 <label for="status" class="control-label">Status</label>
@@ -71,6 +55,23 @@
                     }
                     ?>
                   </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="idcategoria" class="control-label"><span class="text-danger">*</span>Categorias</label>
+                <div class="form-group">
+                  <select name="idcategoria" class="form-control m-bot15">
+                    <option value="">Selecione uma categoria</option>
+                    <?php
+                    foreach($all_categoria_prod_servs as $categoria_prod_serv)
+                    {
+                      $selected = ($categoria_prod_serv['idcategoria_prod_serv'] == $this->input->post('idcategoria')) ? ' selected="selected"' : "";
+
+                      echo '<option value="'.$categoria_prod_serv['idcategoria_prod_serv'].'" '.$selected.'>'.$categoria_prod_serv['nome'].'</option>';
+                    }
+                    ?>
+                  </select>
+                  <span class="text-danger"><?php echo form_error('idcategoria');?></span>
                 </div>
               </div>
               	<?php echo form_close(); ?>
@@ -173,12 +174,19 @@
         <script src="<?php echo base_url()?>assets/js/validate.js"></script>
 
 
+          <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+
+
 
 
 
 
         <script type="text/javascript">
 
+
+    $('#comi').maskMoney();
+
+    $('#valorserv').maskMoney();
 
 
           $(document).on('click', 'span', function(event) {
@@ -256,6 +264,8 @@ else{
                   {
                     if(data.result == true){
                         $( "#divServicos" ).load("<?php echo current_url();?> #divServicos" );
+                          $('#inputproduto').val('').focus();
+                          $('#comi').val('');
 
                     }
                     else{

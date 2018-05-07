@@ -7,7 +7,7 @@
             <div class="box-header">
               <ol class="breadcrumb">
                 <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
-                <li><i class="fa fa-laptop"></i>Contas a pagar</li>
+                <li><i class="fa fa-dollar"></i> Contas a pagar</li>
               </ol>
             	<div class="box-tools">
                     <a href="<?php echo site_url('contasapagar/add'); ?>" class="btn btn-success">NOVO PAGAMENTO</a>
@@ -18,19 +18,19 @@
               <section class="panel">
                 <table class="table table-striped">
                     <tr>
-
-<th>Numero</th>
+<th><i class="fa fa-sort-numeric-desc"></i> ID</th>
+<th><i class="fa fa-cc"></i> Nº Documento</th>
 						<th>Descrição</th>
 
-						<th>Valor</th>
-						<th>Data Vencimento</th>
-						<th>Data Pagamento</th>
+						<th><i class="fa fa-dollar"></i> Valor</th>
+						<th><i class="fa fa-calendar"></i> Data Vencimento</th>
+						<th><i class="fa fa-calendar"></i> Data Pagamento</th>
 
-						<th>Ações</th>
+						<th><i class="fa fa-gears"></i> Ações</th>
                     </tr>
                     <?php foreach($contasapagars as $c){ ?>
                     <tr>
-
+<td><?php echo $c['idcontasapagar']; ?></td>
 <td><?php echo $c['numero']; ?></td>
 						<td><?php echo $c['descricao']; ?></td>
 

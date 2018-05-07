@@ -4,40 +4,7 @@
 
 
 
-    <script type="text/javascript">
-    function formatarMoeda() {
-    var elemento = document.getElementById('vlr');
-    var valor = elemento.value;
 
-    valor = valor + '';
-    valor = parseInt(valor.replace(/[\D]+/g,''));
-    valor = valor + '';
-    valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-    if (valor.length > 6) {
-    valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-    }
-
-    elemento.value = valor;
-    }
-
-    function formatarComissao() {
-    var elemento = document.getElementById('comissao');
-    var valor = elemento.value;
-
-    valor = valor + '';
-    valor = parseInt(valor.replace(/[\D]+/g,''));
-    valor = valor + '';
-    valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-    if (valor.length > 6) {
-    valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-    }
-
-    elemento.value = valor;
-    }
-
-    </script>
 
 <div class="row">
     <div class="col-md-12">
@@ -48,6 +15,15 @@
                 <li><i class="fa fa-wrench"></i>Serviços</li>
               </ol>
 
+              <?php if ($this->session->flashdata('success')) { ?>
+                                <div class="alert alert-success fade in">
+
+                                  <button data-dismiss="alert" class="close close-sm" type="button">
+                                                    <i class="icon-remove"></i>
+                                                </button>
+                                         <?PHP echo $this->session->flashdata('success') ?>
+                                </div>
+                                <?php } ?>
             	<div class="box-tools">
                     <a href="<?php echo site_url('servico/add'); ?>" class="btn btn-success">NOVO SERVIÇO</a>
 
@@ -118,21 +94,38 @@
 
 <form action="" method="post" id="form_prepare">
 
-          <div class="col-md-8">
+          <div class="col-md-5">
           <div class="form-group">
             <label for="exampleInputEmail1">Nome do Pacote</label>
-            <input type="text" class="form-control" id="nomepacote" name="nomepacote" >
+            <input type="text" class="form-control required" id="nomepacote" name="nomepacote" required>
 
             <input type="hidden" class="form-control" value="2" id="tiposervico" name="tiposervico" >
             <input type="hidden" class="form-control" value="1" id="status" name="status" >
           </div>
         </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
           <div class="form-group">
             <label for="exampleInputPassword1">Valor do Pacote</label>
-            <input type="text" class="form-control"  id="vlr" onkeyup="formatarMoeda();" name="vlr" >
+            <input type="text" class="form-control required"  id="vlr"  name="vlr" required>
           </div>
-         </div>
+        </div>
+        <div class="col-md-4">
+          <label for="idcategoria" class="control-label"><span class="text-danger">*</span>Categorias</label>
+          <div class="form-group">
+            <select name="idcategoria" class="form-control m-bot15">
+              <option value="">Selecione uma categoria</option>
+              <?php
+              foreach($all_categoria_prod_servs as $categoria_prod_serv)
+              {
+                $selected = ($categoria_prod_serv['idcategoria_prod_serv'] == $this->input->post('idcategoria')) ? ' selected="selected"' : "";
+
+                echo '<option value="'.$categoria_prod_serv['idcategoria_prod_serv'].'" '.$selected.'>'.$categoria_prod_serv['nome'].'</option>';
+              }
+              ?>
+            </select>
+            <span class="text-danger"><?php echo form_error('idcategoria');?></span>
+          </div>
+        </div>
 
          <fieldset class="scheduler-border">
     <legend class="scheduler-border">Itens do Pacote</legend>
@@ -149,14 +142,14 @@
             <input type="hidden" name="valorserv" id="valorserv" value="" />
             <input type="hidden" name="comissao" id="comissao" value=""/>
               <input type="hidden" name="nomeservico" id="nomeservico" value=""/>
-        <input type="text" class="form-control" name="servico" id="inputproduto" placeholder="Digite o nome do produto" />
+        <input type="text" class="form-control" name="servico" id="inputproduto" placeholder="Digite o nome do produto" onfocus="this.value=''";/>
       </div>
 
     </div>
 
     <div class="col-md-3">
       <label>Comissão</label>
-      <input type="text" class="form-control"  name="comi" id="comi"/>
+      <input type="text" class="form-control"  name="comi" id="comi" onfocus="this.value=''";/>
     </div>
 
     <div class="col-md-3">
@@ -199,12 +192,20 @@
   </div>
 </div>
 
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery.validate.js"></script>
+      <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+        <script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
+        <script src="<?php echo base_url()?>assets/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url()?>assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+  <script src="<?php echo base_url()?>assets/js/validate.js"></script>
 
-<script>
 
-  $( function() {
+          <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+
+<script type="text/javascript">
+$('#comi').maskMoney();
+$('#vlr').maskMoney();
+
+  $(function() {
 
 
     RemoveTableRow = function(handler) {

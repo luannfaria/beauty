@@ -140,7 +140,7 @@ table tr th { color: #688a7e;}
 
 .login-img-body{
 
-  background: url('../assets/bg-1.jpg') no-repeat center center fixed;
+  background: url('../img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -154,7 +154,7 @@ table tr th { color: #688a7e;}
 
 .login-img2-body{
 
-  background: url('../assets/bg-1.jpg') no-repeat center center fixed;
+  background: url('../img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -168,7 +168,7 @@ table tr th { color: #688a7e;}
 
 .login-img3-body{
 
-  background: url('../assets/bg-1.jpg') no-repeat center center fixed;
+  background: url('../img/bg-1.jpg') no-repeat center center fixed;
 
   -webkit-background-size: cover;
 
@@ -491,7 +491,7 @@ table tr th { color: #688a7e;}
     border-radius:0px;
 
     background:rgba(255,255,255,0.9);
-max-height:80%;
+
 }
 
 .modal-header .close{
@@ -499,8 +499,6 @@ max-height:80%;
     font-weight: 300;
 
     font-size: 30px;
-max-height:80%;
-
 
 }
 
@@ -3107,7 +3105,6 @@ div[data-role="editor-toolbar"] {
 	font-weight: bold;
 
     padding: 8px 15px;
-    max-height:80%;
 
 }
 
@@ -3266,7 +3263,7 @@ div[data-role="editor-toolbar"] {
 .widget .padd .modal-body{
 
 	padding: 13px 15px;
-max-height:80%;
+
 }
 
 
@@ -3344,7 +3341,7 @@ max-height:80%;
 .widget .padd, .modal-body{
 
 	padding: 13px 15px;
-max-height:80%;
+
 }
 
 .portlets{
@@ -6424,7 +6421,7 @@ ul.inbox-pagination li {
     border: 1px solid #e6e6e6;
 
     box-shadow: none;
-    max-height:80%;
+
 }
 
 
@@ -6452,7 +6449,7 @@ ul.inbox-pagination li {
     font-weight: 300;
 
     font-family: 'Lato', sans-serif;
-max-height:80%;
+
 }
 
 
@@ -6462,7 +6459,6 @@ max-height:80%;
     font-weight: 400;
 
     font-family: 'Lato', sans-serif;
-    max-height:80%;
 
 }
 
@@ -7439,7 +7435,7 @@ ul.amounts li {
     background: #F7F7F7;
 
     color: #688a7e;
-max-height:80%;
+
 
 
 }
@@ -9872,4 +9868,38 @@ span.customSelect.changed {
 
     background:url(../img/customSelect-arrow.gif) no-repeat center right;
 
+}
+
+/* Contact Form */
+
+.validation {
+    color: red;
+    display:none;
+    margin: 0 0 20px;
+    font-weight:400;
+    font-size:13px;
+}
+
+#sendmessage {
+    color: green;
+    border:1px solid green;
+    display:none;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#errormessage {
+    color: red;
+    display:none;
+    border:1px solid red;
+    text-align:center;
+    padding:15px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+#sendmessage.show, #errormessage.show, .show {
+	display:block;
 }

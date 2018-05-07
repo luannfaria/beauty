@@ -84,7 +84,7 @@ class Contasareceber extends CI_Controller{
 
         $idag =  $this->input->post('idagendamento');
         $itemstatus = $this->input->post('itemstatus');
-    
+
 
 $this->load->model('Calendar_model');
 $si =  $this->Calendar_model->update_serv($idag,$itemstatus);

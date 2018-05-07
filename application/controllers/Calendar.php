@@ -76,16 +76,9 @@ public function faturar(){
 
 
 
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('atendente','Atedente','required');
-		$this->form_validation->set_rules('idcliente','Cliente','required');
-		$this->form_validation->set_rules('telefonefixo','Telefonefixo','numeric');
-		$this->form_validation->set_rules('telefonecelular','Telefonecelular','numeric');
-		$this->form_validation->set_rules('numero','Numero','numeric');
-
-
-
+		$verifica = $this->input->post('valorserv')[0];
+			if($verifica>1)
+	        {
 
 		$count = count($this->input->post('valorserv'));
 
@@ -155,12 +148,18 @@ for($i=0; $i< $count;$i++){
 
 
 }
+            redirect('calendar/index');
 
+}
 
- redirect(base_url('calendar'));
+else{
 
+	$this->load->view('include/header');
+	$this->load->view('agenda/agenda');
+	$this->load->view('include/footer');
+}
 
-	}
+}
 
 
 public function listaagenda(){

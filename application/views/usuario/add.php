@@ -17,14 +17,14 @@
           <div class="col-md-3">
 						<label for="login" class="control-label"><span class="text-danger">*</span>Login</label>
 						<div class="form-group">
-							<input type="text" name="login" value="<?php echo $this->input->post('login'); ?>" class="form-control" id="login" />
+							<input type="text" name="login" value="<?php echo $this->input->post('login'); ?>" class="form-control" id="login" required />
 							<span class="text-danger"><?php echo form_error('login');?></span>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<label for="senha" class="control-label"><span class="text-danger">*</span>Senha</label>
 						<div class="form-group">
-							<input type="password" name="senha" value="<?php echo $this->input->post('senha'); ?>" class="form-control" id="senha" />
+							<input type="password" name="senha" value="<?php echo $this->input->post('senha'); ?>" class="form-control" id="senha" required/>
 
               <input type="hidden" name="status" id="status" value="1" />
 							<span class="text-danger"><?php echo form_error('senha');?></span>
@@ -34,7 +34,7 @@
           <div class="col-md-2">
 						<label for="senha" class="control-label"><span class="text-danger">*</span>Confirmar senha</label>
 						<div class="form-group">
-							<input type="password" name="senhaconf" value="<?php echo $this->input->post('senhaconf'); ?>" class="form-control" id="senhaconf" />
+							<input type="password" name="senhaconf" value="<?php echo $this->input->post('senhaconf'); ?>" class="form-control" id="senhaconf" required />
 
 
 							<span class="text-danger"><?php echo form_error('senhaconf');?></span>
@@ -48,11 +48,13 @@
 						</div>
 					</div>-->
 
+              <input type="hidden" name="datacadastro" value="<?php echo date('d/m/Y') ;?>" class="has-datepicker form-control" id="datepicker" />
+
           <div class="col-md-3">
 
             <label class="control-label"><span class="text-danger">*</span>Permissões</label>
             <div class="form-group">
-            <select name="permissao" class="form-control">
+            <select name="permissao" class="form-control" required>
               <option value="">Selecione nivel de acesso</option>
               <?php
               foreach($permissao as $p)

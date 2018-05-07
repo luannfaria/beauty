@@ -23,19 +23,19 @@
 <div class="row">
 
   <div class="col-lg-3">
-    <h4><strong>Cliente: </strong><?php echo $cliente['nome'] ;?> <?php echo  $cliente['sobrenome']; ?> </h4>
+    <h4><strong> <i class="fa fa-user"></i> Cliente: </strong><?php echo $cliente['nome'] ;?> <?php echo  $cliente['sobrenome']; ?> </h4>
   </div>
 
   <div class="col-lg-3">
-      <h4><strong>Tel fixo: </strong><?php echo $cliente['telefonefixo'] ;?></h4>
+      <h4><strong><i class="fa fa-phone"></i> Tel fixo: </strong><?php echo $cliente['telefonefixo'] ;?></h4>
   </div>
 
   <div class="col-lg-3">
-    <h4><strong>Celular: </strong><?php echo $cliente['telefonecelular'] ;?></h4>
+    <h4><strong><i class="fa fa-mobile"></i> Celular: </strong><?php echo $cliente['telefonecelular'] ;?></h4>
   </div>
 
   <div class="col-lg-2">
-        <h4><strong>Data: <?php echo $agenda['data'] ;?></strong></h4>
+      <h4><strong>  <i class="fa fa-calendar"></i> Data: <?php echo $agenda['data'] ;?></strong></h4>
     </div>
                                       <div class="col-lg-1">
                                             <h4><strong>Nº <?php echo $agenda['idagenda'] ;?></strong></h4>
@@ -51,7 +51,7 @@
 
   <label for="">&nbsp</label>
                                         <div class="col-lg-4">
-                                          <h4>Endereço:</h4>
+                                         <h4><i class="fa fa-map-marker"></i>  Endereço:</h4>
                                         </div>
                                         <div class="col-lg-3">
                                           <h4>Bairro:</h4>
@@ -70,7 +70,7 @@
 
 <div class="row">
                                       <header class="panel-heading">
-                                          Serviços
+                                      <i class="fa fa-wrench"></i>      Serviços
                                           </header>
 
 <div class="col-lg-12">
@@ -122,6 +122,7 @@
                                                         </tr>
                                                       </thead>
                                                       <tbody>
+                                      
 
                                                         <?php
                             $totalserv = 0;
@@ -330,7 +331,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                  <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+
                                 <button type="submit" class="btn btn-success">FATURAR</button>
                                 </div>
   <?php echo form_close(); ?>
