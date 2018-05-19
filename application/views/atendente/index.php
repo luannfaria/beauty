@@ -9,6 +9,15 @@
                 <li><i class="fa fa-home"></i><a href="#">Inicio</a></li>
                 <li><i class="fa fa-laptop"></i>Atendentes</li>
               </ol>
+              <?php if ($this->session->flashdata('success')) { ?>
+                                <div class="alert alert-success fade in">
+
+                                  <button data-dismiss="alert" class="close close-sm" type="button">
+                                                    <i class="icon-remove"></i>
+                                                </button>
+                                         <?PHP echo $this->session->flashdata('success') ?>
+                                </div>
+                                <?php } ?>
 
             	<div class="box-tools">
                     <a href="<?php echo site_url('atendente/add'); ?>" class="btn btn-success">NOVO ATENDENTE</a>

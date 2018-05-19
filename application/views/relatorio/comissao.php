@@ -1,11 +1,10 @@
 <section id="main-content">
   <section class="wrapper">
-<link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
-  <!--  <link rel="stylesheet" href="https://jquery.ui.timepicker.css?v=0.3.3" type="text/css" /> -->
-         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-        <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js?v=0.3.3"></script>
+    <link href="<?php echo base_url();?>assets/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/daterangepicker.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="<?php echo base_url();?>assets/css/bootstrap-colorpicker.css" rel="stylesheet" />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="page-header"><i class="fa fa-table"></i> Relatorio de comissões</h3>
@@ -13,10 +12,18 @@
 <form class="form-inline" method="post" action="<?php echo base_url();?>relatorio/consultacomissao" >
   <div class="form-group">
 
-      <label>Inicio  <input type="text" class="form-control" id="inicio" name="inicio"/></label>
+    <div class="form-group">
+      <label class="control-label">De</label>
 
-      <label>Termino  <input type="text" class="form-control" id="termino" name="termino"/></label>
-</div>
+        <input class="form-control" id="inicio"   type="text" name="inicio"  />
+
+    </div>
+    <div class="form-group">
+      <label class="control-label">Até</label>
+
+        <input class="form-control" id="termino"   type="text" name="termino"  />
+
+    </div>
 
 <div class="form-group">
 
@@ -110,13 +117,28 @@ if(!$relatorio){?>
 </section>
 
 </section>
+<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
 
+
+<script src="<?php echo base_url()?>assets/js/validate.js"></script>
+
+
+
+  <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+
+  <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
 
 <script>
 
-$( "#inicio" ).datepicker({dateFormat: 'yy-mm-dd'});
+  $( "#inicio" ).datepicker({ format: 'dd/mm/yyyy' });
+    $( "#termino" ).datepicker({ format: 'dd/mm/yyyy' });
 
-$( "#termino" ).datepicker({dateFormat: 'yy-mm-dd'});
 
 
 </script>

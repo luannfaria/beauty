@@ -1,12 +1,6 @@
 /*
  * FullCalendar v1.5.4 Stylesheet
  *
- * Copyright (c) 2011 Adam Shaw
- * Dual licensed under the MIT and GPL licenses, located in
- * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
- *
- * Date: Tue Sep 4 23:38:33 2012 -0700
- *
  */
 
 
@@ -20,6 +14,9 @@
 	border-spacing: 0;
 	}
 
+	.fc-bgevent{
+		opacity:1;
+	}
 html .fc,
 .fc table {
 	font-size: 1em;
@@ -65,7 +62,7 @@ html .fc,
 	}
 
 .fc .fc-header-space {
-	padding-left: 10px;
+	padding-left: 7px;
 	}
 
 .fc-header .fc-button {
@@ -124,15 +121,15 @@ html .fc,
 
 .fc-widget-header,    /* <th>, usually */
 .fc-widget-content {  /* <td>, usually */
-	border: 1px solid #ccc;
+	border: 2px solid #343896;
 	}
 
 .fc-state-highlight { /* <td> today cell */ /* TODO: add .fc-today to <th> */
-	background: #ffc;
+	background: #343896;
 	}
 
 .fc-cell-overlay { /* semi-transparent rectangle while dragging */
-	background: #9cf;
+	background: #343896;
 	opacity: .2;
 	filter: alpha(opacity=20); /* for IE */
 	}
@@ -206,7 +203,7 @@ html .fc,
 	border-width: 100px 0 0 1px;
 	border-style: solid;
 	border-color: #fff;
-	background: #444;
+	background: #000000;
 	opacity: .09;
 	filter: alpha(opacity=9);
 	}
@@ -216,9 +213,9 @@ html .fc,
 .fc-state-default,
 .fc-state-default .fc-button-inner {
 	border-style: solid;
-	border-color: #ccc #bbb #aaa;
-	background: #F3F3F3;
-	color: #000;
+	border-color: #3d9cd1;
+	background: #3d9cd1;
+	color: #fff;
 	}
 
 .fc-state-hover,
@@ -528,7 +525,13 @@ table.fc-border-separate {
 .fc-widget-header .fc-agenda-divider-inner {
 	background: #eee;
 	}
+.temp_cell{
+	color: #000000;
+		background: #fff;
+	font-size: 18px;
+	font-weight: bold;
 
+}
 /* slot rows */
 
 .fc-agenda-slots th {

@@ -1,5 +1,7 @@
 # Profit Salons - Versão 1.1 (Projeto em desenvolvimento)
 
+### Sistema completo para gerenciamento de salões de beleza.
+    
 
 ### Frameworks/Bibliotecas
   * [bcit-ci/CodeIgniter](https://github.com/bcit-ci/CodeIgniter)
@@ -12,7 +14,7 @@
   * PHP >= 5.4.0 < 7.1
   * Extensão Mcrypt
   * MySQL
-    Para receber o script do banco de dados enviar email para luannfaria@gmail.com
+    Para receber o script do banco de dados enviar email para profitsistemasweb@gmail.com
 
 ### Créditos
-  * Luan silva - luannfaria@gmail.com
+  * Luan silva - profitsistemasweb@gmail.com

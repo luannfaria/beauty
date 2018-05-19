@@ -22,6 +22,9 @@ class Contasapagar extends CI_Controller{
      */
     function index()
     {
+
+      $this->load->model('Atendente_model');
+          $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
         $data['contasapagars'] = $this->Contasapagar_model->get_all_contasapagars();
 
         //$data['_view'] = 'contasapagar/index';
@@ -35,6 +38,31 @@ class Contasapagar extends CI_Controller{
     /*
      * Adding a new contasapagar
      */
+
+
+     function saidacaixa(){
+
+       $tipomovi = 2;
+               $fluxo = array(
+
+                   'forma' => $this->input->post('formarecebimento'),
+                 'data' => $this->input->post('datavencimento'),
+                 'valor' => $this->input->post('valor'),
+                   'descricao' => $this->input->post('descricao'),
+                 'tipomov' =>$tipomovi,
+               );
+
+               $this->load->model('Fluxo_model');
+
+                 if($this->Fluxo_model->addsaida($fluxo) == true){
+               		echo json_encode(array('result' => true));
+               	}
+
+               	else{
+               		echo json_encode(array('result' =>false));
+               	}
+
+     }
     function add()
     {
         $this->load->library('form_validation');

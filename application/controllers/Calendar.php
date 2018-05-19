@@ -28,13 +28,16 @@ $this->load->model('Atendente_model');
 		$this->load->model('Servico_model');
 		$data['all_servicos'] = $this->Servico_model->get_all_servicos();
 		$this->load->view('include/header');
-		$this->load->view('agenda/agenda',$data);
 		$this->load->view('include/footer');
+		$this->load->view('agenda/agenda',$data);
+
 	}
 
 	function agendavenda($idagenda){
 
 		$data['agenda'] =$this->Calendar_model->getagendamento($idagenda);
+		$this->load->model('Atendente_model');
+				$data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
 
 		$idcliente = $this->Calendar_model->getidcliente($idagenda);
 
@@ -76,16 +79,9 @@ public function faturar(){
 
 
 
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('atendente','Atedente','required');
-		$this->form_validation->set_rules('idcliente','Cliente','required');
-		$this->form_validation->set_rules('telefonefixo','Telefonefixo','numeric');
-		$this->form_validation->set_rules('telefonecelular','Telefonecelular','numeric');
-		$this->form_validation->set_rules('numero','Numero','numeric');
-
-
-
+		$verifica = $this->input->post('valorserv')[0];
+			if($verifica>1)
+	        {
 
 		$count = count($this->input->post('valorserv'));
 
@@ -146,8 +142,8 @@ for($i=0; $i< $count;$i++){
 			'hora' =>  $this->input->post('hora')[$i],
 			'end' =>  $this->input->post('end')[$i],
 			'status' => $this->input->post('status')[$i],
-			'cor' =>$this->input->post('cor')[$i]
-
+			'cor' =>$this->input->post('cor')[$i],
+			'tiposerv'=>$this->input->post('tiposervico')[$i]
 
 	);
 
@@ -155,27 +151,109 @@ for($i=0; $i< $count;$i++){
 
 
 }
+            redirect('calendar/index');
 
+}
 
- redirect(base_url('calendar'));
+else{
 
+	$this->load->view('include/header');
+	$this->load->view('agenda/agenda');
+	$this->load->view('include/footer');
+}
 
-	}
+}
 
 
 public function listaagenda(){
+  $this->load->model('Agenda_model');
+	$this->load->model('Calendar_model');
+	  $this->load->library('table');
+$this->load->library('pagination');
 
+				$params = array();
+        $limit_per_page = 2;
+        $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) : 0;
+        $total_records = $this->Calendar_model->count('agenda');
 
+				if ($total_records > 0)
+        {
+            // get current page records
+            $data["itensagenda"] = $this->Calendar_model->get_current_page_records($limit_per_page, $page*$limit_per_page);
 
-	    $this->load->model('Agenda_model');
+            $config['base_url'] = base_url() . 'calendar/listaagenda';
+            $config['total_rows'] = $total_records;
+            $config['per_page'] = $limit_per_page;
+            $config["uri_segment"] = 3;
+
+            // custom paging configuration
+            $config['num_links'] = 2;
+            $config['use_page_numbers'] = TRUE;
+            $config['reuse_query_string'] = TRUE;
+
+            $config['full_tag_open'] = '<div class="pagination">';
+            $config['full_tag_close'] = '</div>';
+
+            $config['first_link'] = 'First Page';
+            $config['first_tag_open'] = '<span class="firstlink">';
+            $config['first_tag_close'] = '</span>';
+
+            $config['last_link'] = 'Last Page';
+            $config['last_tag_open'] = '<span class="lastlink">';
+            $config['last_tag_close'] = '</span>';
+
+            $config['next_link'] = 'Next Page';
+            $config['next_tag_open'] = '<span class="nextlink">';
+            $config['next_tag_close'] = '</span>';
+
+            $config['prev_link'] = 'Prev Page';
+            $config['prev_tag_open'] = '<span class="prevlink">';
+            $config['prev_tag_close'] = '</span>';
+
+            $config['cur_tag_open'] = '<span class="curlink">';
+            $config['cur_tag_close'] = '</span>';
+
+            $config['num_tag_open'] = '<span class="numlink">';
+            $config['num_tag_close'] = '</span>';
+
+            $this->pagination->initialize($config);
+
+            // build paging links
+            $data["links"] = $this->pagination->create_links();
+        }
+
 
 $data['itensagenda'] = $this->Agenda_model->get_all_agendas();
+
 	$this->load->view('include/header');
 	$this->load->view('agenda/listaagenda',$data);
 	$this->load->view('include/footer');
 
 }
 
+
+public function adicionarserv(){
+
+	$serv = array (
+			'idagenda' => $this->input->post('idagenda'),
+			'nomeservico' => $this->input->post('nomeservico'),
+			'idservico' => $this->input->post('idservico'),
+			'comissao' => $this->input->post('comissao'),
+			'valorservico' => $this->input->post('valorserv'),
+
+	);
+
+	if($this->Calendar_model->addservagenda($serv) ==true){
+		echo json_encode(array('result' => true));
+	}
+
+	else{
+		echo json_encode(array('result' =>false));
+	}
+
+
+
+}
 	public function addtrava(){
 
 
@@ -283,6 +361,27 @@ $itens = array(
 		   exit();
 		    }
 
+				public function removeservicoagenda(){
+
+					$idservico = $this->input->post('idserv');
+
+					$this->load->model('Servico_model');
+
+
+
+
+						if($this->Servico_model->deleteserv($idservico)== true){
+
+							echo json_encode(array('result'=> true));
+
+						}
+						else{
+									echo json_encode(array('result'=> false));
+							}
+
+
+				}
+
 public function listaeventos(){
 
 	$event = $this->Calendar_model->listaeventos();
@@ -338,6 +437,15 @@ public function listaeventos(){
 			if (isset($_GET['term'])){
 					$q = strtolower($_GET['term']);
 					$this->Calendar_model->autoCompleteServico($q);
+			}
+
+	}
+
+	public function autoCompleteProduto(){
+
+			if (isset($_GET['term'])){
+					$q = strtolower($_GET['term']);
+					$this->Calendar_model->autoCompleteProduto($q);
 			}
 
 	}

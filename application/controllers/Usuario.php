@@ -77,10 +77,12 @@ class Usuario extends CI_Controller{
 
         if(isset($data['usuario']['idusuario']))
         {
-            $this->load->library('form_validation');
+          $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('login','Login','required');
-			$this->form_validation->set_rules('senha','Senha','required');
+      $this->form_validation->set_rules('login','Login','required');
+      $this->form_validation->set_rules('senha','Senha','required');
+      $this->form_validation->set_rules('senhaconf', 'Confirmar senha', 'required|matches[senha]');
+      $this->form_validation->set_rules('permissao','Permissão','required');
 
 			if($this->form_validation->run())
             {
@@ -98,6 +100,10 @@ class Usuario extends CI_Controller{
             {
             //    $data['_view'] = 'usuario/edit';
             //    $this->load->view('layouts/main',$data);
+
+            $this->load->model('Permissoes_model');
+
+              $data['permissao'] = $this->Permissoes_model->get_all_permissoes();
 
             $this->load->view('include/header');
             $this->load->view('usuario/edit',$data);

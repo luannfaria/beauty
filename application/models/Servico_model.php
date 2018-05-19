@@ -80,6 +80,17 @@ else{
 
 
     }
+
+    public function deleteserv($idservico){
+
+        $this->db->delete('itensagenda',array('iditensagenda'=>$idservico));
+        if ($this->db->affected_rows() == '1')
+  {
+  return TRUE;
+  }
+
+  return FALSE;
+    }
     /*
      * function to update servico
      */
@@ -87,6 +98,7 @@ else{
     {
         $this->db->where('idservico',$idservico);
         return $this->db->update('servico',$params);
+
     }
 
     /*

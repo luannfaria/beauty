@@ -43,6 +43,7 @@
   <script src="<?php echo base_url()?>assets/js/sparklines.js"></script>
   <script src="<?php echo base_url()?>assets/js/charts.js"></script>
   <script src="<?php echo base_url()?>assets/js/jquery.slimscroll.min.js"></script>
+  
   <script>
     //knob
     $(function() {

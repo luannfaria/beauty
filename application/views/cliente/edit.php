@@ -23,10 +23,11 @@
 
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
-              	<h3 class="box-title">Editar cliente</h3>
-            </div>
+      <section class="panel">
+        <header class="panel-heading">
+          <i class="fa fa-user"></i>Editar cliente
+        </header>
+        <div class="panel-body">
 			<?php echo form_open('cliente/edit/'.$cliente['idcliente']); ?>
 			<div class="box-body">
 				<div class="row clearfix">
@@ -108,7 +109,7 @@
           <div class="col-md-2">
             <label for="datacadastro" class="control-label">Data do cadastro</label>
             <div class="form-group">
-              <input type="text" name="datacadastro" value="<?php echo ($this->input->post('datacadastro') ? $this->input->post('datacadastro') : $cliente['datacadastro']); ?>" class="has-datepicker form-control" id="datacadastro" />
+              <input type="text" name="datacadastro" value="<?php echo ($this->input->post('datacadastro') ? $this->input->post('datacadastro') : $cliente['datacadastro']); ?>" class="has-datepicker form-control" id="datacadastro" disabled/>
             </div>
           </div>
 					<div class="col-md-8">
@@ -128,5 +129,6 @@
 	        </div>
 			<?php echo form_close(); ?>
 		</div>
+  </section>
     </div>
 </div>

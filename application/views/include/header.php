@@ -16,7 +16,6 @@
   <!-- bootstrap theme -->
   <link href="<?php echo base_url()?>assets/css/bootstrap-theme.css" rel="stylesheet">
 
-  <link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
   <!--external css-->
   <!-- font icon -->
   <link href="<?php echo base_url()?>assets/css/elegant-icons-style.css" rel="stylesheet" />
@@ -53,20 +52,10 @@
       </div>
 
       <!--logo start-->
-      <a href="index.html" class="logo">UP <span class="lite">Unhas</span></a>
+      <a href="#" class="logo">UP Unhas <span class="lite"> 1.1</span></a>
       <!--logo end-->
 
-      <div class="nav search-row" id="top_menu">
-        <!--  search form start -->
-        <ul class="nav top-menu">
-          <li>
-            <form class="navbar-form">
-              <input class="form-control" placeholder="Pesquisar" type="text">
-            </form>
-          </li>
-        </ul>
-        <!--  search form end -->
-      </div>
+
 
       <div class="top-nav notification-row">
         <!-- notificatoin dropdown start-->
@@ -138,39 +127,29 @@
           </li>
 
         <?php } ?>
-            <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vProduto') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vServico') || $this->permission->checkPermission($this->session->userdata('permissao'), 'vCategoria')) {
-    ?>
+
           <li class="sub-menu">
             <a href="javascript:;" class="">
                           <i class="icon_tools"></i>
-                          <span>Serviços/Pacotes</span>
+                          <span>Serviços/Produtos</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-                <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vServico')) {
-        ?>
+
               <li><a class="" href="<?php echo base_url(); ?>servico">Serviços/Pacotes</a></li>
 
-            <?php
-    } ?>
-                <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vProduto')) {
-        ?>
-              <li><a class="" href="#">Produtos</a></li>
 
-            <?php
-    } ?>
+              <li><a class="" href="<?php echo base_url();?>produto">Produtos</a></li>
 
-            <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCategoria')) {
-        ?>
+
+
+
               <li><a class="" href="<?php echo base_url(); ?>categoria_prod_serv">Categorias</a></li>
 
-            <?php
-    } ?>
             </ul>
           </li>
 
-        <?php
-} ?>
+
           <?php if ($this->permission->checkPermission($this->session->userdata('permissao'), 'vCliente')) {
         ?>
           <li class="<?php if (isset($menuCliente)) {
@@ -221,15 +200,16 @@
 
           <li class="sub-menu">
             <a href="javascript:;" class="">
-                          <i class="icon_desktop"></i>
+                          <i class="fa fa-list"></i>
                           <span>Relatorios</span>
                           <span class="menu-arrow arrow_carrot-right"></span>
                       </a>
             <ul class="sub">
-              <li><a class="" href="#">Clientes</a></li>
+              <li><a class="" href="#">Clientes <span class="label label-primary">EM BREVE</span></a></li>
               <li><a class="" href="<?php echo base_url() ?>relatorio/comissao">Comissões</a></li>
+                <li><a class="" href="#">Financeiro <span class="label label-primary">EM BREVE</span></a></li>
               <li><a class="" href="#">Serviços/Produtos</a></li>
-              <li><a class="" href="#">Vendas</a></li>
+              <li><a class="" href="#">Vendas <span class="label label-primary">EM BREVE</span></a></li>
             </ul>
           </li>
 

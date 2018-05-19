@@ -1,0 +1,11 @@
+Solicitações cliente UP Unhas
+
+1 - Mudar cor agendamento ao receber agendamento - CONCLUIDO
+2 - Criar saida no caixa dentro do modulo fluxo de CAIXA - CONCLUIDO
+3 - Criar entrada no caixa dentro do modulo fluxo de CAIXA - CONCLUIDO
+4 - Focus na linha da agenda para facilitar localização horario - CONCLUIDO
+5 - Criar fiado para clientes - EM DESENVOLVIMENTO
+6 - Explodir pacote no modulo agenda -  EM DESENVOLVIMENTO
+7 - Mudar layout REL. comissao (Criar opçao selecionar todos func.)
+    Exibir totais dos func (botao detalhes para exibir tudo) - PENDENTE
+8 - Vale para funcionarios - CONCLUIDO

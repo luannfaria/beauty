@@ -8,7 +8,7 @@ var Script = function () {
     var gebtn = function(parEl,child) { return parEl.getElementsByTagName(child); };
     onload = function() {
 
-        
+
 
         if (!d.getElementById || !d.createTextNode) return;
         var ls = gebtn(d,'label');
@@ -83,7 +83,7 @@ var Script = function () {
     $(function(){
         window.prettyPrint && prettyPrint();
         $('#dp1').datepicker({
-            format: 'mm-dd-yyyy'
+            format: 'dd-mm-yyyy'
         });
         $('#dp2').datepicker();
         $('#dp3').datepicker();

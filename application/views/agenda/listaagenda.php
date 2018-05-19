@@ -1,8 +1,10 @@
 <section id="main-content">
+
   <section class="wrapper">
 
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <div class="row">
       <div class="col-lg-12">
 
@@ -63,7 +65,11 @@
     </tr>
 <?php } ?>
 </table>
+
 </section>
+<?php if (isset($links)) { ?>
+    <?php echo $links ?>
+<?php } ?>
 
 
 

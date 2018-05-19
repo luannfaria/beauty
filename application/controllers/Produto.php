@@ -22,8 +22,12 @@ class Produto extends CI_Controller{
     {
         $data['produtos'] = $this->Produto_model->get_all_produtos();
 
-        $data['_view'] = 'produto/index';
-        $this->load->view('layouts/main',$data);
+
+
+
+        $this->load->view('include/header');
+        $this->load->view('produto/index',$data);
+        $this->load->view('include/footer');
     }
 
     /*
@@ -56,8 +60,9 @@ class Produto extends CI_Controller{
 			$this->load->model('Categoria_prod_serv_model');
 			$data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
 
-            $data['_view'] = 'produto/add';
-            $this->load->view('layouts/main',$data);
+      $this->load->view('include/header');
+      $this->load->view('produto/add',$data);
+      $this->load->view('include/footer');
         }
     }
 
@@ -93,11 +98,13 @@ class Produto extends CI_Controller{
             }
             else
             {
-				$this->load->model('Categoria_prod_serv_model');
-				$data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
+              $this->load->model('Categoria_prod_serv_model');
+              $data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
 
-                $data['_view'] = 'produto/edit';
-                $this->load->view('layouts/main',$data);
+
+              $this->load->view('include/header');
+              $this->load->view('produto/edit',$data);
+              $this->load->view('include/footer');
             }
         }
         else

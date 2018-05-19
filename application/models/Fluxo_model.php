@@ -17,6 +17,32 @@ public function add($fluxo) {
 	return $this->db->insert_id();
 }
 
+public function addentrada($fluxo){
+
+    $this->db->insert('fluxocaixa',$fluxo);
+
+  if ($this->db->affected_rows() == '1')
+  {
+    return TRUE;
+  }
+else{
+  return FALSE;
+}
+}
+
+public function addsaida($fluxo){
+
+    $this->db->insert('fluxocaixa',$fluxo);
+
+  if ($this->db->affected_rows() == '1')
+  {
+    return TRUE;
+  }
+else{
+  return FALSE;
+}
+}
+
 public function getfluxo($data){
 
   $this->db->where('data',$data);

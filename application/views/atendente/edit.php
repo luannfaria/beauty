@@ -69,7 +69,7 @@ function mtel(v){
 						<label for="status" class="control-label">Status</label>
 						<div class="form-group">
 							<select name="status" class="form-control">
-								<option value="">select</option>
+								<option value="">Selecione</option>
 								<?php
 								$status_values = array(
 									'1'=>'ATIVO',

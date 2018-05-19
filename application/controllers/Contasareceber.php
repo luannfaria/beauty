@@ -33,6 +33,23 @@ class Contasareceber extends CI_Controller{
     /*
      * Adding a new contasareceber
      */
+
+     function fiado(){
+
+       $params = array(
+   'formarecebimento' => $this->input->post('formarecebimento'),
+   'descricao' => $this->input->post('descricao'),
+   'numero' => $this->input->post('numero'),
+   'valor' => $this->input->post('valor'),
+   'datavencimento' => $this->input->post('data'),
+   'datapagamento' => $this->input->post('datapagamento'),
+   'obs' => $this->input->post('obs'),
+       );
+
+       $contasareceber_id = $this->Contasareceber_model->add_contasareceber($params);
+       redirect('contasareceber/index');
+
+     }
     function add()
     {
         $this->load->library('form_validation');
@@ -84,12 +101,12 @@ class Contasareceber extends CI_Controller{
 
         $idag =  $this->input->post('idagendamento');
         $itemstatus = $this->input->post('itemstatus');
-    
+        $cor =$this->input->post('cor')  ;
 
 $this->load->model('Calendar_model');
 $si =  $this->Calendar_model->update_serv($idag,$itemstatus);
         $dd =  $this->Calendar_model->update_status($idag,$statusfechado);
-
+        $c =$this->Calendar_model->update_cor($idag,$cor);
 
 
 $tipomovi = 1;
@@ -120,7 +137,7 @@ $tipomovi = 1;
             );
 
             $contasareceber_id = $this->Contasareceber_model->add_contasareceber($params);
-            redirect('contasareceber/index');
+            redirect('calendar/listaagenda');
         }
         else
         {
@@ -130,12 +147,34 @@ $tipomovi = 1;
           //  $data['_view'] = 'contasareceber/add';
           //  $this->load->view('layouts/main',$data);
 
-          $this->load->view('include/header');
-          $this->load->view('contasareceber/add',$data);
-          $this->load->view('include/footer');
-        }
+        redirect('calendar/listaagenda');
+      }
     }
 
+
+function entradacaixa(){
+
+  $tipomovi = 1;
+          $fluxo = array(
+
+              'forma' => $this->input->post('formarecebimento'),
+            'data' => $this->input->post('datavencimento'),
+            'valor' => $this->input->post('valor'),
+              'descricao' => $this->input->post('descricao'),
+            'tipomov' =>$tipomovi,
+          );
+
+          $this->load->model('Fluxo_model');
+
+            if($this->Fluxo_model->addentrada($fluxo) == true){
+          		echo json_encode(array('result' => true));
+          	}
+
+          	else{
+          		echo json_encode(array('result' =>false));
+          	}
+
+}
     /*
      * Editing a contasareceber
      */

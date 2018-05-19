@@ -19,10 +19,11 @@
     </script>
 <div class="row">
     <div class="col-md-12">
-      	<div class="box box-info">
-            <div class="box-header with-border">
-              	<h3 class="box-title">Novo cliente</h3>
-            </div>
+      <section class="panel">
+        <header class="panel-heading">
+          <i class="fa fa-user"></i>Novo cliente
+        </header>
+        <div class="panel-body">
             <?php echo form_open('cliente/add'); ?>
           	<div class="box-body">
           		<div class="row clearfix">
@@ -42,19 +43,19 @@
 						</div>
 					</div>
 					<div class="col-md-2">
-						<label for="datacadastro" class="control-label">Data Cadastro</label>
+						<label for="datacadastro" class="control-label"><i class="fa fa-calendar"></i> Data Cadastro</label>
 						<div class="form-group">
-							<input type="text" name="datacadastro" value="<?php date_default_timezone_set('America/Sao_Paulo');  echo date('d/m/Y'); ?>" class="has-datepicker form-control" id="datacadastro" />
+							<input type="text" name="datacadastro" value="<?php date_default_timezone_set('America/Sao_Paulo');  echo date('d/m/Y'); ?>" class="has-datepicker form-control" id="datacadastro" disabled/>
 						</div>
 					</div>
 					<div class="col-md-2">
-						<label for="telefonefixo" class="control-label">Telefone Fixo</label>
+						<label for="telefonefixo" class="control-label"><i class="fa fa-phone"> </i>Telefone Fixo</label>
 						<div class="form-group">
 							<input type="text" name="telefonefixo" placeholder=" Ex: (XX) XXXXX-XXXX" onkeyup="mascara( this, mtel );" maxlength="14" value="<?php echo $this->input->post('telefonefixo'); ?>" class="form-control" id="telefonefixo" />
 						</div>
 					</div>
 					<div class="col-md-2">
-						<label for="telefonecelular" class="control-label"><span class="text-danger">*</span>Telefone Celular</label>
+						<label for="telefonecelular" class="control-label"><span class="text-danger">*</span> <i class="fa fa-mobile"></i> Telefone Celular</label>
 						<div class="form-group">
 							<input type="text" name="telefonecelular" placeholder=" Ex: (XX) XXXXX-XXXX" onkeyup="mascara( this, mtel );" maxlength="15" value="<?php echo $this->input->post('telefonecelular'); ?>" class="form-control" id="telefonecelular" />
 							<span class="text-danger"><?php echo form_error('telefonecelular');?></span>
@@ -85,7 +86,7 @@
 						</div>
 					</div>
 					<div class="col-md-10">
-						<label for="obs" class="control-label">Observação</label>
+						<label for="obs" class="control-label"><i class="fa fa-comment-o"></i> Observação</label>
 						<div class="form-group">
 							<input type="text" name="obs" value="<?php echo $this->input->post('obs'); ?>" class="form-control" id="obs" />
 						</div>
@@ -102,7 +103,8 @@
             	</button>
           	</div>
             <?php echo form_close(); ?>
-      	</div>
+          </div>
+      </section>
     </div>
 </div>
 </section>

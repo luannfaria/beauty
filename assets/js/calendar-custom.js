@@ -32,7 +32,19 @@ var Script = function () {
             editable: true,
 
             eventLimit: true,
+            viewRender: function(view,element){
+              $('#calendar').find('.fc-slats').find('[class="fc-widget-content"]').hover(
+                function(){
+                  var tr = $(this).parent();
+                  var time = tr.find('td.fc-axis.fc-time.fc-widget-content').find("span").text();
+                  $(this).append('<td class="temp_cell" style="border: 3px width:10px;">'+time+'</td>');
 
+                },
+                function(){
+                  $(this).children('.temp_cell').remove();
+                }
+              );
+            },
             customButtons: {
        trava: {
            text: 'TRAVAR HORÁRIOS',

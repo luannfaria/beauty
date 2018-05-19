@@ -9,6 +9,7 @@
     <!--    <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js?v=0.3.3"></script>-->
 
 
+<link href="<?php echo base_url() ?>assets/css/fullcalendar.css" rel="stylesheet" />
 
 
 
@@ -23,7 +24,9 @@
 
 
 
+
         <div id='calendar'></div>
+        <div id="popoverContent" class="hide">This <em>rich</em>  <pre>html</pre> content goes inside popover</div>
 
 
         <script>
@@ -49,7 +52,7 @@
               </div>
               <div class="modal-body">
 
-          <!--    <?php echo form_open('calendar/add'); ?> -->
+
 
           <form action="" method="post" id="form_prepare">
   <div class="col-lg-4">
@@ -89,7 +92,7 @@
     <label for="idcliente" class="control-label"><span class="text-danger">*</span><i class="fa fa-user"> </i> Cliente</label>
 
 
-    <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Digite o nome do cliente" />
+    <input type="text" class="form-control required" name="cliente" id="cliente" placeholder="Digite o nome do cliente"  onfocus="this.value=''" required/>
 
     <input type="hidden" class="form-control" name="idcliente" id="idcliente" />
     <input type="hidden" class="form-control" name="nome" id="nome" />
@@ -103,7 +106,7 @@
   <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Novo Cliente</a>
 
   </div>
-<!--<?php echo form_close(); ?>-->
+
 
 <div class="row">
 
@@ -111,7 +114,7 @@
                                 <div class="form-group">
                       						<label for="idservico" class="control-label"><i class="fa fa-spinner"> </i> Serviços</label>
 
-                                  <input type="text" class="form-control" name="servico" id="servico" placeholder="Digite o nome do serviço" />
+                                  <input type="text" class="form-control required" name="servico" id="servico" placeholder="Digite o nome do serviço" onfocus="this.value=''" required/>
 
                                   <input type="hidden" name="idservico" id="idservico" value=""/>
 
@@ -122,7 +125,7 @@
                                   <input type="hidden" name="valorserv" id="valorserv" />
                                   <input type="hidden" name="comissao" id="comissao" />
                                   <input type="hidden" name="nomeservico" id="nomeservico" />
-
+                                    <input type="hidden" name="tiposervico" id="tiposervico" />
                       					</div>
                               </div>
 
@@ -439,7 +442,7 @@
         </div>
         <div class="modal-footer">
 
-            <button type="submit" class="btn btn-danger"><i class="fa fa-clock-o"> EXCLUIR AGENDAMENTO</i></button>
+
           <!--  <a data-toggle="modal" id="btn-faturar" class="btn btn-success"><i class="fa fa-money"> FATURAR </i></a> -->
               <?php echo form_close(); ?>
 
@@ -521,7 +524,7 @@
 
 
 
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.min.1.5.js"></script>
+
 
 
     <script>
@@ -541,6 +544,7 @@
       $('#form_prepare').submit(function(){
         var $this = $( this );
 
+        var tiposervico = $this.find("input[name='tiposervico']").val();
         var databr = $this.find("input[name='start']").val();
           var hora= $this.find("input[name='hora']").val();
           var start = $this.find("input[name='dataInicial']").val();
@@ -572,6 +576,7 @@
 
 
         var hiddens = '<input type="hidden" name="nomeservico[]" value="'+nomeservico+'" />'+
+        '<input type="hidden" name="tiposervico[]" value="'+tiposervico+'" />'+
         '<input type="hidden" name="databr[]" value="'+databr+'" />'+
         '<input type="hidden" name="valorserv[]" value="'+valorserv+'" />'+
         '<input type="hidden" name="comissao[]" value="'+comissao+'" />'+
@@ -605,7 +610,7 @@
 
               $("#valorserv").val(ui.item.valorserv);
                 $("#comissao").val(ui.item.comissao);
-
+                    $("#tiposervico").val(ui.item.tiposervico);
                   $("#nomeservico").val(ui.item.nomeservico);
 
 

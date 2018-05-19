@@ -20,7 +20,10 @@ class Servico extends CI_Controller{
      */
     function index()
     {
+      
         $data['servicos'] = $this->Servico_model->get_all_servicos();
+        $this->load->model('Categoria_prod_serv_model');
+        $data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
 
       //  $data['_view'] = 'servico/index';
     //    $this->load->view('layouts/main',$data);

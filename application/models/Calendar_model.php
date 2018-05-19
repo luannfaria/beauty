@@ -32,6 +32,22 @@ public function itensagenda($itens){
 	return $this->db->insert_id();
 }
 
+public function addservagenda($serv){
+
+	$this->db->insert('itensagenda',$serv);
+
+	if ($this->db->affected_rows() == '1')
+	{
+		return TRUE;
+	}
+else{
+	return FALSE;
+
+}
+
+
+}
+
 public function itens($idagenda){
 
 	$this->db->select('*');
@@ -84,6 +100,38 @@ function update_status($idag,$statusfechado){
 
 }
 
+function update_cor($idag,$cor){
+	$this->db->set('cor',$cor);
+	$this->db->where('idagenda',$idag);
+	return $this->db->update('itensagenda');
+
+}
+
+public function count($table) {
+
+		return $this->db->count_all($table);
+}
+
+public function get_current_page_records($limit, $start)
+    {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get("agenda");
+
+        if ($query->num_rows() > 0)
+        {
+            foreach ($query->result() as $row)
+            {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+
+        return false;
+    }
+
+
+
 
 
 public function autoCompleteServico($q){
@@ -94,7 +142,7 @@ public function autoCompleteServico($q){
 		$query = $this->db->get('servico');
 		if($query->num_rows() > 0){
 				foreach ($query->result_array() as $row){
-						$row_set[] = array('label'=>$row['nomeservico'].' | Preço: R$ '.$row['valorserv'],'idservico'=>$row['idservico'],'comissao'=>$row['comissao'],'valorserv'=>$row['valorserv'], 'nomeservico'=>$row['nomeservico']);
+						$row_set[] = array('label'=>$row['nomeservico'].' | Preço: R$ '.$row['valorserv'],'idservico'=>$row['idservico'],'comissao'=>$row['comissao'],'valorserv'=>$row['valorserv'],'tiposervico'=>$row['tiposervico'], 'nomeservico'=>$row['nomeservico']);
 				}
 				echo json_encode($row_set);
 		}
@@ -114,9 +162,24 @@ public function autoCompleteCliente($q){
 		}
 }
 
+
+public function autoCompleteProduto($q){
+
+		$this->db->select('*');
+		$this->db->limit(5);
+		$this->db->like('nome', $q);
+		$query = $this->db->get('produto');
+		if($query->num_rows() > 0){
+				foreach ($query->result_array() as $row){
+						$row_set[] = array('label'=>$row['nome'].' | Preço: R$ '.$row['precovenda'],'idproduto'=>$row['idproduto'],'nome'=>$row['nome'],'precovenda'=>$row['precovenda']);
+				}
+				echo json_encode($row_set);
+		}
+}
+
 public function listausuariosagenda(){
 
-	$sql = "SELECT * from atendente";
+	$sql = "SELECT * from atendente where status='1'";
 			 $query = $this->db->query($sql);
 			 $array = $query->result_array();
 			 return $array;
