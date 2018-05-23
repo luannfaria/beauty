@@ -120,9 +120,9 @@ return $row->idservico;
 function confirmaservrealizado($iditensagenda,$params){
 
 	$this->db->where('iditensagenda',$iditensagenda);
-	 $this->db->update('itensagenda',$params);
+	 return $this->db->update('itensagenda',$params);
 
-	return false;
+	 
 
 }
 

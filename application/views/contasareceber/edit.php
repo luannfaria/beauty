@@ -59,7 +59,7 @@
             <label for="formarecebimento" class="control-label">Forma Pagamento</label>
 
             <div class="form-group">
-            <select name="formarecebimento" class="form-control">
+            <select name="formarecebimento" class="form-control" required>
               <option value="">Selecione    </option>
                 <option value="DINHEIRO"> DINHEIRO</option>
                 <option value="CARTAO DE CREDITO"> CARTÃO DE CRÉDITO</option>

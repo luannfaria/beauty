@@ -75,7 +75,7 @@ $this->load->model('Atendente_model');
 					$end = $this->input->post('end')[$i];
 				}
 
-					if($status ==2 and $tiposervico!=2){
+					if(($status=='2') and ($tiposervico!='2')){
 
 							$iditensagenda = $this->input->post('iditem')[$i];
 						$params = array(
@@ -84,19 +84,33 @@ $this->load->model('Atendente_model');
 							'start'=> $start,
 							'hora'=> $hora,
 							'end' => $end,
-							'status' => $status
+							'status' => 2
 
 						);
-						$qq=$this->Calendar_model->confirmaservrealizado($iditensagenda,$params);
+					if($this->Calendar_model->confirmaservrealizado($iditensagenda,$params)== true){
 
+
+							$tipomov =2;
+						$comissao = array(
+									'idfunc' =>$this->input->post('prof')[$i],
+									'data'=>$this->input->post('databr')[$i],
+									'valor' =>$this->input->post('comissao')[$i],
+									'nomefunc'=>$this->input->post('nomeatendente')[$i],
+									'tipomov'=> $tipomov
+						);
+						$this->load->model('Salario_model');
+						$sal = $this->Salario_model->comissao($comissao);
+					}
+					return false;
+					}
 
 					}
 
-
-			}
 echo json_encode(array('result' =>true));
+			}
 
-	}
+
+
 
 	/*Get all Events */
 
@@ -240,13 +254,12 @@ $itens = $this->Calendar_model->itensagenda($itens);
 							'comissao'=> $a['comissao']
 
 				);
-				$aaa = $this->Calendar_model->itensagenda($pac);
-			}
 
-			////////////////////////////////////////////////
+$aaa = $this->Calendar_model->itensagenda($pac);
 
 
-	}
+
+
 
 }
   redirect('calendar/index');
@@ -255,11 +268,11 @@ $itens = $this->Calendar_model->itensagenda($itens);
 
 
 
-}
+}}
 $this->load->view('include/header');
 $this->load->view('include/footer');
 $this->load->view('agenda/agenda');
-
+}
 }
 
 

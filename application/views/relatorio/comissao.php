@@ -1,10 +1,6 @@
 <section id="main-content">
   <section class="wrapper">
-    <link href="<?php echo base_url();?>assets/css/elegant-icons-style.css" rel="stylesheet" />
-    <link href="<?php echo base_url();?>assets/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url();?>assets/css/daterangepicker.css" rel="stylesheet" />
-    <link href="<?php echo base_url();?>assets/css/bootstrap-datepicker.css" rel="stylesheet" />
-    <link href="<?php echo base_url();?>assets/css/bootstrap-colorpicker.css" rel="stylesheet" />
+  <link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
     <div class="row">
       <div class="col-lg-12">
         <h3 class="page-header"><i class="fa fa-table"></i> Relatorio de comissões</h3>
@@ -57,18 +53,19 @@
 <br>
 <?php
 if(!$relatorio){?>
+  <section class="panel">
 <table class="table table-striped">
   <thead>
     <tr>
 
-<th>Data </th>
 <th>Atendente</th>
-
-<th>Serviço</th>
-
+<th>Vales</th>
 
 <th>Comissão</th>
 
+
+<th>Saldo</th>
+<th>Ações</th>
 </tr>
 </thead>
 
@@ -76,48 +73,59 @@ if(!$relatorio){?>
 </tbody>
 
 </table>
+</section>
 <?php } else{?>
 
-
+<section class="panel">
   <table class="table table-striped">
     <thead>
       <tr>
 
-  <th>Data </th>
-  <th>Atendente</th>
+        <th>Atendente</th>
+        <th>Vales</th>
 
-  <th>Serviço</th>
+        <th>Comissão</th>
 
 
-  <th>Comissão</th>
+        <th>Saldo</th>
+        <th>Ações</th>
 
   </tr>
   </thead>
 
   <tbody >
-<?php $total=0; ?>
+<?php $saldo=0;
+    $entrada=0;
+    $saida=0;
+ ?>
+
     <?php foreach ($relatorio as $r) {
-      echo '<tr>';
-            echo '<td>'.$r['start'].'</td>';
-            echo '<td>'.$r['idatendente'].'</td>';
-            echo '<td>'.$r['nomeservico'].'</td>';
+      if($r['tipomov']==2){
+              $entrada += $r['valor'];
+      }
 
-            echo '<td>R$ '.$r['comissao'].',00</td>';
-            echo '</tr>';
-              $total += $r['comissao'];
-  }?>
+      if($r['tipomov']==1){
+              $saida += $r['valor'];
+      }
 
-  <tr>
-                                             <td colspan="3" style="text-align: right"><strong>Total comissão:</strong></td>
-                                             <td><strong>R$ <?php echo number_format($total,2,',','.');?><input type="hidden" id="total-venda" value="<?php echo number_format($total,2); ?>"></strong></td>
-                                         </tr>
-<?php }?>
+
+  }
+$saldo = ($entrada-$saida);
+  echo '<tr>';
+        echo '<td>'.$r['nomefunc'].'</td>';
+        echo '<td><strong>R$'.$saida.',00</strong></td>';
+        echo '<td><strong>R$ '.$entrada.',00</strong></td>';
+
+        echo '<td><strong>R$ '.$saldo.',00</strong></td>';
+          echo '<td><a href="#detalhes" data-toggle="modal" class="btn btn-success">DETALHES</a></td>';
+        echo '</tr>';
+
+ }?>
   </tbody>
-
+  <!-- SELECT nomefunc, idfunc, sum(valor) from salario where tipomov='2' GROUP BY nomefunc -->
   </table>
 </section>
 
-</section>
 <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
 <script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
 
@@ -134,12 +142,64 @@ if(!$relatorio){?>
   <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
   <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
   <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
-
+  <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
 <script>
+$( function() {
+  $( "#inicio" ).datepicker({ dateFormat: 'dd/mm/yy' });
+    $( "#termino" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
-  $( "#inicio" ).datepicker({ format: 'dd/mm/yyyy' });
-    $( "#termino" ).datepicker({ format: 'dd/mm/yyyy' });
-
-
+});
 
 </script>
+
+
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="detalhes" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+        <h4 class="modal-title">Relatorio comissão - Detalhes</h4>
+      </div>
+      <div class="modal-body">
+          <div class=box-body>
+
+            <section class="panel">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td>Data</td>
+                    <td>Descrição</td>
+                    <td>Valor</td>
+                    <td>Tipo mov</td>
+                  </tr>
+                </thead>
+              <tbody>
+              <?php foreach ($relatorio as $r) {
+
+                echo '<tr>';
+                      echo '<td><strong>'.$r['data'].'</strong></td>';
+                      echo '<td>'.$r['descricao'].'</td>';
+                      echo '<td><strong>R$ '.$r['valor'].',00</strong></td>';
+if($r['tipomov']==1){
+                      echo '<td><strong>VALE</strong></td>';
+}
+if($r['tipomov']==2){
+                      echo '<td><strong>COMISSÃO</strong></td>';
+}
+                      echo '</tr>';
+
+                    } ?>
+            </tbody>
+              </table>
+            </section>
+          </div>
+
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div>

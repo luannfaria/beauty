@@ -362,10 +362,11 @@ if (!$result) {
 
 $('#valor').maskMoney();
 $('#valorsaida').maskMoney();
-  $( "#data" ).datepicker({ format: 'dd/mm/yyyy' });
+$( function() {
+  $( "#data" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
 $("#termino").datepicker({dateFormat: 'dd/mm/yy'});
-
+});
 $("#formEntrada").validate({
 
   rules:{

@@ -23,4 +23,17 @@ return FALSE;
 }
 }
 
+public function comissao($sal){
+	$this->db->insert('salario',$sal);
+
+	if ($this->db->affected_rows() == '1')
+	{
+	  return TRUE;
+	}
+	else{
+	return FALSE;
+
+	}
+}
+
 }

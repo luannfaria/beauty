@@ -194,6 +194,7 @@
 
 
                                                         <?php
+                                                        $i=1;
                             $totalserv = 0;
                             foreach ($servicos as $s) {
                                 $totalserv +=$s->valorservico; ?>
@@ -206,8 +207,13 @@
                               <input type="hidden" name="start[]" value="<?php echo $s->start ;?>" />
                                                            <input type="hidden" name="hora[]" value="<?php echo $s->hora ;?>" />
                               <input type="hidden" name="end[]" value="<?php echo $s->end ;?>" />
+                              <input type="hidden" name="prof[]" value="<?php echo $s->idatendente ;?>" />
                             <input type="hidden" name="tiposervico[]" value="<?php echo $s->tiposerv ;?>" />
                             <input type="hidden" name="iditem[]" value="<?php echo $s->iditensagenda; ?>"/>
+                            <input type="hidden" name="nomeatendente[]" value="<?php echo $s->nomeatendente; ?>"/>
+                              <?php date_default_timezone_set('America/Sao_Paulo'); ?>
+                            <input type="hidden" name="databr[]" value="<?php echo date('d/m/Y') ;?>"/>
+                            <input type="hidden" name="comissao[]" value="<?php echo $s->comissao ;?>" />
 
 
 
@@ -220,11 +226,18 @@
 
 
                                                                 <div class="checkbox">
-<label>
-               <input name="status[]" type="checkbox" value="2">
-            SIM
-           </label>
-</div>
+
+                                                                                      <label>
+                                                                                         <input type="checkbox" name="status" value="2">
+
+
+                                                                                                              SIM</label>
+
+
+                                                                                    </div>
+
+
+
 
                                                                                                   </div>
 
@@ -273,7 +286,7 @@ else{
 
 
 
-                                  <?php                    echo '</tr>';  }?>
+                                  <?php    $i++;                echo '</tr>';  }?>
 
 
 <tr>
@@ -568,7 +581,7 @@ else{
                                         </div>
 
 
-                                    
+
 
                             <!-- ck editor -->
 
