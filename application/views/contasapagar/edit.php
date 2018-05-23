@@ -3,17 +3,14 @@
 
 
   <link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
-         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-           <script src="https://fgelinas.com/code/timepicker/jquery.ui.timepicker.js?v=0.3.3"></script>
 
 
 <div class="row">
     <div class="col-md-12">
       	<div class="box box-info">
             <div class="box-header with-border">
-              	<h3 class="box-title">Contas a pagar Editar/PAGAR</h3>
+              	<h3 class="box-title">Contas a pagar</h3>
             </div>
 			<?php echo form_open('contasapagar/edit/'.$contasapagar['idcontasapagar']); ?>
 			<div class="box-body">
@@ -54,17 +51,14 @@
 						</div>
 					</div>
 
-					<div class="col-md-2">
-						<label for="datapagamento" class="control-label">Data pagamento</label>
-						<div class="form-group">
-							<input type="text" name="datapagamento" value="<?php echo ($this->input->post('datapagamento') ? $this->input->post('datapagamento') : $contasapagar['datapagamento']); ?>" class="has-datepicker form-control" id="datapagamento" />
-						</div>
-					</div>
+          <?php date_default_timezone_set('America/Sao_Paulo'); ?>
+
+          <input type="hidden" name="datapagamento" value="<?php echo date('d/m/Y') ;?>" class="has-datepicker form-control" id="datepicker" />
           <div class="col-md-2">
             <label for="formarecebimento" class="control-label">Forma Pagamento</label>
 
             <div class="form-group">
-            <select name="formarecebimento" class="form-control">
+            <select name="formarecebimento" class="form-control" required>
               <option value="">Selecione    </option>
                 <option value="DINHEIRO"> DINHEIRO</option>
                 <option value="CARTAO DE CREDITO"> CARTÃO DE CRÉDITO</option>
@@ -78,13 +72,31 @@
 			</div>
 			<div class="box-footer">
             	<button type="submit" class="btn btn-success">
-					<i class="fa fa-check"></i> SALVAR
+					<i class="fa fa-check"></i> PAGAR
 				</button>
 	        </div>
 			<?php echo form_close(); ?>
 		</div>
     </div>
 </div>
+
+<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
+
+
+<script src="<?php echo base_url()?>assets/js/validate.js"></script>
+
+
+
+  <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+
+  <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
 
 
 <script>

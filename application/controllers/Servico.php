@@ -20,7 +20,7 @@ class Servico extends CI_Controller{
      */
     function index()
     {
-      
+
         $data['servicos'] = $this->Servico_model->get_all_servicos();
         $this->load->model('Categoria_prod_serv_model');
         $data['all_categoria_prod_servs'] = $this->Categoria_prod_serv_model->get_all_categoria_prod_servs();
@@ -106,10 +106,13 @@ class Servico extends CI_Controller{
 
         $count = count($this->input->post('comissao'));
         for($i=0; $i< $count;$i++){
+          $nome1 = $this->input->post('pacotenome');
+          $nome2 = $this->input->post('item')[$i];
+          $nome3 = $nome1 . " item: " . $nome2;
         	$itens = array(
 
         			'idpacote' => $pacote,
-        			'nomeserv' =>  $this->input->post('item')[$i],
+        			'nomeserv' =>  $nome3,
               'idserv' =>$this->input->post('idservico')[$i],
               'comissao' => $this->input->post('comissao')[$i]
 

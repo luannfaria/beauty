@@ -31,6 +31,7 @@
 
         <select name="atendente" class="form-control">
           <option value="">Selecione um atendente</option>
+          <option value="todos">TODOS</option>
           <?php
           foreach($all_atendentes as $atendente)
           {

@@ -35,6 +35,7 @@
 
   <link href="<?php echo base_url()?>assets/css/widgets.css" rel="stylesheet">
   <link href="<?php echo base_url()?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url()?>assets/css/theme.css" rel="stylesheet">
   <link href="<?php echo base_url()?>assets/css/style-responsive.css" rel="stylesheet" />
   <link href="<?php echo base_url()?>assets/css/xcharts.min.css" rel=" stylesheet">
   <link href="<?php echo base_url()?>assets/css/jquery-ui-1.10.4.min.css" rel="stylesheet">

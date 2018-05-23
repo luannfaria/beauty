@@ -10,6 +10,11 @@
 
 
 
+
+
+
+
+
             <div class="panel-body">
               <div class="tab-content">
                 <div id="home" class="tab-pane active">
@@ -84,7 +89,7 @@
                                 <div class="form-group">
                       						<label for="serv" class="control-label">Serviços</label>
 
-                                  <input type="text" class="form-control" name="servico" id="servico" placeholder="Digite o nome do serviço" />
+                                  <input type="text" class="form-control" name="servico" id="servico" placeholder="Digite o nome do serviço" required/>
 
                                   <input type="hidden" name="idservico" id="idservico" value=""/>
 
@@ -102,15 +107,15 @@
                               <div class="form-group">
                                 <label class="control-label">Data</label>
 
-                                  <input class="form-control" id="datepicker"   type="text" name="datepicker"  />
+                                  <input class="form-control" id="datepicker"   type="text" name="datepicker"  required/>
 
                               </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                             <div class="form-group">
                               <label class="control-label">Horario</label>
 
-                                <input class="form-control" id="timepicker"   type="text" name="timepicker"  />
+                                <input class="form-control" id="timepicker"   type="text" name="timepicker" required />
 
                             </div>
                           </div>
@@ -120,7 +125,7 @@
 
                                     <label>Atendente
 
-                                      <select name="atendente" class="form-control">
+                                      <select name="atendente" class="form-control" required>
                                         <option value="">Selecione um atendente</option>
                                         <?php
                                         foreach($all_atendentes as $atendente)
@@ -144,9 +149,30 @@
 </div>
 </div>
 
+
   </form>
+
               <section class="panel">
+
+
+                <?php  foreach ($servicos as $s) {
+
+                  if($s->tiposerv==2) { ?>
+                  <div class="row">
+                  <div class="col-lg-7">
+                  <div class="alert alert-success fade in">
+                  <button data-dismiss="alert" class="close close-sm" type="button">
+                                      <i class="icon-remove"></i>
+                                  </button>
+                  <strong>ATENÇÃO</strong> Marque como <strong>"SIM"</strong> o serviço executado e confirme clicando em <strong>"CONFIRMAR SERVIÇOS"</strong>
+                </div>
+              </div>
+            </div>
+
+
+              <?php  }}?>
                 <div id="divServicos">
+
               <table class="table table-bordered">
                                                       <thead>
                                                         <tr>
@@ -164,39 +190,104 @@
                                                       <tbody>
 
 
+<form action="<?php echo base_url();?>calendar/confirmaservrealizado" method="post" id="confirmaexec">
+
+
                                                         <?php
                             $totalserv = 0;
                             foreach ($servicos as $s) {
-                                $totalserv +=$s->valorservico;
-                                echo '<tr>'; ?>
+                                $totalserv +=$s->valorservico; ?>
 
 
-                                <td>
 
-                                  <div class="btn-row">
-                                                    <div class="btn-group" data-toggle="buttons">
-                                                      <label class="btn btn-default active">
-                                                                            <input type="radio" name="statusitem" id="statusitem" value="2">  SIM
-                                                                        </label>
-                                                      <label class="btn btn-default">
-                                                                            <input type="radio" name="statusitem" id="statusitem" value="1"> NÃO
-                                                                        </label>
-</div></div>
+                            <?php   echo '<tr>'; ?>
 
 
-                                </td>
-                            <?php    echo '<td>'.$s->nomeatendente.'</td>';
-                                echo '<td>'.$s->nomeservico.'</td>';
-                                echo '<td>R$ '.$s->valorservico.',00</td>'; ?>
+                              <input type="hidden" name="start[]" value="<?php echo $s->start ;?>" />
+                                                           <input type="hidden" name="hora[]" value="<?php echo $s->hora ;?>" />
+                              <input type="hidden" name="end[]" value="<?php echo $s->end ;?>" />
+                            <input type="hidden" name="tiposervico[]" value="<?php echo $s->tiposerv ;?>" />
+                            <input type="hidden" name="iditem[]" value="<?php echo $s->iditensagenda; ?>"/>
 
 
-                        <td> <span idAcao="<?php echo $s->iditensagenda ;?>" title="Excluir" class="btn btn-danger"><i class="icon-remove icon-white">EXCLUIR</i></span>
-                          <?php      echo '</tr>';  }?>
 
+
+<?php if($s->tiposerv!=2){ ?>
+                                                          <td>
+
+                                                              <div class="col-lg-10">
+
+
+
+                                                                <div class="checkbox">
+<label>
+               <input name="status[]" type="checkbox" value="2">
+            SIM
+           </label>
+</div>
+
+                                                                                                  </div>
+
+                                                            </td>
+
+                                                          <?php } else {?>
+                                                            <td style="text-align: center">PACOTE</td>
+                                                        <?php  } ?>
+                                                <?php if($s->tiposerv!=2){ ?>
+                                                            <td>
+                                                              <select name="atendente[]" class="form-control" >
+                                                                                   <option value="">Selecione um atendente</option>
+                                                                                   <?php
+                                                                                   foreach($all_atendentes as $atendente)
+                                                                                   {
+                                                                                     $selected = ($atendente['idatendente'] == $s->idatendente) ? ' selected="selected"' : "";
+
+                                                                                     echo '<option   value="'.$atendente['idatendente'].'" '.$selected.'>'.$atendente['nome'].'</option>';
+                                                                                   }
+                                                                                   ?>
+                                                                                 </select>
+
+                                                            </td>
+                                                          <?php } else {?>
+                                                            <td style="text-align: center">PACOTE</td>
+                                                        <?php  }
+
+
+                                                            echo '<td style="text-align: center">'.$s->nomeservico.'</td>';
+
+                                                            if($s->tiposerv!=0){
+                                                            echo '<td style="text-align: center"><strong>R$ '.$s->valorservico.',00</strong></td>';}
+else{
+                                                                  echo '<td style="text-align: center"><strong>###</strong></td>';}
+                                                             ?>
+
+<?php   if($s->tiposerv!=0){ ?>
+                                                  <td><span idAcao="<?php echo $s->iditensagenda ;?>" title="Excluir" class="btn btn-danger"><i class="icon-remove icon-white">EXCLUIR</i></span></td>
+<?php }else{?>
+  <td></td>
+<?php } ?>
+
+
+
+
+
+
+
+                                  <?php                    echo '</tr>';  }?>
+
+
+<tr>
+    <td colspan="5" style="text-align: left"><input type="submit" class="btn btn-success" name="servico" value="CONFIRMAR SERVIÇOS" /></td>
+  </tr>
+  </form>
                                                       </tbody>
+
                                                     </table>
 
                                                   </div>
+
+
+
                                                     </section>
 
 </div>
@@ -423,6 +514,8 @@
                           </div>
 
 
+
+
                           <div class="modal fade" id="modal-fiado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                           <div class="modal-dialog">
                                             <div class="modal-content">
@@ -444,7 +537,14 @@
   <input type="hidden" name="valor"  value="<?php echo $totalserv ?>"/>
                                                         <h4>Data: <?php echo $agenda['data'] ;?></h4>
                                                       </div>
+                                                      <input type="hidden" name="idagendamento" id="idagendamento" value="<?php echo $agenda['idagenda'] ;?>" />
 
+
+
+
+                                                          <input type="hidden" value="#00FF7F" id="cor"name="cor"/>
+
+                                                      <input type="hidden" name="itemstatus" id="itemstatus" value="2" />
 
   <input type="hidden" name="descricao" value="Venda - <?php echo $agenda['idagenda'] ;?> / Cliente:<?php echo $cliente['nome'] ;?> <?php echo  $cliente['sobrenome']; ?>"/>
                                                       <div class="col-lg-4">
@@ -467,28 +567,28 @@
                                           </div>
                                         </div>
 
-                          <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
-                          <script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
 
+                                    
 
-                          <script src="<?php echo base_url()?>assets/js/validate.js"></script>
-
-
-
-                            <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
-
-                            <script src="<?php echo base_url()?>assets/js/moment.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
-                            <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
                             <!-- ck editor -->
 
+                            <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+                            <script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
+
+                          <script src="<?php echo base_url()?>assets/js/bootstrap.js"></script>
+                            <script src="<?php echo base_url()?>assets/js/validate.js"></script>
 
 
 
+                              <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+
+                              <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+                              <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
 
 <script type="text/javascript">
 
@@ -527,8 +627,76 @@ alert('Ocorreu um erro ao tentar excluir serviço.');
 
        });
 
+       $("#confirmaexec").validate({
 
 
+            rules:{
+              nomeservico: {required:true}
+            },
+            messages:{
+            nomeservico: {required:'insira'}
+          },
+
+          submitHandler: function( form ){
+                var dados = $( form ).serialize();
+
+            $.ajax({
+              type: "POST",
+              url:"<?php echo base_url();?>calendar/confirmaservrealizado",
+              data:dados,
+              dataType:'json',
+              success:function(data)
+              {
+                if(data.result == true){
+                    $('#call-modal').trigger('click');
+                }
+                else{
+                    alert('Ocorreu um erro ao tentar adicionar serviço.');
+                }
+              }
+            });
+            return false;
+          }
+
+       });
+
+
+       $("#formpacote").validate({
+
+         rules:{
+            nomeservico: {required:true}
+         },
+         messages:{
+            nomeservico: {required: 'Insira um serviço'}
+         },
+
+submitHandler: function( form ){
+      var dados = $( form ).serialize();
+
+
+     $.ajax({
+       type: "POST",
+       url: "<?php echo base_url();?>calendar/adicionarserv",
+       data: dados,
+       dataType: 'json',
+       success: function(data)
+       {
+         if(data.result == true){
+             $( "#divServicos" ).load("<?php echo current_url();?> #divServicos" );
+             $( "#divFinanceiro" ).load("<?php echo current_url();?> #divFinanceiro" );
+
+
+         }
+         else{
+             alert('Ocorreu um erro ao tentar adicionar serviço.');
+         }
+       }
+       });
+
+       return false;
+     }
+
+});
 
 
                   $("#formServicos").validate({
@@ -660,3 +828,26 @@ $("#produto").autocomplete({
 });
 
                 </script>
+
+
+
+                <a href="#notification" id="call-modal" role="button" class="btn" data-toggle="modal" style="display: none ">notification</a>
+
+
+
+                <div class="modal fade" id="notification">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                              UP Unhas
+                            </div>
+                            <div class="modal-body">
+                                <h3 style="text-align: center">Os dados de acesso estão incorretos, por favor tente novamente!</h3>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Fechar</button>
+
+                            </div>
+                        </div>
+                        </div>
+                      </div>

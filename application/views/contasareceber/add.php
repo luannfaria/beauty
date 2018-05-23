@@ -1,6 +1,6 @@
 <section id="main-content">
   <section class="wrapper">
-
+<link  rel="stylesheet" href="<?php echo base_url() ?>assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
 
 <div class="row">
     <div class="col-md-12">
@@ -82,15 +82,31 @@
     </div>
 </div>
 <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
+
+
 <script src="<?php echo base_url()?>assets/js/validate.js"></script>
 
 
-    <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+
+  <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+
+  <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
+  <!-- ck editor -->
 
 <script type="text/javascript">
 
 $('#valor').maskMoney();
-
+$( function() {
+$( "#datavencimento" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
 $( "#datapagamento" ).datepicker({ dateFormat: 'dd/mm/yy' });
+
+});
 </script>

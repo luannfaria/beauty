@@ -58,6 +58,13 @@ $this->db->where('idagenda', $idagenda);
 
 }
 
+public function buscatiposervico($idagenda){
+
+
+
+	return $this->db->get_where('itensagenda',array('idagenda'=>$idagenda))->row_array();
+}
+
 public function getidcliente($idagenda){
 
 
@@ -85,6 +92,39 @@ public function getidcliente($idagenda){
 
 }
 
+function getidservico($idagenda){
+
+	$this->db->select('idservico');
+$this->db->from('itensagenda');
+$this->db->where('idagenda', $idagenda);
+$this->db->limit(1);
+
+$query = $this->db->get();
+
+if ($query->num_rows() == 1)
+{
+//Use row() to get a single result
+$row = $query->row();
+
+//$row will now have if you printed the contents:
+//print_r( $row );
+//stdClass Object ( [email] => example@gmail.com )
+
+//Pass $query->email directly to reset_password
+
+return $row->idservico;
+}
+}
+
+
+function confirmaservrealizado($iditensagenda,$params){
+
+	$this->db->where('iditensagenda',$iditensagenda);
+	 $this->db->update('itensagenda',$params);
+
+	return false;
+
+}
 
 function update_serv($idag,$itemstatus){
 				$this->db->set('status',$itemstatus);
@@ -183,6 +223,11 @@ public function listausuariosagenda(){
 			 $query = $this->db->query($sql);
 			 $array = $query->result_array();
 			 return $array;
+}
+
+public function getitenspacote($idservico){
+
+	return $this->db->get_where('item_serv',array('idpacote'=>$idservico))->result_array();
 }
 
 public function listaeventos(){

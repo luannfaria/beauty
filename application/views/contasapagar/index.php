@@ -124,6 +124,15 @@
                     </div>
                   </div>
 
+                  <div class="col-md-6">
+
+                    <div class="form-group">
+
+                      <label>Descrição</label>
+                      	<input type="text" name="descricao" value="" class="form-control" id="descricao" required/>
+                    </div>
+                      </div>
+
                   <div class="col-xs-2">
 
                     <div class="form-group">
@@ -135,26 +144,19 @@
                   </div>
 
                   <div class="col-md-3">
-                    <label for="formarecebimento" class="control-label">Forma pgto
+                    <label for="formarecebimento" class="control-label">Forma pgto</label>
 
                     <div class="form-group">
-                    <select name="formarecebimento" class="form-control">
+                    <select name="formarecebimento" class="form-control" required>
                       <option value="">Selecione   </option>
                         <option value="DINHEIRO"> DINHEIRO</option>
                         <option value="CARTAO DE CREDITO"> CARTÃO DE CRÉDITO</option>
                         <option value="CARTAO DE DEBITO"> CARTÃO DE DÉBITO</option>
                         <option value="CHEQUE"> CHEQUE</option>
-                    </select></label>
+                    </select>
                     </div>
                   </div>
-                  <div class="col-md-6">
 
-                    <div class="form-group">
-
-                      <label>Descrição</label>
-                      	<input type="text" name="descricao" value="" class="form-control" id="descricao" required/>
-                    </div>
-                      </div>
                       <div class="col-lg-4">
                         <label for="">&nbsp</label>
                         <div class="form-group">

@@ -55,7 +55,7 @@
 <td>
           <?php if( $i['status']=='1'){ ?>
 
-              <a href="<?php echo site_url('calendar/agendavenda/'.$i['idagenda']); ?>" class="btn btn-success"><span class="fa fa-money"></span> RECEBER</a>
+              <a href="<?php echo site_url('calendar/agendavenda/'.$i['idagenda']); ?>" class="btn btn-success"><span class="fa fa-pencil"></span> VISUALIZAR</a>
 <?php } ?>
 
 <?php if( $i['status']=='2'){ ?>

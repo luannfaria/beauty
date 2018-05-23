@@ -47,6 +47,18 @@ class Contasareceber extends CI_Controller{
        );
 
        $contasareceber_id = $this->Contasareceber_model->add_contasareceber($params);
+
+       $statusfechado = 2;
+
+       $idag =  $this->input->post('idagendamento');
+       $itemstatus = $this->input->post('itemstatus');
+       $cor =$this->input->post('cor');
+
+$this->load->model('Calendar_model');
+$si =  $this->Calendar_model->update_serv($idag,$itemstatus);
+       $dd =  $this->Calendar_model->update_status($idag,$statusfechado);
+       $c =$this->Calendar_model->update_cor($idag,$cor);
+
        redirect('contasareceber/index');
 
      }
@@ -101,7 +113,7 @@ class Contasareceber extends CI_Controller{
 
         $idag =  $this->input->post('idagendamento');
         $itemstatus = $this->input->post('itemstatus');
-        $cor =$this->input->post('cor')  ;
+        $cor =$this->input->post('cor');
 
 $this->load->model('Calendar_model');
 $si =  $this->Calendar_model->update_serv($idag,$itemstatus);

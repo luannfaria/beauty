@@ -10,6 +10,7 @@
 
 
 <link href="<?php echo base_url() ?>assets/css/fullcalendar.css" rel="stylesheet" />
+<link href="<?php echo base_url() ?>assets/css/dataTables.min.css" rel="stylesheet" />
 
 
 
@@ -452,6 +453,8 @@
     </div>
         </div></div>
 
+
+
         <div class="modal fade" id="myModal4">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -523,11 +526,17 @@
 
 
 
+    
 
 
 
 
-    <script>
+
+
+
+
+
+    <script type="text/javascript">
     $( function() {
       $( "#datepicker" ).datepicker({ dateFormat: 'yy-mm-dd' });
 
@@ -542,9 +551,15 @@
       };
 
       $('#form_prepare').submit(function(){
+
+
+
         var $this = $( this );
 
         var tiposervico = $this.find("input[name='tiposervico']").val();
+
+
+
         var databr = $this.find("input[name='start']").val();
           var hora= $this.find("input[name='hora']").val();
           var start = $this.find("input[name='dataInicial']").val();
@@ -567,7 +582,7 @@
 
         var tr = '<tr>'+
           '<td>'+nomeservico+'</td>'+
-          '<td>'+start+'</td>'+
+          '<td>'+databr+'</td>'+
           '<td>'+hora+'</td>'+
 
         '<td>  <button class="btn btn-danger" onclick="RemoveTableRow(this)" type="button">REMOVER</button> </td>'
@@ -700,5 +715,15 @@
 
     });
     </script>
+
+    <div class="modal fade" id="pacote">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body">
+                <h4>PACOTE</h4>
+              </div>
+            </div>
+          </div>
+        </div>
 </section>
 </section>

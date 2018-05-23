@@ -20,14 +20,14 @@
 					<div class="col-md-4">
 						<label for="nomeservico" class="control-label"><span class="text-danger">*</span>Nome serviço</label>
 						<div class="form-group">
-							<input type="text" name="nomeservico" value="<?php echo ($this->input->post('nomeservico') ? $this->input->post('nomeservico') : $servico['nomeservico']); ?>" class="form-control" id="nomeservico" />
+							<input type="text" name="nomeservico" value="<?php echo ($this->input->post('nomeservico') ? $this->input->post('nomeservico') : $servico['nomeservico']); ?>" class="form-control" id="nomeservico" required/>
 							<span class="text-danger"><?php echo form_error('nomeservico');?></span>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<label for="valorserv" class="control-label"><span class="text-danger">*</span>Valor serviço</label>
 						<div class="form-group">
-							<input type="text" name="valorserv" value="<?php echo ($this->input->post('valorserv') ? $this->input->post('valorserv') : $servico['valorserv']); ?>" class="form-control" onfocus="this.value=''";  id="valorserv" />
+							<input type="text" name="valorserv" value="<?php echo ($this->input->post('valorserv') ? $this->input->post('valorserv') : $servico['valorserv']); ?>" class="form-control" onfocus="this.value=''";  id="valorserv" required/>
 							<span class="text-danger"><?php echo form_error('valorserv');?></span>
 						</div>
 					</div>
@@ -35,7 +35,7 @@
 					<div class="col-md-2">
 						<label for="comissao" class="control-label">Comissão</label>
 						<div class="form-group">
-							<input type="text" name="comissao" value="<?php echo ($this->input->post('comissao') ? $this->input->post('comissao') : $servico['comissao']); ?>" class="form-control" onfocus="this.value=''"; id="comissao" />
+							<input type="text" name="comissao" value="<?php echo ($this->input->post('comissao') ? $this->input->post('comissao') : $servico['comissao']); ?>" class="form-control" onfocus="this.value=''"; id="comissao"  required/>
 						</div>
 					</div>
 

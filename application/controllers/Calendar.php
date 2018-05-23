@@ -44,13 +44,57 @@ $this->load->model('Atendente_model');
 			$this->load->model('Cliente_model');
 	$data['cliente'] = $this->Cliente_model->get_cliente($idcliente);
 
+
+
 		$data['servicos'] = $this->Calendar_model->itens($idagenda);
 
+		$idservico = $this->Calendar_model->getidservico($idagenda);
+
+	$this->load->model('Servico_model');
+      $data['itenspacote'] = $this->Servico_model->get_itens($idservico);
 
 		$this->load->view('include/header');
 		$this->load->view('agenda/agendavenda',$data);
 		$this->load->view('include/footer');
 
+
+	}
+
+	public function confirmaservrealizado(){
+
+
+
+
+			for($i=0; $i<3 ; $i++){
+
+				$tiposervico = $this->input->post('tiposervico')[$i];
+					$status = $this->input->post('status')[$i];
+				if($tiposervico==2){
+				$start= $this->input->post('start')[$i];
+					$hora= $this->input->post('hora')[$i];
+					$end = $this->input->post('end')[$i];
+				}
+
+					if($status ==2 and $tiposervico!=2){
+
+							$iditensagenda = $this->input->post('iditem')[$i];
+						$params = array(
+
+
+							'start'=> $start,
+							'hora'=> $hora,
+							'end' => $end,
+							'status' => $status
+
+						);
+						$qq=$this->Calendar_model->confirmaservrealizado($iditensagenda,$params);
+
+
+					}
+
+
+			}
+echo json_encode(array('result' =>true));
 
 	}
 
@@ -74,6 +118,8 @@ public function faturar(){
 			echo json_encode(array('result'=> false));
 	}
 }
+
+
 
 	public function add(){
 
@@ -110,11 +156,6 @@ public function faturar(){
 		  $agenda_id = $this->Calendar_model->addagenda($params);
 
 
-
-
-
-
-	# code...
 $count = count($this->input->post('valorserv'));
 
 $subtotal = 0;
@@ -126,7 +167,13 @@ for ($i=0; $i < $count; $i++){
 		$subtotal += $vlritem;
 
 }
+
+
 for($i=0; $i< $count;$i++){
+
+	$tiposerv = $this->input->post('tiposervico')[$i];
+	if($tiposerv == 1){
+
 	$itens = array(
 
 			'idagenda' => $agenda_id,
@@ -147,20 +194,71 @@ for($i=0; $i< $count;$i++){
 
 	);
 
-		$itens = $this->Calendar_model->itensagenda($itens);
+$itens = $this->Calendar_model->itensagenda($itens);
+
+
 
 
 }
-            redirect('calendar/index');
+
+elseif ($tiposerv==2) {
+
+	$itens = array(
+
+			'idagenda' => $agenda_id,
+			'valorservico' =>  $this->input->post('valorserv')[$i],
+
+			'nomeservico' => $this->input->post('nomeservico')[$i],
+			'comissao' => $this->input->post('comissao')[$i],
+			'nomecliente' => $this->input->post('nome')[0],
+			'idservico' =>  $this->input->post('idservico')[$i],
+			'idatendente' => $this->input->post('resource')[$i],
+			'start' =>  $this->input->post('dataInicial')[$i],
+			'nomeatendente' =>  $this->input->post('nomeatendente')[$i],
+			'hora' =>  $this->input->post('hora')[$i],
+			'end' =>  $this->input->post('end')[$i],
+			'status' => $this->input->post('status')[$i],
+			'cor' =>$this->input->post('cor')[$i],
+			'tiposerv'=>$this->input->post('tiposervico')[$i]
+
+	);
+
+$itens = $this->Calendar_model->itensagenda($itens);
+
+			$idpac = $this->input->post('idservico')[$i];
+
+			$itenspacote = $this->Calendar_model->getitenspacote($idpac);
+
+			foreach ($itenspacote as $a) {
+				$pac = array(
+							'idagenda' => $agenda_id,
+							'nomeservico'=> $a['nomeserv'],
+							'nomecliente'=>$this->input->post('nome')[0],
+							'idatendente' =>$this->input->post('resource')[$i],
+							'nomeatendente'=>$this->input->post('nomeatendente')[$i],
+							'status'=>$this->input->post('status')[$i],
+							'comissao'=> $a['comissao']
+
+				);
+				$aaa = $this->Calendar_model->itensagenda($pac);
+			}
+
+			////////////////////////////////////////////////
+
+
+	}
 
 }
+  redirect('calendar/index');
 
-else{
 
-	$this->load->view('include/header');
-	$this->load->view('agenda/agenda');
-	$this->load->view('include/footer');
+
+
+
 }
+$this->load->view('include/header');
+$this->load->view('include/footer');
+$this->load->view('agenda/agenda');
 
 }
 
@@ -234,6 +332,43 @@ $data['itensagenda'] = $this->Agenda_model->get_all_agendas();
 
 public function adicionarserv(){
 
+$count = count($this->input->post('nomeservico'));
+
+if($count>1){
+			for($i=0; $i< $count;$i++){
+				$status = $this->input->post('status')[$i];
+			//	$start = null;
+			//	$hora = null;
+			//	$end = null;
+				$statusatual=1;
+
+if($status==2){
+	$statusatual=2;
+}
+
+
+
+				//	$statusatual=2;
+
+
+				$serv = array (
+						'idagenda' => $this->input->post('idagenda')[$i],
+						'nomeservico' => $this->input->post('nomeservico')[$i],
+						'idservico' => $this->input->post('idservico')[$i],
+						'comissao' => $this->input->post('comissao')[$i],
+					//	'start' => $start,
+				//		'hora'=> $hora,
+					//	'end'=> $end,
+						'valorservico' => $this->input->post('valorserv')[$i],
+						'status' => $statusatual,
+						'idatendente' => $this->input->post('atendente')[$i],
+
+				);
+			$t=	$this->Calendar_model->addservagenda($serv);
+			}
+			echo json_encode(array('result' => true));
+
+}
 	$serv = array (
 			'idagenda' => $this->input->post('idagenda'),
 			'nomeservico' => $this->input->post('nomeservico'),
@@ -360,6 +495,14 @@ $itens = array(
 		         echo json_encode($obj);
 		   exit();
 		    }
+
+				public function getitenspacote(){
+
+						$idservico = $this->input->post('idservico');
+					$data['itenspacote'] = $this->Calendar_model->getitenspacote($idservico);
+
+echo json_encode($data);
+				}
 
 				public function removeservicoagenda(){
 

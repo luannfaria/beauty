@@ -40,6 +40,9 @@ $data['relatorio'] = 0;
           $inicio = $this->input->post('inicio');
           $termino = $this->input->post('termino');
           $idatendemte = $this->input->post('atendente');
+          if($idatendemte=='todos'){
+              $data['relatorio'] = $this->Relatorio_model->consultacomissaotodos($inicio,$termino);
+          }
           $this->load->model('Atendente_model');
               $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
 

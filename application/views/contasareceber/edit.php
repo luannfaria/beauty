@@ -51,13 +51,9 @@
 							<input type="text" name="obs" value="<?php echo ($this->input->post('obs') ? $this->input->post('obs') : $contasareceber['obs']); ?>" class="form-control" id="obs" />
 						</div>
 					</div>
+          <?php date_default_timezone_set('America/Sao_Paulo'); ?>
 
-          <div class="col-md-2">
-            <label for="datapagamento" class="control-label">Data Pagamento</label>
-            <div class="form-group">
-              <input type="text" name="datapagamento" value="<?php echo ($this->input->post('datapagamento') ? $this->input->post('datapagamento') : $contasareceber['datapagamento']); ?>" class="has-datepicker form-control" id="datapagamento" />
-            </div>
-          </div>
+          <input type="hidden" name="datapagamento" value="<?php echo date('d/m/Y') ;?>" class="has-datepicker form-control" id="datepicker" />
 
           <div class="col-md-2">
             <label for="formarecebimento" class="control-label">Forma Pagamento</label>
@@ -76,7 +72,7 @@
 			</div>
 			<div class="box-footer">
             	<button type="submit" class="btn btn-success">
-					<i class="fa fa-check"></i> SALVAR
+					<i class="fa fa-check"></i> RECEBER
 				</button>
 	        </div>
 			<?php echo form_close(); ?>
@@ -84,8 +80,27 @@
     </div>
 </div>
 
+<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+<script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
+
+
+<script src="<?php echo base_url()?>assets/js/validate.js"></script>
+
+
+
+  <script src="<?php echo base_url()?>assets/js/maskmoney.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.hotkeys.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-wysiwyg.js"></script>
+
+  <script src="<?php echo base_url()?>assets/js/moment.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-colorpicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/daterangepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
+  <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
+  <!-- ck editor -->
 
 <script>
+$('#valor').maskMoney();
 $( function() {
   $( "#datavencimento" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
