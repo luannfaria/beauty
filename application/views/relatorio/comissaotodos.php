@@ -1,4 +1,4 @@
-  <section id="main-content">
+<section id="main-content">
   <section class="wrapper">
 
     <link rel="stylesheet" href="<?php echo base_url()?>assets/css/owl.carousel.css" type="text/css">
@@ -43,7 +43,7 @@
 
         <select name="atendente" class="form-control">
           <option value="">Selecione um atendente</option>
-          <
+          <option value="0">TODOS</option>
           <?php
           foreach($all_atendentes as $atendente)
           {
@@ -70,7 +70,7 @@
     </div>
 <br>
 <?php
-if(!$relatorio){?>
+if(!$relatoriotodos){?>
   <section class="panel">
 <table class="table table-striped">
   <thead>
@@ -117,28 +117,47 @@ if(!$relatorio){?>
     $saida=0;
  ?>
 
-    <?php foreach ($relatorio as $r) {
+    <?php foreach ($relatoriotodos as $r) {
 
 
-      if($r['tipomov']==2){
-              $entrada += $r['valor'];
-      }
 
-      if($r['tipomov']==1){
-              $saida += $r['valor'];
-      }
+                $i1 =+ $r['idfunc'];
+
+              if($r['idfunc']==$i1){
+                if($r['tipomov']==2){
+                        $entrada += $r['valor'];
+                }
+
+                if($r['tipomov']==1){
+                        $saida += $r['valor'];
+                }
+
+              }
+
+              if($r['idfunc']!=$i1){
+                $saldo = ($entrada-$saida);
+                echo '<tr>';
+                      echo '<td>'.$r['nomefunc'].'</td>';
+                      echo '<td><strong>R$'.$saida.',00</strong></td>';
+                      echo '<td><strong>R$ '.$entrada.',00</strong></td>';
+
+                      echo '<td><strong>R$ '.$saldo.',00</strong></td>';
+                        echo '<td><a href="#modal-lg" data-toggle="modal" class="btn btn-success">DETALHES</a></td>';
+                      echo '</tr>';
+
+                      $saldo=0;
+                      $entrada=0;
+                      $saida=0;
+
+              }
+
+
+
 
 
   }
-$saldo = ($entrada-$saida);
-  echo '<tr>';
-        echo '<td>'.$r['nomefunc'].'</td>';
-        echo '<td><strong>R$'.$saida.',00</strong></td>';
-        echo '<td><strong>R$ '.$entrada.',00</strong></td>';
 
-        echo '<td><strong>R$ '.$saldo.',00</strong></td>';
-          echo '<td><a href="#modal-lg" data-toggle="modal" class="btn btn-success">DETALHES</a></td>';
-        echo '</tr>';
+
 
  }?>
   </tbody>
@@ -178,7 +197,7 @@ $saldo = ($entrada-$saida);
                           </tr>
                         </thead>
                       <tbody>
-                      <?php foreach ($relatorio as $r) {
+                      <?php foreach ($relatoriotodos as $r) {
 
                         echo '<tr>';
                               echo '<td><strong>'.$r['data'].'</strong></td>';

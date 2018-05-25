@@ -19,6 +19,14 @@ class Calendar_model extends CI_Model {
 
 /*Create new events */
 
+public function confirma($idtem,$params){
+	$this->db->set($params);
+	$this->db->where('iditensagenda',$idtem);
+  return $this->db->update('itensagenda');
+
+
+
+}
 
 public function addagenda($params){
 
@@ -122,7 +130,7 @@ function confirmaservrealizado($iditensagenda,$params){
 	$this->db->where('iditensagenda',$iditensagenda);
 	 return $this->db->update('itensagenda',$params);
 
-	 
+
 
 }
 

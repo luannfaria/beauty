@@ -25,11 +25,9 @@ function consultacomissao($inicio,$termino,$idatendemte){
 
 function consultacomissaotodos($inicio,$termino){
   $this->db->select('*');
-  $this->db->where('status','2');
-  $this->db->where('tiposerv !=','2');
-  $this->db->where('start >=',$inicio);
-  $this->db->where('start <=',$termino);
-  return $this->db->get('itensagenda')->result_array();
+  $this->db->where('data >=',$inicio);
+  $this->db->where('data <=',$termino);
+  return $this->db->get('salario')->result_array();
 }
 
   }

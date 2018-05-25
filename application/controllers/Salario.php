@@ -25,7 +25,7 @@ class Salario extends CI_Controller {
   }
 
 	public function pgtofunc(){
-
+$tipomov1= '1';
 		$func  = array(
 				'idfunc'  => $this->input->post('atendente'),
 				'valor' => $this->input->post('valor'),
@@ -33,6 +33,7 @@ class Salario extends CI_Controller {
 				'descricao' => $this->input->post('descricao'),
 				'tipopgto' => $this->input->post('salario_comissao'),
 				'formapgto'  => $this->input->post('formarecebimento'),
+				'tipomov' => $tipomov1,
 		);
 
 		if($this->Salario_model->pgtofunc($func) ==true){

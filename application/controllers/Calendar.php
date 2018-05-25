@@ -68,7 +68,7 @@ $this->load->model('Atendente_model');
 			for($i=0; $i<3 ; $i++){
 
 				$tiposervico = $this->input->post('tiposervico')[$i];
-					$status = $this->input->post('status')[$i];
+$status = $this->input->post('status');
 				if($tiposervico==2){
 				$start= $this->input->post('start')[$i];
 					$hora= $this->input->post('hora')[$i];
@@ -84,7 +84,7 @@ $this->load->model('Atendente_model');
 							'start'=> $start,
 							'hora'=> $hora,
 							'end' => $end,
-							'status' => 2
+							'status' => $status
 
 						);
 					if($this->Calendar_model->confirmaservrealizado($iditensagenda,$params)== true){
@@ -111,7 +111,55 @@ echo json_encode(array('result' =>true));
 
 
 
+public function confirma(){
 
+$count=count($this->input->post('start'));
+$indice=0;
+for($i=0;$i<$count;$i++){
+
+$iditem=$this->input->post('iditem')[$i];
+$status=isset($this->input->post('status')[$i]);
+
+$tiposerv=$this->input->post('tiposerv')[$i];
+if($tiposerv!=2){
+		if(isset($this->input->post('status')[$i])!=null){
+			$params = array(
+						'start'=>$this->input->post('start')[$i],
+						'hora'=>$this->input->post('hora')[$i],
+						'end'=>$this->input->post('end')[$i],
+						'status'=>$this->input->post('status')[$i]
+
+			);
+			if($this->Calendar_model->confirma($iditem,$params)!=null){
+
+				$tipomov =2;
+			$comissao = array(
+						'idfunc' =>$this->input->post('prof')[$i],
+						'data'=>$this->input->post('databr')[$i],
+						'valor' =>$this->input->post('comissao')[$i],
+						'nomefunc'=>$this->input->post('nomeatendente')[$i],
+						'tipomov'=> $tipomov
+			);
+			$this->load->model('Salario_model');
+			$sal = $this->Salario_model->comissao($comissao);
+
+				$indice++;
+			}
+
+}
+}
+
+}
+
+if($indice>0){
+					echo json_encode(array('result'=> true));
+			}else{
+					echo json_encode(array('result'=> false));
+			}
+
+
+
+}
 	/*Get all Events */
 
 	Public function getEvents()
@@ -163,6 +211,8 @@ public function faturar(){
 'hora' => $this->input->post('hora')[0],
 'nomeatend' => $this->input->post('nomeatendente')[0],
 'status' => $this->input->post('status')[0],
+'start' =>  $this->input->post('dataInicial')[0],
+	'end' =>  $this->input->post('end')[0],
 'subtotal' => $subtotal
 
 		);

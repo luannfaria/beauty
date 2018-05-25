@@ -486,13 +486,7 @@ table tr th { color: #688a7e;}
 
 /*Modal Content*/
 
-.modal-content{
 
-    border-radius:0px;
-
-    background:rgba(255,255,255,0.9);
-
-}
 
 .modal-header .close{
 
@@ -6440,6 +6434,27 @@ ul.inbox-pagination li {
 
     background: #009da7;
 
+}
+
+.modal {
+}
+.vertical-alignment-helper {
+    display:table;
+    height: 100%;
+    width: 100%;
+}
+.vertical-align-center {
+    /* To center vertically */
+    display: table-cell;
+
+}
+.modal-content {
+    /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+    /*width:inherit;*/
+    height:inherit;
+    /* To center horizontally */
+    margin: 0 auto;
+    width: 800px;
 }
 
 

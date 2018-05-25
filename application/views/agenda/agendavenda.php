@@ -190,65 +190,54 @@
                                                       <tbody>
 
 
-<form action="<?php echo base_url();?>calendar/confirmaservrealizado" method="post" id="confirmaexec">
 
+<form id="form"  action="<?php echo base_url() ?>calendar/confirma" method="post">
 
                                                         <?php
-                                                        $i=1;
+                                                        $i=0;
                             $totalserv = 0;
                             foreach ($servicos as $s) {
                                 $totalserv +=$s->valorservico; ?>
 
 
 
+
                             <?php   echo '<tr>'; ?>
 
 
-                              <input type="hidden" name="start[]" value="<?php echo $s->start ;?>" />
-                                                           <input type="hidden" name="hora[]" value="<?php echo $s->hora ;?>" />
-                              <input type="hidden" name="end[]" value="<?php echo $s->end ;?>" />
+                              <input type="hidden" name="start[]" value="<?php echo $agenda['start'] ;?>" />
+                                                           <input type="hidden" name="hora[]" value="<?php echo $agenda['hora'] ;?>" />
+                              <input type="hidden" name="end[]" value="<?php echo $agenda['end'] ;?>" />
                               <input type="hidden" name="prof[]" value="<?php echo $s->idatendente ;?>" />
-                            <input type="hidden" name="tiposervico[]" value="<?php echo $s->tiposerv ;?>" />
+<input type="hidden" name="databr[]" value="<?php echo $agenda['data']; ?>"/>
                             <input type="hidden" name="iditem[]" value="<?php echo $s->iditensagenda; ?>"/>
                             <input type="hidden" name="nomeatendente[]" value="<?php echo $s->nomeatendente; ?>"/>
-                              <?php date_default_timezone_set('America/Sao_Paulo'); ?>
-                            <input type="hidden" name="databr[]" value="<?php echo date('d/m/Y') ;?>"/>
+
                             <input type="hidden" name="comissao[]" value="<?php echo $s->comissao ;?>" />
 
 
 
 
 <?php if($s->tiposerv!=2){ ?>
-                                                          <td>
-
-                                                              <div class="col-lg-10">
+                                                          <td style="text-align: center">
 
 
+<input <?php if (isset($s->status)) {
+if ($s->status == '2') {
+echo 'checked';
+}
+}?> type="checkbox" name="status[]" value="2"><label>  <label for="">&nbsp</label> Realizado</label></input>
 
-                                                                <div class="checkbox">
-
-                                                                                      <label>
-                                                                                         <input type="checkbox" name="status" value="2">
-
-
-                                                                                                              SIM</label>
-
-
-                                                                                    </div>
-
-
-
-
-                                                                                                  </div>
 
                                                             </td>
 
                                                           <?php } else {?>
                                                             <td style="text-align: center">PACOTE</td>
+                                                            <input  type="hidden" name="status[]" value="">
                                                         <?php  } ?>
                                                 <?php if($s->tiposerv!=2){ ?>
                                                             <td>
-                                                              <select name="atendente[]" class="form-control" >
+                                                              <select name="atendente" class="form-control" >
                                                                                    <option value="">Selecione um atendente</option>
                                                                                    <?php
                                                                                    foreach($all_atendentes as $atendente)
@@ -286,13 +275,13 @@ else{
 
 
 
+
                                   <?php    $i++;                echo '</tr>';  }?>
 
 
-<tr>
-    <td colspan="5" style="text-align: left"><input type="submit" class="btn btn-success" name="servico" value="CONFIRMAR SERVIÇOS" /></td>
-  </tr>
-  </form>
+
+<td style="text-align: center"><input type="submit" class="btn btn-success" name="servico" value="CONFIRMAR SERVIÇO" /></td>
+</form>
                                                       </tbody>
 
                                                     </table>
@@ -315,7 +304,7 @@ else{
                                           </div>
 
                                           <div class="box-body">
-  <form id="formProdutos" action="<?php echo base_url() ?>calenda/addproduto" method="post">
+  <form id="formProdutos" action="<?php echo base_url() ?>calendar/addproduto" method="post">
                                             <div class="col-lg-7">
                                             <div class="form-group">
                                               <label for="idservico" class="control-label">Inserir produtos</label>
@@ -603,6 +592,8 @@ else{
                               <script src="<?php echo base_url()?>assets/js/bootstrap-datepicker.js"></script>
                               <script src="<?php echo base_url()?>assets/js/jquery.timepicker.min.js"></script>
 
+
+
 <script type="text/javascript">
 
 
@@ -640,38 +631,39 @@ alert('Ocorreu um erro ao tentar excluir serviço.');
 
        });
 
-       $("#confirmaexec").validate({
+       $("#form").validate({
 
+         rules:{
+            atendente: {required:true}
+         },
+         messages:{
+            atendente: {required: 'Insira um serviço'}
+         },
 
-            rules:{
-              nomeservico: {required:true}
-            },
-            messages:{
-            nomeservico: {required:'insira'}
-          },
+      submitHandler: function( form ){
+      var dados = $( form ).serialize();
+$.ajax({
+  type: "POST",
+  url:"<?php echo base_url();?>calendar/confirma",
+  data:dados,
+  dataType:'json',
+  success:function(data)
+  {
+    if(data.result == true){
 
-          submitHandler: function( form ){
-                var dados = $( form ).serialize();
+        $('#call-modal').trigger('click');
+    }
+    else{
+        $('#falseservice').trigger('click');
+    }
+  }
 
-            $.ajax({
-              type: "POST",
-              url:"<?php echo base_url();?>calendar/confirmaservrealizado",
-              data:dados,
-              dataType:'json',
-              success:function(data)
-              {
-                if(data.result == true){
-                    $('#call-modal').trigger('click');
-                }
-                else{
-                    alert('Ocorreu um erro ao tentar adicionar serviço.');
-                }
-              }
-            });
-            return false;
-          }
+});
+return false;
+  }
 
-       });
+});
+
 
 
        $("#formpacote").validate({
@@ -845,7 +837,7 @@ $("#produto").autocomplete({
 
 
                 <a href="#notification" id="call-modal" role="button" class="btn" data-toggle="modal" style="display: none ">notification</a>
-
+                  <a href="#servicefalse" id="falseservice" role="button" class="btn" data-toggle="modal" style="display: none ">servicefalse</a>
 
 
                 <div class="modal fade" id="notification">
@@ -855,7 +847,7 @@ $("#produto").autocomplete({
                               UP Unhas
                             </div>
                             <div class="modal-body">
-                                <h3 style="text-align: center">Os dados de acesso estão incorretos, por favor tente novamente!</h3>
+                                <h3 style="text-align: center">Serviço confirmado com sucesso!</h3>
                             </div>
                             <div class="modal-footer">
                               <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Fechar</button>
@@ -864,3 +856,20 @@ $("#produto").autocomplete({
                         </div>
                         </div>
                       </div>
+
+                      <div class="modal fade" id="servicefalse">
+                          <div class="modal-dialog">
+                              <div class="modal-content">
+                                  <div class="modal-header">
+                                    UP Unhas
+                                  </div>
+                                  <div class="modal-body">
+                                      <h3 style="text-align: center">Nenhum serviço confirmado, marque o serviço realizado!</h3>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Fechar</button>
+
+                                  </div>
+                              </div>
+                              </div>
+                            </div>

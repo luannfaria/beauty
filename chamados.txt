@@ -5,7 +5,8 @@ Solicitações cliente UP Unhas
 3 - Criar entrada no caixa dentro do modulo fluxo de CAIXA - CONCLUIDO
 4 - Focus na linha da agenda para facilitar localização horário - CONCLUIDO
 5 - Criar fiado para clientes - CONCLUIDO
-6 - Explodir pacote no modulo agenda -  EM DESENVOLVIMENTO
+6 - Explodir pacote no modulo agenda -  CONCLUIDO
 7 - Mudar layout REL. comissão (Criar opção selecionar todos funcionários.)
     Exibir totais dos funcionários (botão detalhes para exibir tudo) - PENDENTE
 8 - Vale para funcionários - CONCLUIDO
+9 - 
