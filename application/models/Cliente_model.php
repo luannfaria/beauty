@@ -22,14 +22,43 @@ class Cliente_model extends CI_Model
     /*
      * Get all clientes
      */
+     public function get_total() {
+
+     		return $this->db->count_all("cliente");
+     }
+
+
+    public function  get_current_page_records($limit, $start){
+      $this->db->order_by('idcliente','desc');
+       $this->db->limit($limit,$start);
+
+       $query = $this->db->get("cliente");
+
+       if ($query->num_rows() > 0)
+       {
+           foreach ($query->result() as $row)
+           {
+               $data[] = $row;
+           }
+
+           return $data;
+       }
+
+       return false;
+     }
+
     function get_all_clientes()
     {
         $this->db->order_by('idcliente', 'desc');
-        return $this->db->get('cliente')->result_array();
+
+          return $this->db->get('cliente')->result_array();
+
     }
 
-    public function count($table) {
-        return $this->db->count_all($table);
+
+
+    public function count() {
+        return $this->db->count_all("cliente");
     }
 
     /*
@@ -43,7 +72,7 @@ class Cliente_model extends CI_Model
   return TRUE;
 }
 
-return TRUE;   
+return TRUE;
     }
 
 

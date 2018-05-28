@@ -17,6 +17,11 @@ public function add($fluxo) {
 	return $this->db->insert_id();
 }
 
+public function get_total(){
+
+  return $this->db->count_all("fluxocaixa");
+}
+
 public function addentrada($fluxo){
 
     $this->db->insert('fluxocaixa',$fluxo);
@@ -43,10 +48,19 @@ else{
 }
 }
 
-public function getfluxo($data){
-
+public function getfluxo($table,$field,$data,$limit=0,$start=0,$one=false,$array='array'){
+  $this->db->select($field);
+  $this->db->from($table);
   $this->db->where('data',$data);
-  return $this->db->get('fluxocaixa')->result_array();
+  $this->db->order_by('idfluxo','desc');
+   $this->db->limit($limit,$start);
+
+
+
+  $query = $this->db->get();
+
+  $result =  !$one  ? $query->result() : $query->row();
+  return $result;
 
 
 }

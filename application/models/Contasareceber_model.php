@@ -28,9 +28,35 @@ class Contasareceber_model extends CI_Model
         return $this->db->get('contasareceber')->result_array();
     }
 
+    public function get_current_page_records($limit, $start)
+        {
+
+    				$this->db->order_by('idcontasareceber','desc');
+            $this->db->limit($limit, $start);
+
+            $query = $this->db->get("contasareceber");
+
+            if ($query->num_rows() > 0)
+            {
+                foreach ($query->result() as $row)
+                {
+                    $data[] = $row;
+                }
+
+                return $data;
+            }
+
+            return false;
+        }
+
     /*
      * function to add new contasareceber
      */
+
+     public function get_total() {
+
+     		return $this->db->count_all("contasareceber");
+     }
     function add_contasareceber($params)
     {
         $this->db->insert('contasareceber',$params);
@@ -47,7 +73,7 @@ class Contasareceber_model extends CI_Model
     }
 
 
-  
+
 
     /*
      * function to delete contasareceber

@@ -31,7 +31,7 @@
 					<div class="col-md-5">
 						<label for="nome" class="control-label"><span class="text-danger">*</span>Nome</label>
 						<div class="form-group">
-							<input type="text" name="nome" value="<?php echo $this->input->post('nome'); ?>" class="form-control" id="nome" />
+							<input type="text" name="nome" value=" " class="form-control" id="nome" />
 							<span class="text-danger"><?php echo form_error('nome');?></span>
 						</div>
 					</div>
@@ -45,7 +45,8 @@
 					<div class="col-md-2">
 						<label for="datacadastro" class="control-label"><i class="fa fa-calendar"></i> Data Cadastro</label>
 						<div class="form-group">
-							<input type="text" name="datacadastro" value="<?php date_default_timezone_set('America/Sao_Paulo');  echo date('d/m/Y'); ?>" class="has-datepicker form-control" id="datacadastro" disabled/>
+							<input type="text" name="data" value="<?php date_default_timezone_set('America/Sao_Paulo');  echo date('d/m/Y'); ?>" class="has-datepicker form-control" id="data" disabled/>
+              	<input type="hidden" name="datacadastro" value="<?php date_default_timezone_set('America/Sao_Paulo');  echo date('d/m/Y'); ?>" class="has-datepicker form-control" id="datacadastro"/>
 						</div>
 					</div>
 					<div class="col-md-2">

@@ -14,7 +14,7 @@ class Cliente extends CI_Controller{
 }
 
 
-        $this->load->helper(array('codegen_helper'));
+       $this->load->helper(array('codegen_helper'));
           $this->load->model('Cliente_model','',TRUE);
           $this->data['menuCliente'] = 'cliente';
     }
@@ -22,59 +22,50 @@ class Cliente extends CI_Controller{
     /*
      * Listing of clientes
      */
-    function index()
-    {
-
-      $this->gerenciar();
-
-    }
 
 
-    function gerenciar(){
+
+    function index(){
 
       if(!$this->permission->checkPermission($this->session->userdata('permissao'),'vCliente')){
            $this->session->set_flashdata('error','Você não tem permissão para visualizar clientes.');
            redirect(base_url());
         }
 
+        $this->load->model('Cliente_model');
 
+      $this->load->library('pagination');
         $this->load->library('table');
         $this->load->library('pagination');
 
-
-        $config['base_url'] = base_url().'cliente/gerenciar/';
-        $config['total_rows'] = $this->Cliente_model->count('cliente');
-        $config['page_query_string'] = TRUE;
-        $config['uri_segment'] = 3;
+        $config['base_url'] = base_url() . 'cliente/index';
+        $config['total_rows'] = $this->Cliente_model->get_total();
         $config['per_page'] = 10;
-
-        $config['prev_link'] = '‹';
-        $config['next_link'] = '›';
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['next_tag_open'] = '<li>';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_tag_open'] = '<li>';
-        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '>>';
+        $config['prev_link'] = '<<';
+        $config['full_tag_open'] = '<div class="text-center"><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></div>';
         $config['num_tag_open'] = '<li>';
         $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="active"><a href="">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['full_tag_close'] = '</ul>';
-        $config['first_link'] = '‹‹';
+        $config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+        $config['cur_tag_close'] = '</b></a></li>';
+        $config['prev_tag_open'] = '<li>';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '</li>';
+        $config['first_link'] = 'Primeira';
+        $config['last_link'] = 'Última';
         $config['first_tag_open'] = '<li>';
         $config['first_tag_close'] = '</li>';
-        $config['last_link'] = '››';
         $config['last_tag_open'] = '<li>';
         $config['last_tag_close'] = '</li>';
-
 
         $this->pagination->initialize($config);
 
 
 
-
-        $data['clientes'] = $this->Cliente_model->get_all_clientes();
-
+        $data["results"] = $this->Cliente_model->get_current_page_records($config['per_page'],$this->uri->segment(3));
+        $data["links"] = $this->pagination->create_links();
     //    $data['_view'] = 'cliente/index';
       //  $this->load->view('layouts/main',$data);
 
@@ -117,12 +108,12 @@ class Cliente extends CI_Controller{
 				'numero' => $this->input->post('numero'),
 				'bairro' => $this->input->post('bairro'),
 				'cidade' => $this->input->post('cidade'),
-				'obs' => $this->input->post('obs'),
+				'obs' => $this->input->post('obs')
             );
 
              if($this->Cliente_model->add_cliente($params) == TRUE){
                $this->session->set_flashdata('success','Cliente adicionado com sucesso!');
-                 redirect('cliente/gerenciar');
+                 redirect('cliente/index');
              }
              else {
                  $this->data['custom_error'] = '<div class="form_error"><p>Ocorreu um erro.</p></div>';

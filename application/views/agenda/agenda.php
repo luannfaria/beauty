@@ -104,7 +104,7 @@
   </div>
 
   <div class="col-lg-4"><br>
-  <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Novo Cliente</a>
+<!--  <a data-toggle="modal" href="#myModal3" class="btn btn-primary">Novo Cliente</a>-->
 
   </div>
 
@@ -468,7 +468,7 @@
                       <div class="box-body">
                         <div class="row clearfix">
                     <div class="col-md-6">
-                      <label for="descricao" class="control-label">Descricao</label>
+                      <label for="descricao" class="control-label">Descrição</label>
                       <div class="form-group">
                         <input type="text" name="descricao" value="<?php echo $this->input->post('descricao'); ?>" class="form-control" id="descricao" />
                       </div>

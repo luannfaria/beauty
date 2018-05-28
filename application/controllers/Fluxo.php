@@ -19,8 +19,52 @@ class Fluxo extends CI_Controller{
 
     function fluxo(){
 
-      $this->load->model('Fluxo_model');
-$data['result'] = 0;
+
+
+      $this->load->library('table');
+  $this->load->library('pagination');
+  		// init params
+  	    //    $params = array();
+  	      //  $limit_per_page = 10;
+  	       // $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+  	       // $total_records =
+
+
+              // get current page records
+
+
+              $config['base_url'] = base_url() . 'fluxo/fluxo';
+              $config['total_rows'] = $this->Fluxo_model->get_total();
+  						$config['per_page'] = 10;
+  						$config['next_link'] = '>>';
+  						$config['prev_link'] = '<<';
+  						$config['full_tag_open'] = '<div class="text-center"><ul class="pagination">';
+  						$config['full_tag_close'] = '</ul></div>';
+  						$config['num_tag_open'] = '<li>';
+  						$config['num_tag_close'] = '</li>';
+  						$config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+  						$config['cur_tag_close'] = '</b></a></li>';
+  						$config['prev_tag_open'] = '<li>';
+  						$config['prev_tag_close'] = '</li>';
+  						$config['next_tag_open'] = '<li>';
+  						$config['next_tag_close'] = '</li>';
+  						$config['first_link'] = 'Primeira';
+  						$config['last_link'] = 'Última';
+  						$config['first_tag_open'] = '<li>';
+  						$config['first_tag_close'] = '</li>';
+  						$config['last_tag_open'] = '<li>';
+  						$config['last_tag_close'] = '</li>';
+
+              $this->pagination->initialize($config);
+
+              date_default_timezone_set('America/Sao_Paulo');
+              $inicio = date('d/m/Y');
+              $data["result"] = $this->Fluxo_model->getfluxo('fluxocaixa','*',$inicio,10,$this->uri->segment(3));
+
+              // build paging links
+              $data["links"] =$this->pagination->create_links();
+
+
       $this->load->view('include/header');
       $this->load->view('fluxo/fluxocaixa',$data);
       $this->load->view('include/footer');
@@ -28,9 +72,38 @@ $data['result'] = 0;
 
     function buscafluxo(){
 
-      $inicio = $this->input->post('data');
+      $this->load->library('table');
+  $this->load->library('pagination');
+      // init params
+      $config['base_url'] = base_url() . 'fluxo/fluxo';
+      $config['total_rows'] = $this->Fluxo_model->get_total();
+      $config['per_page'] = 10;
+      $config['next_link'] = '>>';
+      $config['prev_link'] = '<<';
+      $config['full_tag_open'] = '<div class="text-center"><ul class="pagination">';
+      $config['full_tag_close'] = '</ul></div>';
+      $config['num_tag_open'] = '<li>';
+      $config['num_tag_close'] = '</li>';
+      $config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+      $config['cur_tag_close'] = '</b></a></li>';
+      $config['prev_tag_open'] = '<li>';
+      $config['prev_tag_close'] = '</li>';
+      $config['next_tag_open'] = '<li>';
+      $config['next_tag_close'] = '</li>';
+      $config['first_link'] = 'Primeira';
+      $config['last_link'] = 'Última';
+      $config['first_tag_open'] = '<li>';
+      $config['first_tag_close'] = '</li>';
+      $config['last_tag_open'] = '<li>';
+      $config['last_tag_close'] = '</li>';
 
-      $data['result'] = $this->Fluxo_model->getfluxo($inicio);
+      $this->pagination->initialize($config);
+  $inicio = $this->input->post('data');
+
+      $data["result"] = $this->Fluxo_model->getfluxo('fluxocaixa','*',$inicio,10,$this->uri->segment(3));
+  $data["links"] =$this->pagination->create_links();
+
+      //$data['result'] = $this->Fluxo_model->getfluxo();
 
       $this->load->view('include/header');
       $this->load->view('fluxo/fluxocaixa',$data);

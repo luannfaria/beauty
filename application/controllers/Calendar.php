@@ -331,57 +331,43 @@ public function listaagenda(){
 	$this->load->model('Calendar_model');
 	  $this->load->library('table');
 $this->load->library('pagination');
+		// init params
+	    //    $params = array();
+	      //  $limit_per_page = 10;
+	       // $start_index = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+	       // $total_records =
 
-				$params = array();
-        $limit_per_page = 2;
-        $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) : 0;
-        $total_records = $this->Calendar_model->count('agenda');
 
-				if ($total_records > 0)
-        {
             // get current page records
-            $data["itensagenda"] = $this->Calendar_model->get_current_page_records($limit_per_page, $page*$limit_per_page);
+
 
             $config['base_url'] = base_url() . 'calendar/listaagenda';
-            $config['total_rows'] = $total_records;
-            $config['per_page'] = $limit_per_page;
-            $config["uri_segment"] = 3;
-
-            // custom paging configuration
-            $config['num_links'] = 2;
-            $config['use_page_numbers'] = TRUE;
-            $config['reuse_query_string'] = TRUE;
-
-            $config['full_tag_open'] = '<div class="pagination">';
-            $config['full_tag_close'] = '</div>';
-
-            $config['first_link'] = 'First Page';
-            $config['first_tag_open'] = '<span class="firstlink">';
-            $config['first_tag_close'] = '</span>';
-
-            $config['last_link'] = 'Last Page';
-            $config['last_tag_open'] = '<span class="lastlink">';
-            $config['last_tag_close'] = '</span>';
-
-            $config['next_link'] = 'Next Page';
-            $config['next_tag_open'] = '<span class="nextlink">';
-            $config['next_tag_close'] = '</span>';
-
-            $config['prev_link'] = 'Prev Page';
-            $config['prev_tag_open'] = '<span class="prevlink">';
-            $config['prev_tag_close'] = '</span>';
-
-            $config['cur_tag_open'] = '<span class="curlink">';
-            $config['cur_tag_close'] = '</span>';
-
-            $config['num_tag_open'] = '<span class="numlink">';
-            $config['num_tag_close'] = '</span>';
+            $config['total_rows'] = $this->Calendar_model->get_total();
+						$config['per_page'] = 10;
+						$config['next_link'] = '>>';
+						$config['prev_link'] = '<<';
+						$config['full_tag_open'] = '<div class="text-center"><ul class="pagination">';
+						$config['full_tag_close'] = '</ul></div>';
+						$config['num_tag_open'] = '<li>';
+						$config['num_tag_close'] = '</li>';
+						$config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+						$config['cur_tag_close'] = '</b></a></li>';
+						$config['prev_tag_open'] = '<li>';
+						$config['prev_tag_close'] = '</li>';
+						$config['next_tag_open'] = '<li>';
+						$config['next_tag_close'] = '</li>';
+						$config['first_link'] = 'Primeira';
+						$config['last_link'] = 'Última';
+						$config['first_tag_open'] = '<li>';
+						$config['first_tag_close'] = '</li>';
+						$config['last_tag_open'] = '<li>';
+						$config['last_tag_close'] = '</li>';
 
             $this->pagination->initialize($config);
-
+  $data["results"] = $this->Calendar_model->get_current_page_records($config['per_page'],$this->uri->segment(3));
             // build paging links
             $data["links"] = $this->pagination->create_links();
-        }
+
 
 
 $data['itensagenda'] = $this->Agenda_model->get_all_agendas();

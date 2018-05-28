@@ -9,4 +9,13 @@ Solicitações cliente UP Unhas
 7 - Mudar layout REL. comissão (Criar opção selecionar todos funcionários.)
     Exibir totais dos funcionários (botão detalhes para exibir tudo) - PENDENTE
 8 - Vale para funcionários - CONCLUIDO
-9 - 
+
+AJUSTES PARA O SISTEMAS
+
+IMPLEMENTAR PESQUISAR NOS SEGUINTES modulos
+  AGENDAMENTOS - CLIENTE
+  SERVIÇOS  - NOME SERVIÇOS
+  CONTAS A PAGAR  - POR DATA VENC
+  CONTAS A RECEBER - POR DATA VENC
+
+  PAGINAÇÃO

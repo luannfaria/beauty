@@ -21,16 +21,28 @@
                            <?PHP echo $this->session->flashdata('success') ?>
                   </div>
                   <?php } ?>
+                  <div class="row">
+                      <div class="col-md-12">
             	<div class="box-tools">
+                <div class="col-md-6">
                 <?php if($this->permission->checkPermission($this->session->userdata('permissao'),'aCliente')){ ?>
                     <a href="<?php echo site_url('cliente/add'); ?>" class="btn btn-success">NOVO CLIENTE</a>
                   <?php } ?>
                 </div>
-
-                <br>
+                <div class="col-md-6">
+                  <input type="text" class="form-control"/>
+                </div>
+                </div>
+              </div>
             </div>
+
+
+          </div><br/>
             <div class="box-body">
+
+
               <section class="panel">
+                  <?php if (isset($results)) { ?>
                 <table class="table table-striped">
                     <tr>
 
@@ -45,37 +57,46 @@
             <th>Status</th>
 						<th>Ações</th>
                     </tr>
-                    <?php foreach($clientes as $c){ ?>
+                    <?php foreach($results as $c){ ?>
                     <tr>
 
 
-						<td><?php echo $c['nome']; ?> <?php echo $c['sobrenome']; ?></td>
+						<td><?php echo $c->nome; ?> <?php echo $c->sobrenome; ?></td>
 
-						<td><?php echo $c['datacadastro']; ?></td>
-						<td><?php echo $c['telefonefixo']; ?></td>
-						<td><?php echo $c['telefonecelular']; ?></td>
+						<td><?php echo $c->datacadastro; ?></td>
+						<td><?php echo $c->telefonefixo; ?></td>
+						<td><?php echo $c->telefonecelular; ?></td>
 
-						<td><?php echo $c['obs']; ?></td>
-            <?php if( $c['status']=='1'){ ?>
+						<td><?php echo $c->obs; ?></td>
+            <?php if( $c->status =='1'){ ?>
           <td><span class="label label-success">ATIVO</span></td>
           <?php } ?>
-          <?php if( $c['status']=='2'){ ?>
+          <?php if( $c->status =='2'){ ?>
           <td><span class="label label-danger">INATIVO</span></td>
           <?php } ?>
 						<td>
-                            <a href="<?php echo site_url('cliente/edit/'.$c['idcliente']); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
-                          <!--  <a href="<?php echo site_url('cliente/remove/'.$c['idcliente']); ?>" class="btn btn-danger btn-xs"><span class="fa fa-trash"></span> Delete</a> -->
+                            <a href="<?php echo site_url('cliente/edit/'.$c->idcliente); ?>" class="btn btn-info"><span class="fa fa-pencil"></span> EDITAR</a>
+
                         </td>
                     </tr>
                     <?php } ?>
                 </table>
-              </section>
+              <?php } else { ?>
+                            <div>No user(s) found.</div>
+                        <?php } ?>
 
+
+              </section>
+              <?php if (isset($links)) { ?>
+                  <?php echo $links ?>
+              <?php } ?>
             </div>
 
-            <?php echo $this->pagination->create_links();?>
         </div>
 
 
     </div>
 </div>
+
+</section>
+</section>

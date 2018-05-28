@@ -28,9 +28,11 @@ function mtel(v){
 
       <div class="painel-body">
         	<?php echo form_open('atendente/edit/'.$atendente['idatendente']); ?>
-			<div class="box-body">
 
-<div class="col-md-12">
+        <div class="box-body">
+          <div class="row clearfix">
+
+
 					<div class="col-md-3">
 						<label for="nome" class="control-label"><span class="text-danger">*</span>Nome</label>
 						<div class="form-group">
@@ -133,14 +135,21 @@ function mtel(v){
 						</div>
 					</div>
 
-				</div>
 
+  </div>
+</div>
 			<div class="box-footer">
             	<button type="submit" class="btn btn-success">
 					<i class="fa fa-check"></i> SALVAR
 				</button>
 	        </div>
-			<?php echo form_close(); ?>
-    </div>
+
+
+        	<?php echo form_close(); ?>
 </div>
-		</div>
+
+
+
+</section>
+</div>
+</div>

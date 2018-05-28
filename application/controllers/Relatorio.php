@@ -40,29 +40,12 @@ $data['relatorio'] = 0;
           $inicio = $this->input->post('inicio');
           $termino = $this->input->post('termino');
           $idatendemte = $this->input->post('atendente');
-          if($idatendemte=='0'){
+
             $this->load->model('Atendente_model');
                 $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
-              $data['relatoriotodos'] = $this->Relatorio_model->consultacomissaotodos($inicio,$termino);
-              $this->load->view('include/header');
-              $this->load->view('relatorio/comissaotodos',$data);
-              $this->load->view('include/footer');
-          }
-          if($idatendemte!=null){
-          $this->load->model('Atendente_model');
-              $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
+              $data['relatorio'] = $this->Relatorio_model->consultacomissao($inicio,$termino,$idatendemte);
+            
 
-          $data['relatorio'] = $this->Relatorio_model->consultacomissao($inicio,$termino,$idatendemte);
-
-          $this->load->view('include/header');
-          $this->load->view('relatorio/comissao',$data);
-          $this->load->view('include/footer');
-}
-else{
-  $this->load->model('Atendente_model');
-      $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
-
-  $data['relatorio'] = $this->Relatorio_model->consultacomissaotodos($inicio,$termino);
 
   $this->load->view('include/header');
   $this->load->view('relatorio/comissao',$data);
@@ -71,7 +54,3 @@ else{
 }
 
     }
-
-
-
-}

@@ -15,6 +15,7 @@
                 </div>
                 <br>
             </div>
+            <?php if (isset($contasapagars)) { ?>
             <div class="box-body">
               <section class="panel">
                 <table class="table table-striped">
@@ -31,25 +32,25 @@
                     </tr>
                     <?php foreach($contasapagars as $c){ ?>
                     <tr>
-<td><?php echo $c['idcontasapagar']; ?></td>
-<td><?php echo $c['numero']; ?></td>
-						<td><?php echo $c['descricao']; ?></td>
+<td><?php echo $c->idcontasapagar; ?></td>
+<td><?php echo $c->numero; ?></td>
+						<td><?php echo $c->descricao; ?></td>
 
-						<td><?php echo $c['valor']; ?></td>
-						<td><?php echo $c['datavencimento']; ?></td>
-						<td><?php echo $c['datapagamento']; ?></td>
+						<td><?php echo $c->valor; ?></td>
+						<td><?php echo $c->datavencimento; ?></td>
+						<td><?php echo $c->datapagamento; ?></td>
 
 
 
 
                         <td>
-                                      <?php if($c['datapagamento']!=NULL){ ?>
+                                      <?php if($c->datapagamento!=NULL){ ?>
                                         <a href="#" class="btn btn-info"><span class="fa fa-pencil"></span> VISUALIZAR</a>
 
                                       <?php } ?>
-                                    <?php if($c['datapagamento']==NULL){ ?>
-                                        <a href="<?php echo site_url('contasapagar/edit/'.$c['idcontasapagar']); ?>" class="btn btn-success"><span class="fa fa-money"></span> PAGAR</a>
-                                        <a href="<?php echo site_url('contasapagar/remove/'.$c['idcontasapagar']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> EXCLUIR</a>
+                                    <?php if($c->datapagamento==NULL){ ?>
+                                        <a href="<?php echo site_url('contasapagar/edit/'.$c->$idcontasapagar); ?>" class="btn btn-success"><span class="fa fa-money"></span> PAGAR</a>
+                                        <a href="<?php echo site_url('contasapagar/remove/'.$c->$idcontasapagar); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> EXCLUIR</a>
                                       <?php } ?>
                                     </td>
 
@@ -58,7 +59,9 @@
                 </table>
 </section>
             </div>
-
+            <?php if (isset($links)) { ?>
+                <?php echo $links ?>
+            <?php } }?>
 
         </div>
     </div>
@@ -223,3 +226,6 @@
 
  });
   </script>
+
+</section>
+</section>

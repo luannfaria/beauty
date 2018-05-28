@@ -22,10 +22,39 @@ class Contasapagar extends CI_Controller{
      */
     function index()
     {
+      $this->load->library('table');
+  $this->load->library('pagination');
+
+      $config['base_url'] = base_url() . 'contasapagar/index';
+      $config['total_rows'] = $this->Contasapagar_model->count_all();
+      $config['per_page'] = 10;
+      $config['next_link'] = '>>';
+      $config['prev_link'] = '<<';
+      $config['full_tag_open'] = '<div class="text-center"><ul class="pagination">';
+      $config['full_tag_close'] = '</ul></div>';
+      $config['num_tag_open'] = '<li>';
+      $config['num_tag_close'] = '</li>';
+      $config['cur_tag_open'] = '<li><a style="color: #2D335B"><b>';
+      $config['cur_tag_close'] = '</b></a></li>';
+      $config['prev_tag_open'] = '<li>';
+      $config['prev_tag_close'] = '</li>';
+      $config['next_tag_open'] = '<li>';
+      $config['next_tag_close'] = '</li>';
+      $config['first_link'] = 'Primeira';
+      $config['last_link'] = 'Última';
+      $config['first_tag_open'] = '<li>';
+      $config['first_tag_close'] = '</li>';
+      $config['last_tag_open'] = '<li>';
+      $config['last_tag_close'] = '</li>';
+
+      $this->pagination->initialize($config);
+//$data["results"] = $this->Calendar_model->get_current_page_records($config['per_page'],$this->uri->segment(3));
+      // build paging links
+      $data["links"] = $this->pagination->create_links();
 
       $this->load->model('Atendente_model');
           $data['all_atendentes'] = $this->Atendente_model->get_all_atendentes();
-        $data['contasapagars'] = $this->Contasapagar_model->get_all_contasapagars();
+        $data['contasapagars'] = $this->Contasapagar_model->get_all_contasapagars($config['per_page'],$this->uri->segment(3));
 
         //$data['_view'] = 'contasapagar/index';
       //  $this->load->view('layouts/main',$data);

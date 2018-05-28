@@ -15,6 +15,7 @@
                 <br>
             </div>
             <div class="box-body">
+              <?php if (isset($contasarecebers)) { ?>
               <section class="panel">
                 <table class="table table-striped">
                     <tr>
@@ -29,27 +30,33 @@
                     </tr>
                     <?php foreach($contasarecebers as $c){ ?>
                     <tr>
-							<td><?php echo $c['numero']; ?></td>
-						<td><?php echo $c['descricao']; ?></td>
+							<td><?php echo $c->numero; ?></td>
+						<td><?php echo $c->descricao; ?></td>
 
-						<td><?php echo $c['valor']; ?></td>
-						<td><?php echo $c['datavencimento']; ?></td>
-						<td><?php echo $c['datapagamento']; ?></td>
-						<td><?php echo $c['obs']; ?></td>
+						<td><?php echo $c->valor; ?></td>
+						<td><?php echo $c->datavencimento; ?></td>
+						<td><?php echo $c->datapagamento; ?></td>
+						<td><?php echo $c->obs; ?></td>
 						<td>
-                          <?php if($c['datapagamento']!=NULL){ ?>
+                          <?php if($c->datavencimento!=NULL){ ?>
                             <a href="#" class="btn btn-info"><span class="fa fa-pencil"></span> VISUALIZAR</a>
 
                           <?php } ?>
-                        <?php if($c['datapagamento']==NULL){ ?>
-                            <a href="<?php echo site_url('contasareceber/edit/'.$c['idcontasareceber']); ?>" class="btn btn-success"><span class="fa fa-money"></span> RECEBER</a>
-                            <a href="<?php echo site_url('contasareceber/remove/'.$c['idcontasareceber']); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> EXCLUIR</a>
+                        <?php if($c->datapagamento==NULL){ ?>
+                            <a href="<?php echo site_url('contasareceber/edit/'.$c->idcontasareceber); ?>" class="btn btn-success"><span class="fa fa-money"></span> RECEBER</a>
+                            <a href="<?php echo site_url('contasareceber/remove/'.$c->idcontasareceber); ?>" class="btn btn-danger"><span class="fa fa-trash"></span> EXCLUIR</a>
                           <?php } ?>
                         </td>
                     </tr>
                     <?php } ?>
                 </table>
               </section>
+            <?php } else { ?>
+                          <div>No user(s) found.</div>
+                      <?php } ?>
+              <?php if (isset($links)) { ?>
+                  <?php echo $links ?>
+              <?php } ?>
             </div>
         </div>
     </div>

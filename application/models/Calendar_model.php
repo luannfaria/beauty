@@ -155,14 +155,17 @@ function update_cor($idag,$cor){
 
 }
 
-public function count($table) {
+public function get_total() {
 
-		return $this->db->count_all($table);
+		return $this->db->count_all("agenda");
 }
 
 public function get_current_page_records($limit, $start)
     {
+
+				$this->db->order_by('idagenda','desc');
         $this->db->limit($limit, $start);
+
         $query = $this->db->get("agenda");
 
         if ($query->num_rows() > 0)

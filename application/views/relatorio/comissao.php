@@ -27,13 +27,13 @@
     <div class="form-group">
       <label class="control-label">De</label>
 
-        <input class="form-control" id="inicio"   type="text" name="inicio"  />
+        <input class="form-control" id="inicio" value=" "  type="text" name="inicio"  />
 
     </div>
     <div class="form-group">
       <label class="control-label">Até</label>
 
-        <input class="form-control" id="termino"   type="text" name="termino"  />
+        <input class="form-control" id="termino"  value=" " type="text" name="termino"  />
 
     </div>
 
@@ -43,7 +43,7 @@
 
         <select name="atendente" class="form-control">
           <option value="">Selecione um atendente</option>
-          <
+          <option value="0">Todos</option>
           <?php
           foreach($all_atendentes as $atendente)
           {
@@ -117,30 +117,52 @@ if(!$relatorio){?>
     $saida=0;
  ?>
 
-    <?php foreach ($relatorio as $r) {
+    <?php
+    $all = $relatorio;
 
 
-      if($r['tipomov']==2){
-              $entrada += $r['valor'];
-      }
-
-      if($r['tipomov']==1){
-              $saida += $r['valor'];
-      }
+    foreach ($relatorio as $r) {
+$next = next($all);
 
 
+
+
+
+
+
+
+  if($r['tipomov']==2){
+          $entrada += $r['valor'];
   }
-$saldo = ($entrada-$saida);
-  echo '<tr>';
-        echo '<td>'.$r['nomefunc'].'</td>';
-        echo '<td><strong>R$'.$saida.',00</strong></td>';
-        echo '<td><strong>R$ '.$entrada.',00</strong></td>';
 
-        echo '<td><strong>R$ '.$saldo.',00</strong></td>';
-          echo '<td><a href="#modal-lg" data-toggle="modal" class="btn btn-success">DETALHES</a></td>';
-        echo '</tr>';
+  if($r['tipomov']==1){
+          $saida += $r['valor'];
+  }
+if($r['idfunc']!=$next['idfunc']){
+    $saldo = ($entrada-$saida);
+      echo '<tr>';
 
- }?>
+      $i=$r['idfunc'];
+
+      $d = $i;
+            echo '<td>'.$r['nomefunc'].'</td>';
+            echo '<td><strong>R$'.$saida.',00</strong></td>';
+            echo '<td><strong>R$ '.$entrada.',00</strong></td>';
+
+            echo '<td><strong>R$ '.$saldo.',00</strong></td>';
+            // echo '<td><span idAcao="'.$r['idfunc'].'" title="'.$r['idfunc'].'" class="btn btn-success">DETALHES</span></td>';
+echo '<td><a data-toggle="modal" data-target="#modal-lg'.$r['idfunc'].'" class="btn btn-success" value="'.$d.'"><span class="btn-label"></span>DETALHES'.$d.'</a></td>';
+            echo '</tr>'; ?>
+
+
+
+        <?php    $saldo=0;
+                $entrada=0;
+                $saida=0;
+  }
+
+
+}}?>
   </tbody>
   <!-- SELECT nomefunc, idfunc, sum(valor) from salario where tipomov='2' GROUP BY nomefunc
 
@@ -152,67 +174,70 @@ $saldo = ($entrada-$saida);
 -->
   </table>
 
-  <div class="modal fade" id="modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="vertical-alignment-helper">
-        <div class="modal-dialog vertical-align-center">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
 
-                    </button>
-                     <h4 class="modal-title" id="myModalLabel">Relatorio comissão</h4>
-
-                </div>
-                <div class="modal-body">
-
-
-                    <section class="panel">
-                      <table class="table table-striped">
-                        <h4><strong>Profissional: </strong> <?php echo $r['nomefunc'];?> </h4>
-                        <thead>
-                          <tr>
-                            <td>Data</td>
-                            <td>Descrição</td>
-                            <td>Valor</td>
-                            <td>Tipo mov</td>
-                          </tr>
-                        </thead>
-                      <tbody>
-                      <?php foreach ($relatorio as $r) {
-
-                        echo '<tr>';
-                              echo '<td><strong>'.$r['data'].'</strong></td>';
-                              echo '<td>'.$r['descricao'].'</td>';
-                              echo '<td><strong>R$ '.$r['valor'].',00</strong></td>';
-        if($r['tipomov']==1){
-                              echo '<td><strong>VALE</strong></td>';
-        }
-        if($r['tipomov']==2){
-                              echo '<td><strong>COMISSÃO</strong></td>';
-        }
-                              echo '</tr>';
-
-                            } ?>
-                    </tbody>
-                      </table>
-                    </section>
-
-
-
-              </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">IMPRIMIR</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 </div>
 
 </section>
 
+<?php for($i=0;$i<$r['idfunc'];$i++){?>
+<div class="modal fade" id="modal-lg<?php echo $i?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Detalhe comissão </h4>
+                      </div>
+                      <div class="modal-body">
+                        <table class="table table-striped">
+                          <thead>
+                            <tr>
+
+                              <th>Data</th>
+                              <th>Descrição</th>
+
+                              <th>Valor</th>
+
+
+                              <th>Tipo</th>
+
+
+                        </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                            <?php   foreach ($relatorio as $r) {
+
+                              if($i==$r['idfunc']){
+                                echo '<tr>';
+                                  echo '<td>'.$r['data'].'</td>';
+                                  echo'<td>'.$r['descricao'].'</td>';
+                                  echo'<td>R$ '.$r['valor'].',00</td>';
+                                  if($r['tipomov']==2){
+                                  echo'<td>COMISSÃO</td>';
+                                }
+                                  else{
+                                    echo'<td>VALE</td>';
+                              }
+                                  echo '</tr>';
+                              }
+}?>
+
+</tbody>
+</table>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                        <button class="btn btn-success" type="button">Save changes</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              <?php } ?>
 <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
 <script src="<?php echo base_url()?>assets/js/jquery-ui-1.10.4.min.js"></script>
 
@@ -235,7 +260,42 @@ $( function() {
   $( "#inicio" ).datepicker({ dateFormat: 'dd/mm/yy' });
     $( "#termino" ).datepicker({ dateFormat: 'dd/mm/yy' });
 
+  //  $(document).on('click', 'span', function(event) {
+    //            var idfunc = $(this).attr('idAcao');
+//
+      //          document.getElementById('funcionario').value= idfunc;
+
+
+              //  if(($idserv % 1) == 0){
+
+    //                $.ajax({
+      //                type: "POST",
+        //              url: "<?php echo base_url();?>calendar/removeservicoagenda",
+          //            data: "idserv="+$idserv,
+            //          dataType: 'json',
+              //        success: function(data)
+                //      {
+                  //      if(data.result == true){
+
+                    //        $("#divServicos").load("<?php echo current_url();?> #divServicos" );
+                      //        $("#divFinanceiro").load("<?php echo current_url();?> #divFinanceiro" );
+
+  //  }
+    //else{
+
+  //  alert(idfunc);
+    //}
+      //                }
+        //             });
+          //            return false;
+            //    }
+
+  //         });
+
+
 });
+
+
 
 </script>
 

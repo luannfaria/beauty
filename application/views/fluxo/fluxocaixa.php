@@ -20,23 +20,18 @@
 <form class="form-inline" method="post" action="<?php echo base_url();?>fluxo/buscafluxo" >
   <div class="form-group">
 
-      <label>Data  <input type="text" class="form-control" id="data" name="data"/></label>
+      <label>Data  <input type="text" value=" "class="form-control sm-input" id="data" name="data"/></label>
 
 
 
 </div>
 
 
-<div class="form-group">
-    <label for="">&nbsp</label>
 
-    <button class="btn btn-primary">PESQUISAR</button>
-
-</div>
-
+<button class="btn btn-primary">PESQUISAR</button>
 </form>
       </div>
-        <label for="">&nbsp</label>
+      
         <div class="col-lg-3">
 
             <a class="btn btn-success" data-toggle="modal" href="#modal-entrada">
@@ -107,18 +102,18 @@ if (!$result) {
         $saldofinal=0; ?>
     <?php foreach ($result as $r) {
             echo '<tr>';
-            echo '<td>'.$r['data'].'</td>';
-            if ($r['tipomov']==1) {
+            echo '<td>'.$r->data.'</td>';
+            if ($r->tipomov==1) {
                 echo '<td><span class="label label-success"><i class="fa fa-arrow-up"></i> ENTRADA</span></td>';
-                $totalentrada += $r['valor'];
+                $totalentrada += $r->valor;
             }
-            if ($r['tipomov']==2) {
-                $totalsaida += $r['valor'];
+            if ($r->tipomov==2) {
+                $totalsaida += $r->valor;
                 echo '<td><span class="label label-danger"><i class="fa fa-arrow-down"></i> SAIDA</span></td>';
             }
-            echo '<td>'.$r['descricao'].'</td>';
-            echo '<td>R$ '.$r['valor'].'</td>';
-            echo '<td>'.$r['forma'].'</td>';
+            echo '<td>'.$r->descricao.'</td>';
+            echo '<td>R$ '.$r->valor.'</td>';
+            echo '<td>'.$r->forma.'</td>';
 
 
             echo '</tr>';
@@ -331,9 +326,7 @@ if (!$result) {
                                   </div>
                                 </div>
                               </div>
-</section>
 
-</section>
 
 
 <script src="<?php echo base_url()?>assets/js/jquery.js"></script>
@@ -445,3 +438,6 @@ return false;
 
 
 </script>
+</section>
+
+</section>

@@ -15,12 +15,19 @@ class Relatorio_model extends CI_Model
 function consultacomissao($inicio,$termino,$idatendemte){
 
 //  $sql=  "select * from itensagenda WHERE itensagenda.idatendente='$idatendemte' and itensagenda.start >= '$inicio' and itensagenda.start <= '$termino'";
-
+if($idatendemte!=0){
   $this->db->where('idfunc',$idatendemte);
   $this->db->where('data >=',$inicio);
   $this->db->where('data <=',$termino);
+  $this->db->order_by('idfunc','asc');
+  return $this->db->get('salario')->result_array();
+}
+else{
+
+  $this->db->order_by('idfunc','asc');
   return $this->db->get('salario')->result_array();
 
+}
 }
 
 function consultacomissaotodos($inicio,$termino){

@@ -17,27 +17,27 @@
 					<div class="col-md-6">
 						<label for="descricao" class="control-label"><span class="text-danger">*</span>Descrição</label>
 						<div class="form-group">
-							<input type="text" name="descricao" value="<?php echo $this->input->post('descricao'); ?>" class="form-control" id="descricao" />
+							<input type="text" name="descricao" value=" " class="form-control" id="descricao" required/>
 							<span class="text-danger"><?php echo form_error('descricao');?></span>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<label for="numero" class="control-label">Numero</label>
 						<div class="form-group">
-							<input type="text" name="numero" value="<?php echo $this->input->post('numero'); ?>" class="form-control" id="numero" />
+							<input type="text" name="numero" value=" " class="form-control" id="numero" />
 						</div>
 					</div>
 					<div class="col-md-2">
 						<label for="valor" class="control-label"><span class="text-danger">*</span>Valor</label>
 						<div class="form-group">
-							<input type="text" name="valor" value="<?php echo $this->input->post('valor'); ?>" class="form-control" id="valor" />
+							<input type="text" name="valor" value="<?php echo $this->input->post('valor'); ?>" class="form-control" id="valor" required/>
 							<span class="text-danger"><?php echo form_error('valor');?></span>
 						</div>
 					</div>
 					<div class="col-md-2">
 						<label for="datavencimento" class="control-label"><span class="text-danger">*</span>Data Vencimento</label>
 						<div class="form-group">
-							<input type="text" name="datavencimento" value="<?php echo $this->input->post('datavencimento'); ?>" class="form-control" id="datavencimento" />
+							<input type="text" name="datavencimento" value=" " class="form-control" id="datavencimento" required/>
 							<span class="text-danger"><?php echo form_error('datavencimento');?></span>
 						</div>
 					</div>
